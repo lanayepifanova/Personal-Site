@@ -298,7 +298,7 @@ export default function Media() {
         </div>
 
         <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
-          I took down most of my previous videos because I didn’t like the quality, but I am getting back into making content and getting rid of the perfectionist mindset! I make short-form videos about tech, recent news, and startups. I like to make tutorials on how to use AI tools to build cool things like automating video editing with Claude, agent orchestration, MCP servers, and web scraping. I am also starting a series to explain technical ideas in math, physics, and machine learning to nontechnical viewers.
+          I make short-form videos about tech, recent news, and startups. I like to make tutorials on how to use AI tools to build cool things like automating video editing with Claude, agent orchestration, MCP servers, and web scraping. I am also starting a series to explain technical ideas in math, physics, and machine learning to nontechnical viewers.
         </p>
 
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">

@@ -1,7 +1,10 @@
-import { useState, type CSSProperties, type WheelEvent, type UIEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type WheelEvent, type UIEvent } from "react";
 import { createPortal } from "react-dom";
 import { ExternalLink, Newspaper, Instagram } from "lucide-react";
+import { useLocation } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { atlasLocations, slugifyTravelCity } from "@/data/travelLocations";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 type GalleryItem = {
   title: string;
@@ -18,11 +21,99 @@ type CampusGallery = {
 
 export default function Communities() {
   const [activeLightboxUrl, setActiveLightboxUrl] = useState<string | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const [, setLocation] = useLocation();
 
   usePageMeta({
     title: "Lana Yepifanova | Communities at Rice University",
     canonicalPath: "/communities",
   });
+
+  useEffect(() => {
+    if (!mapContainerRef.current) return;
+
+    let isMounted = true;
+    let cleanup = () => {};
+
+    import("maplibre-gl").then(({ default: maplibregl }) => {
+      if (!isMounted || !mapContainerRef.current) return;
+
+      const map = new maplibregl.Map({
+        container: mapContainerRef.current,
+        style: "https://demotiles.maplibre.org/style.json",
+        center: [12, 28],
+        zoom: 0.75,
+        attributionControl: false,
+        scrollZoom: false,
+      });
+
+      map.dragRotate.disable();
+      map.touchZoomRotate.disableRotation();
+      map.doubleClickZoom.enable();
+      map.boxZoom.enable();
+      map.addControl(
+        new maplibregl.NavigationControl({
+          showCompass: false,
+          showZoom: true,
+          visualizePitch: false,
+        }),
+        "top-right",
+      );
+      map.addControl(
+        new maplibregl.AttributionControl({
+          compact: true,
+          customAttribution: "MapLibre / OpenStreetMap",
+        }),
+        "bottom-right",
+      );
+
+      const bounds = new maplibregl.LngLatBounds();
+      const markers = atlasLocations.map((location) => {
+        const markerElement = document.createElement("button");
+        markerElement.type = "button";
+        markerElement.setAttribute("aria-label", `${location.city}, ${location.country}`);
+        markerElement.className =
+          "group relative block h-7 w-7 cursor-pointer border-0 bg-transparent p-0 outline-none focus-visible:ring-2 focus-visible:ring-red-300 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
+        markerElement.innerHTML = `
+          <span class="absolute left-1/2 top-0 block h-5 w-5 -translate-x-1/2 rounded-full border border-red-900 bg-red-600 shadow-[0_1px_4px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out group-hover:scale-110 group-hover:shadow-[0_0_0_6px_rgba(220,38,38,0.14),0_8px_18px_rgba(0,0,0,0.28)] group-hover:bg-red-500 group-focus-visible:scale-110 group-focus-visible:shadow-[0_0_0_6px_rgba(220,38,38,0.14),0_8px_18px_rgba(0,0,0,0.28)] group-focus-visible:bg-red-500"></span>
+          <span class="absolute left-1/2 top-3.5 block h-3.5 w-3.5 -translate-x-1/2 rotate-45 border-b border-r border-red-900 bg-red-600 transition-all duration-200 ease-out group-hover:scale-110 group-hover:bg-red-500 group-focus-visible:scale-110 group-focus-visible:bg-red-500"></span>
+          <span class="absolute left-1/2 top-1.5 block h-2 w-2 -translate-x-1/2 rounded-full bg-white transition-all duration-200 ease-out group-hover:scale-125 group-focus-visible:scale-125"></span>
+        `;
+        const citySlug = slugifyTravelCity(location.city);
+        markerElement.addEventListener("click", () => {
+          setLocation(`/communities/travel/${citySlug}`);
+        });
+
+        const marker = new maplibregl.Marker({
+          element: markerElement,
+          anchor: "center",
+        })
+          .setLngLat([location.lon, location.lat])
+          .addTo(map);
+
+        bounds.extend([location.lon, location.lat]);
+        return marker;
+      });
+
+      map.on("load", () => {
+        map.fitBounds(bounds, {
+          padding: 38,
+          duration: 0,
+          maxZoom: 1.35,
+        });
+      });
+
+      cleanup = () => {
+        markers.forEach((marker) => marker.remove());
+        map.remove();
+      };
+    });
+
+    return () => {
+      isMounted = false;
+      cleanup();
+    };
+  }, [setLocation]);
   const campusGalleries: CampusGallery[] = [
     {
       title: "Sports",
@@ -455,6 +546,25 @@ export default function Communities() {
           })}
         </div>
 
+      </section>
+
+      {/* Travel Documentation */}
+      <section className="space-y-6 border-t border-gray-100 pt-12">
+        <div className="space-y-1">
+          <div className="flex justify-between items-end">
+            <h2 className="text-2xl sm:text-3xl font-sans font-medium text-black tracking-tight">
+              Travel Documentation
+            </h2>
+          </div>
+          <div className="flex justify-between items-baseline">
+            <div className="text-base sm:text-lg font-serif text-black">Hover and Click on the Pins!</div>
+          </div>
+        </div>
+
+        <div
+          ref={mapContainerRef}
+          className="relative aspect-[16/10] min-h-[300px] w-full min-w-0 overflow-hidden border border-gray-200 bg-gray-50 sm:min-h-[360px] lg:min-h-0"
+        />
       </section>
       {activeLightboxUrl &&
         createPortal(

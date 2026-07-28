@@ -3,7 +3,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 
 export default function Engineering() {
   usePageMeta({
-    title: "Lana Yepifanova | Work Experience",
+    title: "Lana Yepifanova | Engineering",
     canonicalPath: "/",
   });
 

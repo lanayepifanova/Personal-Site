@@ -5,13 +5,11 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Engineering from "./pages/Engineering";
 import Communities from "./pages/Communities";
-import Music from "./pages/Music";
 import VoiceAIWearables from "./pages/VoiceAIWearables";
 import AISlopAdvertising from "./pages/AISlopAdvertising";
 import GreatResponsibilities from "./pages/GreatResponsibilities";
 import TravelDestination from "./pages/TravelDestination";
 import Media from "./pages/Media";
-import Writing from "./pages/Writing";
 import Layout from "./components/Layout";
 
 function Routes({ location }: { location?: string }) {
@@ -19,14 +17,12 @@ function Routes({ location }: { location?: string }) {
     <Switch location={location}>
       <Route path="/" component={Engineering} />
       <Route path="/engineering" component={Engineering} />
-      <Route path="/music" component={Music} />
       <Route path="/communities" component={Communities} />
       <Route path="/media" component={Media} />
-      <Route path="/writing" component={Writing} />
       <Route path="/essays/voice-ai-wearables" component={VoiceAIWearables} />
       <Route path="/essays/ai-slop-advertising" component={AISlopAdvertising} />
       <Route path="/essays/great-responsibilities" component={GreatResponsibilities} />
-      <Route path="/writing/travel/:city" component={TravelDestination} />
+      <Route path="/communities/travel/:city" component={TravelDestination} />
       <Route component={NotFound} />
     </Switch>
   );

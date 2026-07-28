@@ -1,5 +1,6 @@
 import { type CSSProperties, type UIEvent, type WheelEvent } from "react";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 
 const reels = [
   {
@@ -65,6 +66,10 @@ const reels = [
   {
     id: "DbGJgFChmai",
     url: "https://www.instagram.com/reel/DbGJgFChmai/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DbN330BBsOM",
+    url: "https://www.instagram.com/reel/DbN330BBsOM/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
 ];
 
@@ -249,6 +254,8 @@ export default function Media() {
           </a>
         </iframe>
       </section>
+
+      <PianoYoutubeSection />
     </div>
   );
 }

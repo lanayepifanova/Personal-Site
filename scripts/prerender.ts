@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-const routes = ["/", "/communities", "/media", "/writing"];
+const routes = ["/", "/communities", "/media"];
 const distDir = path.resolve("dist/public");
 const serverEntry = path.resolve("dist/server/entry-server.js");
 

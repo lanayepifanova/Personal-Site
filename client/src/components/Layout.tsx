@@ -1,16 +1,14 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
-import { BookOpenText, Code, Megaphone, Music, Users } from "lucide-react";
+import { Code, Megaphone, Users } from "lucide-react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
 
   const navItems = [
-    { href: "/engineering", label: "Work Experience", icon: Code },
+    { href: "/engineering", label: "Engineering", icon: Code },
     { href: "/communities", label: "Communities", icon: Users },
     { href: "/media", label: "Media", icon: Megaphone },
-    { href: "/music", label: "Music", icon: Music },
-    { href: "/writing", label: "Writing", icon: BookOpenText },
   ];
 
   const isActive = (href: string) => {

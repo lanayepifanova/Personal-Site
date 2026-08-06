@@ -153,7 +153,7 @@ export default function Media() {
 
         <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
           <div
-            className="gallery-marquee reverse"
+            className="gallery-marquee"
             style={{ ["--marquee-duration" as string]: "42s" } as CSSProperties}
           >
             {[0, 1].map((duplicate) => (

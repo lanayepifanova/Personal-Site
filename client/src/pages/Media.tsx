@@ -83,6 +83,14 @@ const reels = [
     id: "DbdUlxJhWOM",
     url: "https://www.instagram.com/reel/DbdUlxJhWOM/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
+  {
+    id: "Dbj1NcLhYH8",
+    url: "https://www.instagram.com/reel/Dbj1NcLhYH8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=",
+  },
+  {
+    id: "DbnnxHrBoDm",
+    url: "https://www.instagram.com/reel/DbnnxHrBoDm/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+  },
 ];
 
 export default function Media() {

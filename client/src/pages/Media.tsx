@@ -91,6 +91,14 @@ const reels = [
     id: "DbnnxHrBoDm",
     url: "https://www.instagram.com/reel/DbnnxHrBoDm/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
+  {
+    id: "DbuKy60A-57",
+    url: "https://www.instagram.com/reel/DbuKy60A-57/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DbwvpOuAO5k",
+    url: "https://www.instagram.com/reel/DbwvpOuAO5k/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+  },
 ];
 
 export default function Media() {
@@ -139,7 +147,7 @@ export default function Media() {
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
-              Ultimate Ivy League Guide
+              Ultimate Ivy League Guide ({reels.length})
             </h2>
           </div>
           <div className="flex justify-between items-baseline">

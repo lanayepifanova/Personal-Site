@@ -2,7 +2,7 @@ import { type CSSProperties, type UIEvent, type WheelEvent } from "react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 
-const reels = [
+export const reels = [
   {
     id: "DZXbULchiiD",
     url: "https://www.instagram.com/reel/DZXbULchiiD/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
@@ -147,7 +147,7 @@ export default function Media() {
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
-              Ultimate Ivy League Guide ({reels.length})
+              Ultimate Ivy League Guide
             </h2>
           </div>
           <div className="flex justify-between items-baseline">
@@ -263,7 +263,7 @@ export default function Media() {
         </div>
 
         <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
-          I've taken down most of my content at this point, but I used to post videos relating to startups, tech, and academia. I also used to run a business in which I made a lot of sponsored UGC advertisements in partnership with certain AI companies and consumer brands. I hope to get back into posting on my personal brand and creating videos again soon.
+          @lana_yaps is a cinematic storytelling project about technology, the economy, and the inner work of becoming. I explore how new systems such as AI, markets, ambition, work, creativity, and culture are reshaping the world around us, while also asking what kind of person we have to become to move through that world with clarity, imagination, and agency.
         </p>
 
         <iframe

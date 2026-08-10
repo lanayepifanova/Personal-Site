@@ -337,6 +337,26 @@
   color: #111827;
 }
 
+.retro-desktop {
+  background-image:
+    radial-gradient(circle, rgba(0, 0, 0, 0.16) 1px, transparent 1px),
+    linear-gradient(#d8d8d2, #d8d8d2);
+  background-size: 9px 9px, auto;
+}
+
+.home-field {
+  background-image: url("/images/home-mobile-field.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .home-field {
+    background-image: url("/images/home-desktop-field.png");
+  }
+}
+
 @keyframes gallery-marquee {
   from {
     transform: translateX(0);

@@ -3,6 +3,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import Home from "./pages/Home";
 import Engineering from "./pages/Engineering";
 import Communities from "./pages/Communities";
 import VoiceAIWearables from "./pages/VoiceAIWearables";
@@ -11,17 +12,19 @@ import GreatResponsibilities from "./pages/GreatResponsibilities";
 import TravelDestination from "./pages/TravelDestination";
 import Media from "./pages/Media";
 import Layout from "./components/Layout";
+import ExploreItem from "./pages/ExploreItem";
 
 function Routes({ location }: { location?: string }) {
   return (
     <Switch location={location}>
-      <Route path="/" component={Engineering} />
+      <Route path="/" component={Home} />
       <Route path="/engineering" component={Engineering} />
       <Route path="/communities" component={Communities} />
       <Route path="/media" component={Media} />
       <Route path="/essays/voice-ai-wearables" component={VoiceAIWearables} />
       <Route path="/essays/ai-slop-advertising" component={AISlopAdvertising} />
       <Route path="/essays/great-responsibilities" component={GreatResponsibilities} />
+      <Route path="/explore/:slug" component={ExploreItem} />
       <Route path="/communities/travel/:city" component={TravelDestination} />
       <Route component={NotFound} />
     </Switch>

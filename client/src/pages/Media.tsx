@@ -107,6 +107,10 @@ export const reels = [
     id: "Db5pWilhBR6",
     url: "https://www.instagram.com/reel/Db5pWilhBR6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
+  {
+    id: "Db9pgYMAhDu",
+    url: "https://www.instagram.com/reel/Db9pgYMAhDu/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
+  },
 ];
 
 export default function Media() {

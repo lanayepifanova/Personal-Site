@@ -111,6 +111,14 @@ export const reels = [
     id: "Db9pgYMAhDu",
     url: "https://www.instagram.com/reel/Db9pgYMAhDu/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==",
   },
+  {
+    id: "DcAMlX_gaZc",
+    url: "https://www.instagram.com/reel/DcAMlX_gaZc/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==&igsi=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DcBXvfVyHjY",
+    url: "https://www.instagram.com/reel/DcBXvfVyHjY/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==&igsi=MzRlODBiNWFlZA==",
+  },
 ];
 
 export default function Media() {

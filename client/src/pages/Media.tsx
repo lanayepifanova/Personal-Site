@@ -282,10 +282,6 @@ export default function Media() {
           </div>
         </div>
 
-        <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
-          @lana_yaps is a cinematic storytelling project about technology, the economy, and the inner work of becoming. I explore how new systems such as AI, markets, ambition, work, creativity, and culture are reshaping the world around us, while also asking what kind of person we have to become to move through that world with clarity, imagination, and agency.
-        </p>
-
         <iframe
           src="https://www.instagram.com/lana_yaps/embed/"
           title="Lana Yepifanova on Instagram"

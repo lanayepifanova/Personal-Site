@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type WheelEvent, type UIEvent } from "react";
-import { createPortal } from "react-dom";
-import { ExternalLink, Newspaper, Instagram } from "lucide-react";
+import { ExternalLink, Newspaper, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { atlasLocations, slugifyTravelCity } from "@/data/travelLocations";
@@ -19,8 +18,133 @@ type CampusGallery = {
   items: GalleryItem[];
 };
 
+type LinkedInPost = {
+  url: string;
+  title: string;
+};
+
+function LinkedInPostCarousel({
+  posts,
+  height,
+  label,
+}: {
+  posts: LinkedInPost[];
+  height: number;
+  label: string;
+}) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToPost = (index: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const clamped = Math.max(0, Math.min(posts.length - 1, index));
+    const card = track.children[clamped] as HTMLElement | undefined;
+    if (!card) return;
+    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+  };
+
+  const handleScroll = (event: UIEvent<HTMLDivElement>) => {
+    const track = event.currentTarget;
+    const cards = Array.from(track.children) as HTMLElement[];
+    let nearest = 0;
+    let smallest = Number.POSITIVE_INFINITY;
+    cards.forEach((card, index) => {
+      const distance = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
+      if (distance < smallest) {
+        smallest = distance;
+        nearest = index;
+      }
+    });
+    setActiveIndex(nearest);
+  };
+
+  const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
+    const { deltaX, deltaY } = event;
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      return;
+    }
+
+    const track = event.currentTarget;
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    if (maxScrollLeft <= 0) {
+      return;
+    }
+
+    const next = Math.max(0, Math.min(maxScrollLeft, track.scrollLeft + deltaY));
+    if (next === track.scrollLeft) {
+      return;
+    }
+
+    event.preventDefault();
+    track.scrollLeft = next;
+  };
+
+  return (
+    <div className="space-y-3">
+      <div
+        ref={trackRef}
+        onScroll={handleScroll}
+        onWheel={handleWheel}
+        tabIndex={0}
+        aria-label={label}
+        className="flex gap-4 overflow-x-auto snap-x snap-proximity pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {posts.map((post) => (
+          <div key={post.url} className="snap-start shrink-0 w-[min(100%,504px)]">
+            <iframe
+              src={post.url}
+              title={post.title}
+              style={{ height }}
+              className="w-full rounded-xl border border-gray-200 bg-white"
+              loading="lazy"
+              allowFullScreen
+            ></iframe>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={() => scrollToPost(activeIndex - 1)}
+          disabled={activeIndex === 0}
+          aria-label="Previous post"
+          className="h-8 w-8 rounded-full border border-gray-200 flex items-center justify-center text-black transition-colors hover:border-black disabled:opacity-30 disabled:hover:border-gray-200"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollToPost(activeIndex + 1)}
+          disabled={activeIndex === posts.length - 1}
+          aria-label="Next post"
+          className="h-8 w-8 rounded-full border border-gray-200 flex items-center justify-center text-black transition-colors hover:border-black disabled:opacity-30 disabled:hover:border-gray-200"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+        <div className="flex items-center gap-1.5">
+          {posts.map((post, index) => (
+            <button
+              key={`dot-${post.url}`}
+              type="button"
+              onClick={() => scrollToPost(index)}
+              aria-label={`Go to post ${index + 1}`}
+              className={`h-1.5 rounded-full transition-all ${
+                index === activeIndex ? "w-5 bg-black" : "w-1.5 bg-gray-300 hover:bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
+        <span className="font-mono text-[10px] text-gray-500 uppercase tracking-wider ml-auto">
+          {activeIndex + 1} / {posts.length}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function Communities() {
-  const [activeLightboxUrl, setActiveLightboxUrl] = useState<string | null>(null);
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const [, setLocation] = useLocation();
 
@@ -157,24 +281,36 @@ export default function Communities() {
     { title: "Dance", image: "/images/harvard2.JPG" },
   ];
 
-  const riceResidencyVideo = {
-    title: "Rice Residency",
-    url: "https://www.youtube.com/embed/U-tJ9IUpr9A",
-  };
-
-  const getYoutubeId = (url: string) => {
-    const match = url.match(/\/embed\/([a-zA-Z0-9_-]+)/);
-    return match ? match[1] : null;
-  };
-
-  const getYoutubeThumbnail = (url: string) => {
-    const id = getYoutubeId(url);
-    if (!id) {
-      return "";
-    }
-    return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
-  };
-
+  // LinkedIn embeds come back at different natural heights, so each carousel
+  // renders every card at the tallest of its posts to stay uniform.
+  const riceResidencyPosts: LinkedInPost[] = [
+    {
+      title: "Rice Residency on LinkedIn",
+      url: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7393677780632358912?collapsed=1",
+    },
+    {
+      title: "Rice Residency on LinkedIn",
+      url: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7483613851846959104?collapsed=1",
+    },
+    {
+      title: "Rice Residency on LinkedIn",
+      url: "https://www.linkedin.com/embed/feed/update/urn:li:share:7399149937298399232?collapsed=1",
+    },
+  ];
+  const harvardStPosts: LinkedInPost[] = [
+    {
+      title: "Harvard St Commons on LinkedIn",
+      url: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7405712623981240320?collapsed=1",
+    },
+    {
+      title: "Harvard St Commons on LinkedIn",
+      url: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7400594883188514816?collapsed=1",
+    },
+    {
+      title: "The Residency on LinkedIn",
+      url: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7394450878885384193?collapsed=1",
+    },
+  ];
   const enableManualGallery = (target: HTMLDivElement) => {
     if (!target.classList.contains("is-manual")) {
       target.classList.add("is-manual");
@@ -247,147 +383,64 @@ export default function Communities() {
             </a>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setActiveLightboxUrl(riceResidencyVideo.url)}
-          className="group text-left w-full"
-        >
-          <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden rounded-xl shadow-sm border border-gray-100 relative">
-            <img
-              src={getYoutubeThumbnail(riceResidencyVideo.url)}
-              alt={riceResidencyVideo.title}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors duration-300 group-hover:bg-black/35">
-              <div className="h-10 w-10 rounded-full bg-white/90 flex items-center justify-center">
-                <div className="ml-0.5 h-0 w-0 border-y-[6px] border-y-transparent border-l-[10px] border-l-black"></div>
-              </div>
-            </div>
-          </div>
-        </button>
-        
+        <LinkedInPostCarousel
+          posts={riceResidencyPosts}
+          height={668}
+          label="Rice Residency LinkedIn posts"
+        />
 
       </section>
 
       {/* Harvard St Commons Section */}
-      <section className="space-y-8 border-t border-gray-100 pt-12">
-        <div className="space-y-2">
-          <div className="flex justify-between items-baseline">
-            <h2 className="text-lg font-serif text-black">Harvard St Commons</h2>
-            <span className="font-mono text-[10px] text-gray-500 uppercase tracking-wider">Resident</span>
+      <section className="space-y-6 border-t border-gray-100 pt-12">
+        <div className="space-y-1">
+          <div className="flex justify-between items-end">
+            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Harvard St Commons</h2>
           </div>
-          <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-xl">
-            I took a gap semester from Rice University to live at the hacker house for Harvard and MIT. This experience changed my life. Alumni and affiliated founders have gone on to raise from top firms including Greylock Partners, Sequoia Capital, General Catalyst, Pear VC, Felicis Ventures, and Z Fellows.
-          </p>
-          
-          <div className="flex gap-4 text-xs font-sans">
-            <a 
-              href="https://harvardst.co" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-            >
-              <ExternalLink className="h-3 w-3" />
-              Visit HarvardSt.co
-            </a>
-            <a 
-              href="https://www.instagram.com/harvardstcommons/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-            >
-              <Instagram className="h-3 w-3" />
-              See Cohort Pictures
-            </a>
+          <div className="flex justify-between items-baseline">
+            <div className="text-lg font-serif text-black">Resident</div>
           </div>
         </div>
 
+        <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
+          I took a gap semester from Rice University to live at the hacker house for Harvard and MIT. This experience changed my life. Alumni and affiliated founders have gone on to raise from top firms including Greylock Partners, Sequoia Capital, General Catalyst, Pear VC, Felicis Ventures, and Z Fellows.
+        </p>
+
+        <div className="flex gap-4 text-xs font-sans">
+          <a
+            href="https://harvardst.co"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            Visit HarvardSt.co
+          </a>
+          <a
+            href="https://www.instagram.com/harvardstcommons/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Instagram className="h-3 w-3" />
+            See Cohort Pictures
+          </a>
+        </div>
+
         <div className="w-full overflow-hidden rounded-sm border border-gray-200">
-          <img 
-            src="/images/harvard-st-commons.jpeg" 
+          <img
+            src="/images/harvard-st-commons.jpeg"
             alt="Harvard St Commons Community"
             className="w-full h-auto object-cover"
             loading="lazy"
           />
         </div>
 
-      </section>
-
-      {/* The Residency + The Collective Section */}
-      <section className="space-y-8 border-t border-gray-100 pt-12">
-        <div className="grid gap-8 md:grid-cols-2">
-          <div className="border border-gray-200 p-5 space-y-4">
-            <div className="space-y-3">
-              <h2 className="text-lg font-serif text-black">The Residency</h2>
-              <div className="flex flex-wrap gap-2 text-[11px] font-mono uppercase tracking-wider">
-                <a
-                  href="https://www.livetheresidency.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-gray-200 rounded-full text-gray-600 hover:text-black hover:border-black transition-colors"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  The Residency
-                </a>
-                <a
-                  href="https://homebrew.nyc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-gray-200 rounded-full text-gray-600 hover:text-black hover:border-black transition-colors"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  Homebrew Homies
-                </a>
-              </div>
-            </div>
-
-            <div className="w-full overflow-hidden rounded-sm border border-gray-200">
-              <img
-                src="/images/the-residency.jpeg"
-                alt="The Residency Community"
-                className="w-full h-64 object-cover"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div className="border border-gray-200 p-5 space-y-4">
-            <div className="space-y-3">
-              <h2 className="text-lg font-serif text-black">The Collective</h2>
-              <div className="flex flex-wrap gap-2 text-[11px] font-mono uppercase tracking-wider">
-                <a
-                  href="https://www.thecollectiveny.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-gray-200 rounded-full text-gray-600 hover:text-black hover:border-black transition-colors"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  The Collective
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/thecollectiveny/posts/?feedView=all"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-gray-200 rounded-full text-gray-600 hover:text-black hover:border-black transition-colors"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  See Us Here
-                </a>
-              </div>
-            </div>
-
-            <div className="w-full overflow-hidden rounded-sm border border-gray-200">
-              <img
-                src="/images/the-collective.jpeg"
-                alt="The Collective Community"
-                className="w-full h-64 object-cover"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-
+        <LinkedInPostCarousel
+          posts={harvardStPosts}
+          height={627}
+          label="Harvard St Commons LinkedIn posts"
+        />
       </section>
 
       {/* Dance */}
@@ -566,40 +619,6 @@ export default function Communities() {
           className="relative aspect-[16/10] min-h-[300px] w-full min-w-0 overflow-hidden border border-gray-200 bg-gray-50 sm:min-h-[360px] lg:min-h-0"
         />
       </section>
-      {activeLightboxUrl &&
-        createPortal(
-          <div
-            className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4"
-            onClick={() => setActiveLightboxUrl(null)}
-          >
-            <div
-              className="relative w-full max-w-4xl bg-black"
-              onClick={(event) => event.stopPropagation()}
-            >
-              <button
-                type="button"
-                onClick={() => setActiveLightboxUrl(null)}
-                className="absolute -top-10 right-0 text-white text-sm tracking-widest uppercase"
-              >
-                close
-              </button>
-              <div className="aspect-video">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={`${activeLightboxUrl}${activeLightboxUrl.includes("?") ? "&" : "?"}autoplay=1`}
-                  title="Rice Residency Video"
-                  frameBorder="0"
-                  allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full"
-                ></iframe>
-              </div>
-            </div>
-          </div>,
-          document.body,
-        )}
-
     </div>
   );
 }

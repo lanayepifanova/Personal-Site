@@ -5,7 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const isHome = location === "/";
 
   if (isHome) {
-    return <main className="min-h-screen bg-black">{children}</main>;
+    return <main className="h-svh overflow-hidden bg-black">{children}</main>;
   }
 
   return (

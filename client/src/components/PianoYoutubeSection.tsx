@@ -74,23 +74,6 @@ const pianoLongFormVideos = [
   "https://www.youtube.com/embed/ACmF4cCZjkY",
 ];
 
-const pianoGallery = {
-  duration: "48s",
-  items: [
-    {
-      title: "Chamber Music at Lincoln Center",
-      image: "/images/lincolncenter.JPG",
-      objectPosition: "50% 70%",
-    },
-    { title: "Music", image: "/images/music2.JPG" },
-    { title: "Music", image: "/images/music3.JPG" },
-    { title: "Music", image: "/images/music10.JPG" },
-    { title: "Music", image: "/images/music11.JPG" },
-    { title: "Music", image: "/images/music12.JPG" },
-    { title: "Music", image: "/images/music13.JPG" },
-  ],
-};
-
 const pianoShortRows = [
   pianoShorts.slice(0, Math.ceil(pianoShorts.length / 2)),
   pianoShorts.slice(Math.ceil(pianoShorts.length / 2)),
@@ -186,37 +169,6 @@ export default function PianoYoutubeSection() {
           <ExternalLink className="h-3 w-3" />
           Visit Piano YouTube Channel
         </a>
-      </div>
-
-      <div className="space-y-4">
-        <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
-          <div
-            className="gallery-marquee"
-            style={{ ["--marquee-duration" as string]: pianoGallery.duration } as CSSProperties}
-          >
-            {[0, 1].map((duplicate) => (
-              <div
-                key={`piano-gallery-${duplicate}`}
-                className="gallery-row"
-                aria-hidden={duplicate === 1}
-              >
-                {pianoGallery.items.map((item) => (
-                  <figure key={`${item.image}-${duplicate}`} className="gallery-item">
-                    <div className="gallery-card">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="gallery-image"
-                        style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
-                        loading="lazy"
-                      />
-                    </div>
-                  </figure>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       <div className="space-y-4">

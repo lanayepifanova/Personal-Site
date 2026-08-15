@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type WheelEvent, type UIEvent } from "react";
-import { ExternalLink, Newspaper, Instagram, ChevronLeft, ChevronRight } from "lucide-react";
+import { ExternalLink, Newspaper, Instagram, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { atlasLocations, slugifyTravelCity } from "@/data/travelLocations";
@@ -10,12 +10,6 @@ type GalleryItem = {
   image: string;
   objectPosition?: string;
   scale?: string;
-};
-
-type CampusGallery = {
-  title: string;
-  duration: string;
-  items: GalleryItem[];
 };
 
 type LinkedInPost = {
@@ -238,36 +232,62 @@ export default function Communities() {
       cleanup();
     };
   }, [setLocation]);
-  const campusGalleries: CampusGallery[] = [
+  const sportsPhotos: GalleryItem[] = [
     {
-      title: "Sports",
-      duration: "26s",
-      items: [
-        {
-          title: "Co-Ed Varsity Wrestling",
-          image: "/images/wrestling.jpg",
-          objectPosition: "50% 55%",
-        },
-        { title: "Flag Football", image: "/images/flagfootball.jpg" },
-        { title: "Track", image: "/images/track.jpg" },
-        { title: "Rice Club Sailing Team", image: "/images/sailing.png" },
-        { title: "Basketball", image: "/images/basketball.JPG" },
-        { title: "Swimming", image: "/images/swimming.JPG" },
-      ],
+      title: "Co-Ed Varsity Wrestling",
+      image: "/images/wrestling.jpg",
+      objectPosition: "50% 55%",
     },
-    {
-      title: "Volunteer",
-      duration: "32s",
-      items: [
-        { title: "Alternative Spring Break", image: "/images/alternativespringbreak.JPG" },
-        { title: "Volunteer", image: "/images/volunteer1.JPG" },
-        { title: "Volunteer", image: "/images/volunteer2.JPG" },
-        { title: "Volunteer", image: "/images/volunteer3.JPG" },
-        { title: "Volunteer", image: "/images/volunteer4.JPG" },
-        { title: "Volunteer", image: "/images/volunteer5.JPG", objectPosition: "50% 15%", scale: "1.4" },
-      ],
-    },
+    { title: "Flag Football", image: "/images/flagfootball.jpg" },
+    { title: "Track", image: "/images/track.jpg" },
+    { title: "Rice Club Sailing Team", image: "/images/sailing.png" },
+    { title: "Basketball", image: "/images/basketball.JPG" },
+    { title: "Swimming", image: "/images/swimming.JPG" },
   ];
+  const volunteerPhotos: GalleryItem[] = [
+    { title: "Alternative Spring Break", image: "/images/alternativespringbreak.JPG" },
+    { title: "Volunteer", image: "/images/volunteer1.JPG" },
+    { title: "Volunteer", image: "/images/volunteer2.JPG" },
+    { title: "Volunteer", image: "/images/volunteer3.JPG" },
+    { title: "Volunteer", image: "/images/volunteer4.JPG" },
+    { title: "Volunteer", image: "/images/volunteer5.JPG", objectPosition: "50% 15%", scale: "1.4" },
+  ];
+
+  const musicPhotos: GalleryItem[] = [
+    {
+      title: "Chamber Music at Lincoln Center",
+      image: "/images/lincolncenter.JPG",
+      objectPosition: "50% 70%",
+    },
+    { title: "Music", image: "/images/music2.JPG" },
+    { title: "Music", image: "/images/music3.JPG" },
+    { title: "Music", image: "/images/music10.JPG" },
+    { title: "Music", image: "/images/music11.JPG" },
+    { title: "Music", image: "/images/music12.JPG" },
+  ];
+
+  // Filled in once the copy is ready; each block hides itself while empty.
+  const sportsRole = "";
+  const sportsDescription =
+    "I placed #1 at the Mayor's Cup Championship for Girls Wrestling in Jan 2023. In high school, I was a part of Girls JV Track & Field, Girls Varsity Tennis, Girls Varsity Swimming, Girls Varsity Flag Football, and CoEd Varsity Wrestling. At Rice University, I am part of the Rice Club Sailing Team, Rice Women's Club Lacrosse, and Intramural Girls Basketball.";
+  const danceRole = "";
+  const danceDescription =
+    "When I was little, I was part of the American Ballet Theatre from age 7-12 and then Rose Academy of Ballet from age 12-18. " +
+    "At Rice University, I am part of the BASYK Dance Team and the Kasama Dance Team. When I took my gap semester in Boston, I joined the Harvard AADT Dance Team for the semester and performed in their fall showcase.";
+  const volunteerRole = "";
+  const musicRole = "";
+  const musicDescription =
+    "I was part of the Chamber Music Society at Lincoln Center's Young Musicians Concert and made it to the final stage " +
+    "to perform at Alice Tully Hall two years in a row. We played Sarasate Navarra for Two Violins and Piano Op. 33 the " +
+    "first year, and Nino Rota Trio for Flute, Violin and Piano the second year. I was also a part of the Chamber Strings " +
+    "Group, Pit Orchestra, and S!NG Instrumental Group in high school, and was selected for the NYC Honors Festival.";
+  const volunteerDescription =
+    "I participated in Rice University's Center for Civic Leadership Alternative Spring Break program twice. " +
+    "First, it was for a project called \u201cBringing Health Home: Addressing the Absence of Primary Care in Homeless Communities,\u201d " +
+    "partnered with Precinct 2, ReVision, and Lord of the Streets in Houston, and Grace at the Green Light, Unity, Catholic Churches, " +
+    "Bridge House, and Ozanam Inn in New Orleans. Second, it was for a project called \u201cRepairing the Leak: Exploring the Link " +
+    "Between Waterway Pollution and Environmental Health,\u201d partnered with Texas Environmental Justice Advocacy Services, " +
+    "Sunrise Movement Houston, and Texas Health & Environmental Alliance.";
   const danceVideos = [
     "https://www.youtube.com/embed/Qs3Z8Mcl5hM",
     "https://www.youtube.com/embed/BZAXumqsj1k",
@@ -358,7 +378,7 @@ export default function Communities() {
           </div>
         </div>
 
-        <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
+        <p className="text-gray-600 font-serif text-sm leading-relaxed">
           Rice Residency is a selective, founder-led hacker house near Rice University in Houston for students and early-stage founders building software, hardware, and deep-tech startups. We've raised 2.5M+ in funding, had 3 residents get into a16z speedrun, 1 resident get into the YC S26 batch, and 7 residents in the Rice Summer Venture Studio.
         </p>
 
@@ -402,7 +422,7 @@ export default function Communities() {
           </div>
         </div>
 
-        <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
+        <p className="text-gray-600 font-serif text-sm leading-relaxed">
           I took a gap semester from Rice University to live at the hacker house for Harvard and MIT. This experience changed my life. Alumni and affiliated founders have gone on to raise from top firms including Greylock Partners, Sequoia Capital, General Catalyst, Pear VC, Felicis Ventures, and Z Fellows.
         </p>
 
@@ -443,31 +463,236 @@ export default function Communities() {
         />
       </section>
 
-      {/* Dance */}
-      <section className="space-y-12 border-t border-gray-100 pt-12">
-        <div className="border-b border-gray-100 pb-2 flex flex-wrap justify-between items-end gap-3">
-          <h2 className="text-sm font-sans font-bold text-gray-400 uppercase tracking-widest">
-            Dance
-          </h2>
-          <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-gray-400 uppercase tracking-wider">
-            <a
-              href="https://www.instagram.com/basyk.rice/?hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-black transition-colors"
-            >
-              @basyk.rice
-            </a>
-            <span className="text-gray-300">/</span>
-            <a
-              href="https://www.harvardaadt.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-black transition-colors"
-            >
-              harvardaadt.org
-            </a>
+      {/* Sports */}
+      <section className="space-y-6 border-t border-gray-100 pt-12">
+        <div className="space-y-1">
+          <div className="flex justify-between items-end">
+            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Sports</h2>
           </div>
+          {sportsRole && (
+            <div className="flex justify-between items-baseline">
+              <div className="text-lg font-serif text-black">{sportsRole}</div>
+            </div>
+          )}
+        </div>
+
+        {sportsDescription && (
+          <p className="text-gray-600 font-serif text-sm leading-relaxed">
+            {sportsDescription}
+          </p>
+        )}
+
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+          <a
+            href="https://www.btsny.org/post/beat-the-streets-academy-win-titles-2023-nyc-mayors-cup-wrestling-results"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Newspaper className="h-3 w-3" />
+            NYC Mayor&apos;s Cup Results
+          </a>
+          <a
+            href="https://thhsclassic.com/12147/sport/girls-jv-cross-country-holds-title-of-queens-borough-champions-for-27th-year/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Newspaper className="h-3 w-3" />
+            Queens Borough Champions
+          </a>
+          <a
+            href="https://thhsclassic.com/18762/sport/psal-winter-season-five-thhs-athletes-with-outstanding-stats/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Newspaper className="h-3 w-3" />
+            PSAL Season Standouts
+          </a>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {sportsPhotos.map((item) => (
+            <figure key={`sports-${item.title}-${item.image}`} className="w-full">
+              <div className="gallery-card">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="gallery-image"
+                  style={{
+                    ...(item.objectPosition ? { objectPosition: item.objectPosition } : {}),
+                    ...(item.scale ? { transform: `scale(${item.scale})` } : {}),
+                  }}
+                  loading="lazy"
+                />
+              </div>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* Music */}
+      <section className="space-y-6 border-t border-gray-100 pt-12">
+        <div className="space-y-1">
+          <div className="flex justify-between items-end">
+            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Music</h2>
+          </div>
+          {musicRole && (
+            <div className="flex justify-between items-baseline">
+              <div className="text-lg font-serif text-black">{musicRole}</div>
+            </div>
+          )}
+        </div>
+
+        {musicDescription && (
+          <p className="text-gray-600 font-serif text-sm leading-relaxed">
+            {musicDescription}
+          </p>
+        )}
+
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+          <a
+            href="https://www.chambermusicsociety.org/education-and-community-engagement/for-emerging-artists/ymc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            Young Musicians Concert
+          </a>
+          <a
+            href="https://playbill.com/article/young-musicians-on-the-tully-stage"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Newspaper className="h-3 w-3" />
+            Featured in Playbill
+          </a>
+          <a
+            href="https://youtu.be/_DiAbZRqQZg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Youtube className="h-3 w-3" />
+            Nino Rota
+          </a>
+          <a
+            href="https://youtu.be/9fDRZKqb4Uo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Youtube className="h-3 w-3" />
+            Sarasate
+          </a>
+          <a
+            href="https://thhsclassic.com/16500/arts-entertainment/thhs-music-program-performs-in-an-eventful-month-of-concerts-and-festivals/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Newspaper className="h-3 w-3" />
+            NYSSMA Festival
+          </a>
+          <a
+            href="https://thhsclassic.com/16181/arts-entertainment/harrisites-earn-multiples-seats-in-nyc-honors-music-festival/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Newspaper className="h-3 w-3" />
+            NYC Honors Music Festival
+          </a>
+          <a
+            href="https://thhsclassic.com/15654/news/winter-concert-canceled-as-covid-19-cases-surge-in-nyc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Newspaper className="h-3 w-3" />
+            Chamber Strings
+          </a>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {musicPhotos.map((item) => (
+            <figure key={`music-${item.image}`} className="w-full">
+              <div className="gallery-card">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="gallery-image"
+                  style={{
+                    ...(item.objectPosition ? { objectPosition: item.objectPosition } : {}),
+                    ...(item.scale ? { transform: `scale(${item.scale})` } : {}),
+                  }}
+                  loading="lazy"
+                />
+              </div>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* Dance */}
+      <section className="space-y-6 border-t border-gray-100 pt-12">
+        <div className="space-y-1">
+          <div className="flex justify-between items-end">
+            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Dance</h2>
+          </div>
+          {danceRole && (
+            <div className="flex justify-between items-baseline">
+              <div className="text-lg font-serif text-black">{danceRole}</div>
+            </div>
+          )}
+        </div>
+
+        {danceDescription && (
+          <p className="text-gray-600 font-serif text-sm leading-relaxed">
+            {danceDescription}
+          </p>
+        )}
+
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+          <a
+            href="https://www.instagram.com/basyk.rice/?hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Instagram className="h-3 w-3" />
+            BASYK Dance Team
+          </a>
+          <a
+            href="https://www.harvardaadt.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            Harvard AADT Dance Team
+          </a>
+          <a
+            href="https://www.abt.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            American Ballet Theatre
+          </a>
+          <a
+            href="https://www.roseacademyofballet.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            Baby Lana Ballet Photo
+          </a>
         </div>
 
         <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
@@ -536,70 +761,66 @@ export default function Communities() {
         </div>
       </section>
 
-      {/* Campus Life Section */}
-      <section className="space-y-8 border-t border-gray-100 pt-12">
-        <div className="space-y-2"></div>
-
-        <div className="space-y-10">
-          {campusGalleries.map((gallery, index) => {
-            const marqueeStyle = {
-              ["--marquee-duration" as string]: gallery.duration ?? "32s",
-            } as CSSProperties;
-            const marqueeClass = index % 2 === 0 ? "gallery-marquee" : "gallery-marquee reverse";
-            const isStaticGrid = gallery.title === "Sports" || gallery.title === "Volunteer";
-
-            return (
-              <div key={gallery.title} className="space-y-4">
-                <h3 className="text-sm font-mono text-gray-500 uppercase tracking-wider">{gallery.title}</h3>
-                {isStaticGrid ? (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    {gallery.items.map((item) => (
-                      <figure key={`${gallery.title}-${item.title}`} className="w-full">
-                        <div className="gallery-card">
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="gallery-image"
-                            style={{ ...(item.objectPosition ? { objectPosition: item.objectPosition } : {}), ...(item.scale ? { transform: `scale(${item.scale})` } : {}) }}
-                            loading="lazy"
-                          />
-                        </div>
-                      </figure>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
-                    <div className={marqueeClass} style={marqueeStyle}>
-                      {[0, 1].map((duplicate) => (
-                        <div
-                          key={`${gallery.title}-${duplicate}`}
-                          className="gallery-row"
-                          aria-hidden={duplicate === 1}
-                        >
-                          {gallery.items.map((item) => (
-                            <figure key={`${gallery.title}-${item.title}-${duplicate}`} className="gallery-item">
-                              <div className="gallery-card">
-                                <img
-                                  src={item.image}
-                                  alt={item.title}
-                                  className="gallery-image"
-                                  style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
-                                  loading="lazy"
-                                />
-                              </div>
-                            </figure>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+      {/* Volunteering */}
+      <section className="space-y-6 border-t border-gray-100 pt-12">
+        <div className="space-y-1">
+          <div className="flex justify-between items-end">
+            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Volunteering</h2>
+          </div>
+          {volunteerRole && (
+            <div className="flex justify-between items-baseline">
+              <div className="text-lg font-serif text-black">{volunteerRole}</div>
+            </div>
+          )}
         </div>
 
+        {volunteerDescription && (
+          <p className="text-gray-600 font-serif text-sm leading-relaxed">
+            {volunteerDescription}
+          </p>
+        )}
+
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+          <a
+            href="https://sites.google.com/rice.edu/repairing-the-leak/home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            Repairing the Leak Project
+          </a>
+          <a
+            href="https://sites.google.com/rice.edu/asbdigitalshowcase/home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            Bringing Health Home
+          </a>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {volunteerPhotos.map((item) => (
+            <figure key={`volunteer-${item.title}-${item.image}`} className="w-full">
+              <div className="gallery-card">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="gallery-image"
+                  style={{
+                    ...(item.objectPosition ? { objectPosition: item.objectPosition } : {}),
+                    ...(item.scale ? { transform: `scale(${item.scale})` } : {}),
+                  }}
+                  loading="lazy"
+                />
+              </div>
+            </figure>
+          ))}
+        </div>
       </section>
+
 
       {/* Travel Documentation */}
       <section className="space-y-6 border-t border-gray-100 pt-12">

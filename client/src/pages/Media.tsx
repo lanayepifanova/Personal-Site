@@ -1,5 +1,5 @@
 import { type CSSProperties, type UIEvent, type WheelEvent } from "react";
-import { ExternalLink, Instagram, Newspaper, Youtube } from "lucide-react";
+import { ExternalLink, Instagram, Newspaper, Twitter, Youtube } from "lucide-react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 
@@ -328,6 +328,15 @@ export default function Media() {
           >
             <Youtube className="h-3 w-3" />
             @lana_yaps on YouTube
+          </a>
+          <a
+            href="https://x.com/lana_yaps"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Twitter className="h-3 w-3" />
+            @lana_yaps on X
           </a>
         </div>
 

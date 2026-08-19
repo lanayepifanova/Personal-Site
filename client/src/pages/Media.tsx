@@ -129,6 +129,8 @@ export const reels = [
 export default function Media() {
   usePageMeta({
     title: "Lana Yepifanova | Media",
+    description:
+      "Lana Yepifanova makes short-form video, performs piano on YouTube, and hosts a podcast. Find her work on Instagram, YouTube, X, and Substack.",
     canonicalPath: "/media",
   });
 

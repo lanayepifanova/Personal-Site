@@ -11,6 +11,9 @@ export default function TravelDestination() {
 
   usePageMeta({
     title: `${title} | Lana Yepifanova`,
+    description: photos.length
+      ? `Lana Yepifanova traveled to ${title}. Browse ${photos.length} photos from her atlas of the places she has lived in and visited.`
+      : `Lana Yepifanova traveled to ${title}, one stop on her atlas of the places she has lived in and visited.`,
     canonicalPath: location,
   });
 

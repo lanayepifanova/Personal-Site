@@ -6,9 +6,6 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Engineering from "./pages/Engineering";
 import Communities from "./pages/Communities";
-import VoiceAIWearables from "./pages/VoiceAIWearables";
-import AISlopAdvertising from "./pages/AISlopAdvertising";
-import GreatResponsibilities from "./pages/GreatResponsibilities";
 import TravelDestination from "./pages/TravelDestination";
 import Media from "./pages/Media";
 import Layout from "./components/Layout";
@@ -21,9 +18,6 @@ function Routes({ location }: { location?: string }) {
       <Route path="/engineering" component={Engineering} />
       <Route path="/communities" component={Communities} />
       <Route path="/media" component={Media} />
-      <Route path="/essays/voice-ai-wearables" component={VoiceAIWearables} />
-      <Route path="/essays/ai-slop-advertising" component={AISlopAdvertising} />
-      <Route path="/essays/great-responsibilities" component={GreatResponsibilities} />
       <Route path="/explore/:slug" component={ExploreItem} />
       <Route path="/communities/travel/:city" component={TravelDestination} />
       <Route component={NotFound} />

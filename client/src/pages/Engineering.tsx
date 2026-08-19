@@ -4,6 +4,8 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 export default function Engineering() {
   usePageMeta({
     title: "Lana Yepifanova | Engineering",
+    description:
+      "Lana Yepifanova founded Unitbot, wrote software at JLL and Mixo Ads AI, and prototyped hardware at Rice University's Oshman Engineering Design Kitchen.",
     canonicalPath: "/",
   });
 

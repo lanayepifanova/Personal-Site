@@ -144,6 +144,8 @@ export default function Communities() {
 
   usePageMeta({
     title: "Lana Yepifanova | Communities at Rice University",
+    description:
+      "Lana Yepifanova co-founded Rice Residency and takes part in sports, music, dance, and volunteering at Rice University. Explore the places she has traveled.",
     canonicalPath: "/communities",
   });
 

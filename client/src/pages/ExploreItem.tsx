@@ -285,11 +285,34 @@ function DetailContent({ slug, title }: { slug: string; title: string }) {
   );
 }
 
+const groupDescriptions: Record<string, string> = {
+  startups:
+    "Lana Yepifanova founded Unitbot, a property management platform for NYC landlords that was acquired by an early beta user, and built the ad platform Mixo Ads AI.",
+  "worked-at":
+    "Lana Yepifanova has worked at Macquarie Group, Xylem Robotics, JLL, Rudin, SL Green, and the New York City Department of Environmental Protection.",
+  uilg:
+    "Lana Yepifanova makes short-form Instagram reels about college admissions, campus life, and applying to selective schools.",
+  doerr:
+    "Lana Yepifanova hosts the Leading Owls Podcast from the Doerr Institute for New Leaders at Rice University.",
+  instagram:
+    "Lana Yepifanova posts short-form video about engineering and student life at Rice University on Instagram, where she goes by @lana_yaps.",
+  piano:
+    "Lana Yepifanova records and publishes her piano performances on YouTube.",
+};
+
+function describeItem(slug: string, title: string) {
+  const item =
+    engineeringItems.find((entry) => entry.slug === slug) ?? communityItems[slug];
+  if (item) return item.description;
+  return groupDescriptions[slug] ?? `${title} is part of Lana Yepifanova's personal site.`;
+}
+
 export default function ExploreItem({ params }: ExploreItemProps) {
   const title = itemLabels[params.slug] ?? params.slug.replaceAll("-", " ");
 
   usePageMeta({
     title: `${title} | Lana Yepifanova`,
+    description: describeItem(params.slug, title),
     canonicalPath: `/explore/${params.slug}`,
   });
 

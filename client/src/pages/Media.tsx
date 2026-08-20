@@ -132,6 +132,10 @@ export const reels = [
     id: "DcPo0YbR3nf",
     url: "https://www.instagram.com/reel/DcPo0YbR3nf/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==&igsi=NTc4MTIwNjQ2YQ==",
   },
+  {
+    id: "DcQ0eRfBICZ",
+    url: "https://www.instagram.com/reel/DcQ0eRfBICZ/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==&igsi=NTc4MTIwNjQ2YQ==",
+  },
 ];
 
 export default function Media() {

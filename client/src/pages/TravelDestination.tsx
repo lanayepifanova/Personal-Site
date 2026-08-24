@@ -20,7 +20,7 @@ export default function TravelDestination() {
   return (
     <div className="animate-in fade-in duration-700 pt-8 pb-32 px-4 max-w-5xl mx-auto">
       <header className="space-y-3 mb-12">
-        <h1 className="text-2xl sm:text-3xl font-serif font-medium text-black leading-snug">
+        <h1 className="text-2xl sm:text-3xl font-sans font-medium text-black leading-snug">
           {title}
         </h1>
       </header>
@@ -38,7 +38,7 @@ export default function TravelDestination() {
           ))}
         </div>
       ) : (
-        <div className="font-serif text-[15px] leading-relaxed text-gray-800">
+        <div className="font-sans text-[15px] leading-relaxed text-gray-800">
           <p>Coming Soon</p>
         </div>
       )}

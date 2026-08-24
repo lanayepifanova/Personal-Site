@@ -1,63 +1,73 @@
-import { Github, Instagram, Linkedin } from "lucide-react";
-
 import { usePageMeta } from "@/hooks/usePageMeta";
+
+function A({ href, children }: { href: string; children: React.ReactNode }) {
+  const external = href.startsWith("http");
+
+  return (
+    <a
+      href={href}
+      className="underline decoration-gray-400 underline-offset-2 transition-colors hover:text-gray-500"
+      {...(external ? { target: "_blank", rel: "noreferrer noopener" } : {})}
+    >
+      {children}
+    </a>
+  );
+}
 
 export default function Home() {
   usePageMeta({
     title: "Lana Yepifanova",
+    description:
+      "Lana Yepifanova is a senior at Rice University, the founder of Unitbot, and a co-founder of Rice Residency.",
     canonicalPath: "/",
   });
 
   return (
-    <div className="h-svh overflow-hidden bg-black">
-      <section className="home-field relative h-svh overflow-hidden bg-[#d8d8d2]">
-        <div className="absolute inset-0 bg-black/18" aria-hidden="true" />
-        <div className="absolute inset-x-4 top-[32%] z-10 -translate-y-1/2 text-center sm:inset-x-8">
-          <h1 className="font-sans text-base font-semibold lowercase tracking-normal text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-lg">
-            hey, i'm lana
-          </h1>
-          <nav className="mt-4 flex flex-wrap justify-center gap-3 font-sans text-sm text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-base">
-            <a className="underline decoration-white/70 underline-offset-4 hover:text-white/75" href="/engineering">
-              engineering
-            </a>
-            <a className="underline decoration-white/70 underline-offset-4 hover:text-white/75" href="/media">
-              media
-            </a>
-            <a className="underline decoration-white/70 underline-offset-4 hover:text-white/75" href="/communities">
-              communities
-            </a>
-          </nav>
-          <div className="mt-5 flex justify-center gap-4 text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)]">
-            <a
-              className="hover:text-white/75"
-              href="https://github.com/lanayepifanova"
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="GitHub"
-            >
-              <Github className="h-4 w-4" strokeWidth={1.75} />
-            </a>
-            <a
-              className="hover:text-white/75"
-              href="https://www.linkedin.com/in/lana-yepifanova/"
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-4 w-4" strokeWidth={1.75} />
-            </a>
-            <a
-              className="hover:text-white/75"
-              href="https://www.instagram.com/lana_yaps/"
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="Instagram"
-            >
-              <Instagram className="h-4 w-4" strokeWidth={1.75} />
-            </a>
-          </div>
-        </div>
-      </section>
+    <div className="mx-auto max-w-[27rem] px-1 pt-2 pb-24 font-sans text-black animate-in fade-in duration-700">
+      <h1 className="text-[15px] font-semibold tracking-tight">Lana Yepifanova</h1>
+      <p className="mt-1 text-[12px] font-normal tracking-tight text-gray-400">Updated Aug 24, 2026</p>
+
+      <div className="mt-7 space-y-4 text-[13px] leading-[1.7] text-black">
+        <p>
+          Hi, I&apos;m Lana! I&apos;m a senior at <A href="https://www.rice.edu">Rice University</A> studying
+          History.
+        </p>
+
+        <p>
+          I was the solo founder of <A href="/engineering">UnitBot</A>, a property management platform that automated
+          maintenance requests and rent reminders for NYC landlords. It was acquired by an early beta user for 300k.
+          This idea came after working in real estate and infrastructure firms like{" "}
+          <A href="/engineering">JLL</A>,{" "}
+          <A href="/engineering">Rudin</A>, <A href="/engineering">SL Green</A>,{" "}
+          <A href="/engineering">NYC DEP</A> and <A href="/engineering">NYCLV</A>. Most recently, I worked in
+          Commodities Trading at <A href="/engineering">Macquarie Group</A>.
+        </p>
+
+        <p>
+          I co-founded <A href="https://www.riceresidency.com">Rice Residency</A>, a founder-led hacker house in
+          Houston for students and early-stage founders building software, hardware, and deep-tech startups. Our
+          residents have raised $2.5M+, with three in a16z speedrun, one in the YC S26 batch, and seven in the Rice
+          Summer Venture Studio.
+        </p>
+
+        <p>
+          I make short form and long form content{" "}
+          <A href="https://www.instagram.com/lana_yaps/">@lana_yaps</A> where I have grown to 20k+ followers. I also
+          make content for <A href="https://www.ultimateivyleagueguide.com">Ultimate Ivy League Guide</A> which has
+          grown to 1M+ followers, the <A href="https://doerr.rice.edu/podcast">Leading Owls Podcast</A> that has 1k+
+          monthly listeners, and my small{" "}
+          <A href="https://www.youtube.com/@LanaYepifanova">Piano Youtube Channel</A> with 500+ subscribers.
+        </p>
+
+        <p className="pt-2 text-gray-500">
+          <A href="https://www.instagram.com/lana_yaps/">Instagram</A> &middot;{" "}
+          <A href="https://www.tiktok.com/@lana_yaps">TikTok</A> &middot;{" "}
+          <A href="https://www.youtube.com/@lana_yaps">YouTube</A> &middot;{" "}
+          <A href="https://x.com/lana_yaps">X</A> &middot;{" "}
+          <A href="https://github.com/lanayepifanova">GitHub</A> &middot;{" "}
+          <A href="https://www.linkedin.com/in/lana-yepifanova/">LinkedIn</A>
+        </p>
+      </div>
     </div>
   );
 }

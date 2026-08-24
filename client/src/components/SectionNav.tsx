@@ -7,7 +7,7 @@ const links = [
   { label: "communities", href: "/communities" },
 ];
 
-const navRoutes = ["/engineering", "/media", "/communities"];
+const navRoutes = ["/", "/engineering", "/media", "/communities"];
 
 export default function SectionNav() {
   const [location] = useLocation();
@@ -17,16 +17,23 @@ export default function SectionNav() {
   }
 
   return (
-    <nav className="flex justify-center gap-6 px-4 pt-2 pb-6 text-sm font-sans text-black">
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className="hover:underline decoration-1 underline-offset-4 transition-all"
-        >
-          {link.label}
-        </Link>
-      ))}
+    <nav className="mx-auto flex w-full max-w-[27rem] justify-between gap-x-2 px-1 pt-2 pb-6 text-[13px] font-sans text-black sm:text-sm">
+      {links.map((link) => {
+        const isActive = location === link.href;
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            aria-current={isActive ? "page" : undefined}
+            className={`whitespace-nowrap decoration-1 underline-offset-4 transition-all ${
+              isActive ? "underline" : "hover:underline"
+            }`}
+          >
+            {link.label}
+          </Link>
+        );
+      })}
     </nav>
   );
 }

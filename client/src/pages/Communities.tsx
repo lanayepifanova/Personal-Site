@@ -130,7 +130,7 @@ function LinkedInPostCarousel({
             />
           ))}
         </div>
-        <span className="font-mono text-[10px] text-gray-500 uppercase tracking-wider ml-auto">
+        <span className="font-sans text-[10px] text-gray-500 uppercase tracking-wider ml-auto">
           {activeIndex + 1} / {posts.length}
         </span>
       </div>
@@ -368,23 +368,23 @@ export default function Communities() {
   };
 
   return (
-    <div className="page-stagger space-y-20 animate-in fade-in duration-700 pt-8 pb-24 px-4">
+    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-12 animate-in fade-in duration-700 pt-10 pb-24 px-1">
       {/* Rice Residency Section */}
       <section className="space-y-6">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Rice Residency</h2>
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Rice Residency</h2>
           </div>
           <div className="flex justify-between items-baseline">
-            <div className="text-lg font-serif text-black">Co-Founder and Co-Lead</div>
+            <div className="text-[13px] font-sans text-black">Co-Founder and Co-Lead</div>
           </div>
         </div>
 
-        <p className="text-gray-600 font-serif text-sm leading-relaxed">
+        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
           Rice Residency is a selective, founder-led hacker house near Rice University in Houston for students and early-stage founders building software, hardware, and deep-tech startups. We've raised 2.5M+ in funding, had 3 residents get into a16z speedrun, 1 resident get into the YC S26 batch, and 7 residents in the Rice Summer Venture Studio.
         </p>
 
-        <div className="flex gap-4 text-xs font-sans">
+        <div className="flex gap-4 text-[11px] font-sans">
           <a 
             href="https://riceresidency.com" 
             target="_blank" 
@@ -417,18 +417,18 @@ export default function Communities() {
       <section className="space-y-6 border-t border-gray-100 pt-12">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Harvard St Commons</h2>
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Harvard St Commons</h2>
           </div>
           <div className="flex justify-between items-baseline">
-            <div className="text-lg font-serif text-black">Resident</div>
+            <div className="text-[13px] font-sans text-black">Resident</div>
           </div>
         </div>
 
-        <p className="text-gray-600 font-serif text-sm leading-relaxed">
+        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
           I took a gap semester from Rice University to live at the hacker house for Harvard and MIT. This experience changed my life. Alumni and affiliated founders have gone on to raise from top firms including Greylock Partners, Sequoia Capital, General Catalyst, Pear VC, Felicis Ventures, and Z Fellows.
         </p>
 
-        <div className="flex gap-4 text-xs font-sans">
+        <div className="flex gap-4 text-[11px] font-sans">
           <a
             href="https://harvardst.co"
             target="_blank"
@@ -469,22 +469,22 @@ export default function Communities() {
       <section className="space-y-6 border-t border-gray-100 pt-12">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Sports</h2>
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Sports</h2>
           </div>
           {sportsRole && (
             <div className="flex justify-between items-baseline">
-              <div className="text-lg font-serif text-black">{sportsRole}</div>
+              <div className="text-[13px] font-sans text-black">{sportsRole}</div>
             </div>
           )}
         </div>
 
         {sportsDescription && (
-          <p className="text-gray-600 font-serif text-sm leading-relaxed">
+          <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
             {sportsDescription}
           </p>
         )}
 
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
           <a
             href="https://www.btsny.org/post/beat-the-streets-academy-win-titles-2023-nyc-mayors-cup-wrestling-results"
             target="_blank"
@@ -514,7 +514,7 @@ export default function Communities() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {sportsPhotos.map((item) => (
             <figure key={`sports-${item.title}-${item.image}`} className="w-full">
               <div className="gallery-card">
@@ -538,22 +538,22 @@ export default function Communities() {
       <section className="space-y-6 border-t border-gray-100 pt-12">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Music</h2>
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Music</h2>
           </div>
           {musicRole && (
             <div className="flex justify-between items-baseline">
-              <div className="text-lg font-serif text-black">{musicRole}</div>
+              <div className="text-[13px] font-sans text-black">{musicRole}</div>
             </div>
           )}
         </div>
 
         {musicDescription && (
-          <p className="text-gray-600 font-serif text-sm leading-relaxed">
+          <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
             {musicDescription}
           </p>
         )}
 
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
           <a
             href="https://www.chambermusicsociety.org/education-and-community-engagement/for-emerging-artists/ymc"
             target="_blank"
@@ -619,7 +619,7 @@ export default function Communities() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {musicPhotos.map((item) => (
             <figure key={`music-${item.image}`} className="w-full">
               <div className="gallery-card">
@@ -643,22 +643,22 @@ export default function Communities() {
       <section className="space-y-6 border-t border-gray-100 pt-12">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Dance</h2>
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Dance</h2>
           </div>
           {danceRole && (
             <div className="flex justify-between items-baseline">
-              <div className="text-lg font-serif text-black">{danceRole}</div>
+              <div className="text-[13px] font-sans text-black">{danceRole}</div>
             </div>
           )}
         </div>
 
         {danceDescription && (
-          <p className="text-gray-600 font-serif text-sm leading-relaxed">
+          <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
             {danceDescription}
           </p>
         )}
 
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
           <a
             href="https://www.instagram.com/basyk.rice/?hl=en"
             target="_blank"
@@ -767,22 +767,22 @@ export default function Communities() {
       <section className="space-y-6 border-t border-gray-100 pt-12">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">Volunteering</h2>
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Volunteering</h2>
           </div>
           {volunteerRole && (
             <div className="flex justify-between items-baseline">
-              <div className="text-lg font-serif text-black">{volunteerRole}</div>
+              <div className="text-[13px] font-sans text-black">{volunteerRole}</div>
             </div>
           )}
         </div>
 
         {volunteerDescription && (
-          <p className="text-gray-600 font-serif text-sm leading-relaxed">
+          <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
             {volunteerDescription}
           </p>
         )}
 
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
           <a
             href="https://sites.google.com/rice.edu/repairing-the-leak/home"
             target="_blank"
@@ -803,7 +803,7 @@ export default function Communities() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {volunteerPhotos.map((item) => (
             <figure key={`volunteer-${item.title}-${item.image}`} className="w-full">
               <div className="gallery-card">
@@ -828,12 +828,12 @@ export default function Communities() {
       <section className="space-y-6 border-t border-gray-100 pt-12">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-2xl sm:text-3xl font-sans font-medium text-black tracking-tight">
+            <h2 className="text-[15px] sm:text-[15px] font-sans font-semibold text-black tracking-tight">
               Travel Documentation
             </h2>
           </div>
           <div className="flex justify-between items-baseline">
-            <div className="text-base sm:text-lg font-serif text-black">Hover and Click on the Pins!</div>
+            <div className="text-[13px] font-sans text-black">Hover and Click on the Pins!</div>
           </div>
         </div>
 

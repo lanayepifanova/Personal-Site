@@ -146,20 +146,20 @@ export default function PianoYoutubeSection() {
     <section className="space-y-6 border-t border-gray-100 pt-12">
       <div className="space-y-1">
         <div className="flex justify-between items-end">
-          <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+          <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
             Piano YouTube Channel
           </h2>
         </div>
         <div className="flex justify-between items-baseline">
-          <div className="text-lg font-serif text-black">Pianist and Creator</div>
+          <div className="text-[13px] font-sans text-black">Pianist and Creator</div>
         </div>
       </div>
 
-      <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
+      <p className="text-gray-600 font-sans text-[13px] leading-relaxed max-w-2xl">
         I started my piano YouTube channel to document my growth as a pianist, share performances beyond formal recitals, and make classical music feel more accessible online. It has grown to 500+ subscribers, 130k+ views, and 66 videos.
       </p>
 
-      <div className="flex gap-4 text-xs font-sans">
+      <div className="flex gap-4 text-[11px] font-sans">
         <a
           href="https://www.youtube.com/@LanaYepifanova"
           target="_blank"
@@ -280,7 +280,7 @@ export default function PianoYoutubeSection() {
               <button
                 type="button"
                 onClick={() => setActiveLightboxUrl(null)}
-                className="absolute -top-10 right-0 text-white text-sm tracking-widest uppercase"
+                className="absolute -top-10 right-0 text-white text-[13px] tracking-widest uppercase"
               >
                 close
               </button>

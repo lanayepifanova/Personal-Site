@@ -145,7 +145,7 @@ function EngineeringCard({ item }: { item: EngineeringItem }) {
       <div className="space-y-2 p-4">
         <div className="flex items-baseline justify-between gap-4">
           <h2 className="font-sans text-lg font-semibold text-black">{item.title}</h2>
-          <span className="font-mono text-xs text-gray-500">{item.period}</span>
+          <span className="font-sans text-xs text-gray-500">{item.period}</span>
         </div>
         <p className="font-sans text-sm leading-relaxed text-gray-600">{item.description}</p>
       </div>
@@ -156,7 +156,7 @@ function EngineeringCard({ item }: { item: EngineeringItem }) {
 function EngineeringGroupPage({ title, items }: { title: string; items: EngineeringItem[] }) {
   return (
     <section className="mt-12 space-y-6">
-      <h1 className="font-serif text-5xl font-semibold tracking-normal sm:text-7xl">{title}</h1>
+      <h1 className="font-sans text-5xl font-semibold tracking-normal sm:text-7xl">{title}</h1>
       <div className="grid gap-6 md:grid-cols-2">
         {items.map((item) => (
           <Link key={item.slug} href={`/explore/${item.slug}`} className="block">
@@ -171,7 +171,7 @@ function EngineeringGroupPage({ title, items }: { title: string; items: Engineer
 function EngineeringDetailPage({ item }: { item: EngineeringItem }) {
   return (
     <section className="mt-12 max-w-5xl space-y-6">
-      <h1 className="font-serif text-5xl font-semibold tracking-normal sm:text-7xl">{item.title}</h1>
+      <h1 className="font-sans text-5xl font-semibold tracking-normal sm:text-7xl">{item.title}</h1>
       <img
         src={item.image}
         alt={item.title}
@@ -179,7 +179,7 @@ function EngineeringDetailPage({ item }: { item: EngineeringItem }) {
         style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
       />
       <div className="max-w-2xl space-y-2">
-        <div className="font-mono text-sm text-gray-500">{item.period}</div>
+        <div className="font-sans text-sm text-gray-500">{item.period}</div>
         <p className="font-sans text-lg leading-relaxed text-gray-700">{item.description}</p>
       </div>
     </section>
@@ -189,7 +189,7 @@ function EngineeringDetailPage({ item }: { item: EngineeringItem }) {
 function UilgPage() {
   return (
     <section className="mt-12 space-y-6">
-      <h1 className="font-serif text-5xl font-semibold tracking-normal sm:text-7xl">uilg</h1>
+      <h1 className="font-sans text-5xl font-semibold tracking-normal sm:text-7xl">uilg</h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {reels.map((reel) => (
           <div
@@ -217,7 +217,7 @@ function UilgPage() {
 function DoerrPage() {
   return (
     <section className="mt-12 max-w-5xl space-y-6">
-      <h1 className="font-serif text-5xl font-semibold tracking-normal sm:text-7xl">doerr</h1>
+      <h1 className="font-sans text-5xl font-semibold tracking-normal sm:text-7xl">doerr</h1>
       <iframe
         src="https://embed.podcasts.apple.com/us/podcast/leading-owls-podcast/id1775472900"
         title="Leading Owls Podcast"
@@ -241,7 +241,7 @@ function DoerrPage() {
 function InstagramPage() {
   return (
     <section className="mt-12 max-w-3xl space-y-6">
-      <h1 className="font-serif text-5xl font-semibold tracking-normal sm:text-7xl">instagram</h1>
+      <h1 className="font-sans text-5xl font-semibold tracking-normal sm:text-7xl">instagram</h1>
       <iframe
         src="https://www.instagram.com/lana_yaps/embed/"
         title="Lana Yepifanova on Instagram"
@@ -280,7 +280,7 @@ function DetailContent({ slug, title }: { slug: string; title: string }) {
 
   return (
     <section className="mt-16 max-w-3xl">
-      <h1 className="font-serif text-5xl font-semibold tracking-normal sm:text-7xl">{title}</h1>
+      <h1 className="font-sans text-5xl font-semibold tracking-normal sm:text-7xl">{title}</h1>
     </section>
   );
 }
@@ -320,7 +320,7 @@ export default function ExploreItem({ params }: ExploreItemProps) {
     <main className="min-h-screen bg-[#d8d8d2] px-5 py-8 text-black sm:px-10 sm:py-12">
       <Link
         href="/"
-        className="font-mono text-xs underline decoration-black/40 underline-offset-4 hover:text-black/60"
+        className="font-sans text-xs underline decoration-black/40 underline-offset-4 hover:text-black/60"
       >
         back
       </Link>

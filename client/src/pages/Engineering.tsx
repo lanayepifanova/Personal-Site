@@ -14,10 +14,20 @@ type Job = {
 
 function JobGrid({ jobs }: { jobs: Job[] }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+    <div className="grid grid-cols-1 gap-y-12">
       {jobs.map((job) => (
-        <article key={`${job.company}-${job.period}`} className="group flex flex-col text-left">
-          <div className="aspect-[16/9] overflow-hidden rounded-xl mb-4 bg-gray-100 shadow-sm border border-gray-100 relative">
+        <article key={`${job.company}-${job.period}`} className="group flex flex-col space-y-4 text-left">
+          <div className="space-y-1">
+            <div className="flex justify-between items-baseline">
+              <h3 className="text-[15px] font-sans font-semibold text-black tracking-tight">{job.company}</h3>
+              <span className="font-sans text-[11px] text-gray-400">{job.period}</span>
+            </div>
+            {job.role ? <div className="text-[13px] font-sans text-black">{job.role}</div> : null}
+          </div>
+
+          <div className="text-gray-600 font-sans text-[13px] leading-relaxed">{job.description}</div>
+
+          <div className="aspect-[16/9] overflow-hidden rounded-xl bg-gray-100 shadow-sm border border-gray-100 relative">
             <img
               src={job.image}
               alt={job.company}
@@ -25,13 +35,6 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
               style={job.imagePosition ? { objectPosition: job.imagePosition } : undefined}
             />
           </div>
-          <div className="flex justify-between items-baseline mb-1">
-            <h3 className="text-base font-sans font-semibold text-black group-hover:underline decoration-1 underline-offset-4 transition-all">
-              {job.company}
-            </h3>
-            <span className="font-sans text-sm text-gray-400">{job.period}</span>
-          </div>
-          <div className="text-gray-500 font-sans text-sm leading-relaxed">{job.description}</div>
         </article>
       ))}
     </div>
@@ -161,33 +164,33 @@ export default function Engineering() {
   const workshopLinks = [] as { title: string; href: string }[];
 
   return (
-    <div className="page-stagger space-y-20 animate-in fade-in duration-700 pt-8 pb-24 px-4">
+    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-12 animate-in fade-in duration-700 pt-10 pb-24 px-1">
       
-      <section className="-mt-2 space-y-6">
-        <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+      <section className="space-y-6">
+        <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
           Startup Experience
         </h2>
         <JobGrid jobs={startups} />
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+        <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
           Work Experience
         </h2>
         <JobGrid jobs={corporate} />
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+        <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
           Side Projects
         </h2>
-        <p className="text-gray-500 font-sans text-sm leading-relaxed">coming soon...</p>
+        <p className="text-gray-500 font-sans text-[13px] leading-relaxed">coming soon...</p>
       </section>
 
       {workshopLinks.length > 0 && (
         <section className="-mt-12 pb-20">
           <div className="space-y-2">
-            <h3 className="text-xs font-mono text-gray-400">Workshops</h3>
+            <h3 className="text-[11px] font-sans text-gray-400">Workshops</h3>
             {workshopLinks.map((link) => (
               <a
                 key={link.title}
@@ -197,7 +200,7 @@ export default function Engineering() {
                 className="group flex items-center justify-between gap-4 border-b border-gray-100 py-2.5 text-black transition-colors last:border-b-0"
               >
                 <div className="min-w-0">
-                  <div className="text-sm sm:text-[15px] text-black leading-snug">{link.title}</div>
+                  <div className="text-[13px] text-black leading-snug">{link.title}</div>
                 </div>
                 <ArrowUpRight className="h-4 w-4 shrink-0 text-gray-300 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black" />
               </a>

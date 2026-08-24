@@ -201,24 +201,24 @@ export default function Media() {
   };
 
   return (
-    <div className="page-stagger space-y-20 px-4 pb-24 pt-2 sm:pt-8">
+    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-12 px-1 pb-24 pt-10">
       <section className="space-y-6">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
               Ultimate Ivy League Guide
             </h2>
           </div>
           <div className="flex justify-between items-baseline">
-            <div className="text-lg font-serif text-black">Content Creator</div>
+            <div className="text-[13px] font-sans text-black">Content Creator</div>
           </div>
         </div>
 
-        <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
+        <p className="text-gray-600 font-sans text-[13px] leading-relaxed max-w-2xl">
           Ultimate Ivy League Guide is one of the fastest-growing college admissions mentorship companies, featured in Forbes, Business Insider, Yahoo, and other leading publications for its innovative approach to college admissions. Through personalized coaching, strategic planning, and its signature Narrative Method, the company empowers students to build standout applications that showcase their unique strengths and long-term potential.
         </p>
 
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
           <a
             href="https://www.ultimateivyleagueguide.com"
             target="_blank"
@@ -269,7 +269,7 @@ export default function Media() {
         <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
           <div
             className="gallery-marquee"
-            style={{ ["--marquee-duration" as string]: "60s" } as CSSProperties}
+            style={{ ["--marquee-duration" as string]: "90s" } as CSSProperties}
           >
             {[0, 1].map((duplicate) => (
               <div
@@ -300,7 +300,7 @@ export default function Media() {
           </div>
         </div>
         <noscript>
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8">
             {reels.map((reel) => (
               <div
                 key={reel.id}
@@ -326,20 +326,20 @@ export default function Media() {
       <section className="space-y-6 border-t border-gray-100 pt-12">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
               Lana Yepifanova (@lana_yaps)
             </h2>
           </div>
           <div className="flex justify-between items-baseline">
-            <div className="text-lg font-serif text-black">Personal Branding</div>
+            <div className="text-[13px] font-sans text-black">Personal Branding</div>
           </div>
         </div>
 
-        <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
+        <p className="text-gray-600 font-sans text-[13px] leading-relaxed max-w-2xl">
           I make short-form videos about tech, recent news, and startups. I like to make tutorials on how to use AI tools to build cool things like automating video editing with Claude, agent orchestration, MCP servers, and web scraping. I am also starting a series to explain technical ideas in math, physics, and machine learning to nontechnical viewers.
         </p>
 
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
           <a
             href="https://www.instagram.com/lana_yaps/"
             target="_blank"
@@ -398,20 +398,20 @@ export default function Media() {
       <section className="space-y-6 border-t border-gray-100 pt-12">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
               Leading Owls Podcast
             </h2>
           </div>
           <div className="flex justify-between items-baseline">
-            <div className="text-lg font-serif text-black">Podcast Host</div>
+            <div className="text-[13px] font-sans text-black">Podcast Host</div>
           </div>
         </div>
 
-        <p className="text-gray-600 font-serif text-sm leading-relaxed max-w-2xl">
+        <p className="text-gray-600 font-sans text-[13px] leading-relaxed max-w-2xl">
           The Leading Owls Podcast is the official leadership podcast of the Doerr Institute for New Leaders at Rice University, showcasing the students, faculty, alumni, and professionals who are shaping the future through leadership. Episodes are available on Spotify, Apple Podcasts, YouTube, Amazon Music, and other major podcast platforms.
         </p>
 
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-sans">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
           <a
             href="https://doerr.rice.edu/podcast"
             target="_blank"

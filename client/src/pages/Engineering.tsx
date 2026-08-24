@@ -87,7 +87,7 @@ export default function Engineering() {
       period: "2026",
       description:
         "GTM Associate. Developed marketing, media and content strategy for the launch of a new consumer product.",
-      image: "/images/xylem-robotics.png",
+      image: "/images/xylem-robotics.webp",
       link: null
     },
     {

@@ -136,7 +136,27 @@ export const reels = [
     id: "DcQ0eRfBICZ",
     url: "https://www.instagram.com/reel/DcQ0eRfBICZ/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==&igsi=NTc4MTIwNjQ2YQ==",
   },
+  {
+    id: "DcUvX0PgyCb",
+    url: "https://www.instagram.com/reel/DcUvX0PgyCb/?utm_source=ig_web_copy_link",
+  },
+  {
+    id: "DcUFRSko7IL",
+    type: "p",
+    url: "https://www.instagram.com/p/DcUFRSko7IL/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DcYi7kmBmhO",
+    url: "https://www.instagram.com/reel/DcYi7kmBmhO/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DcZ5OxCgqWk",
+    url: "https://www.instagram.com/reel/DcZ5OxCgqWk/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+  },
 ];
+
+export const reelEmbedUrl = (reel: { id: string; type?: string }) =>
+  `https://www.instagram.com/${reel.type ?? "reel"}/${reel.id}/embed/`;
 
 export default function Media() {
   usePageMeta({
@@ -263,7 +283,7 @@ export default function Media() {
                     className="h-[680px] w-[320px] shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-white sm:w-[380px]"
                   >
                     <iframe
-                      src={`https://www.instagram.com/reel/${reel.id}/embed/`}
+                      src={reelEmbedUrl(reel)}
                       title={`Instagram reel ${reel.id}`}
                       className="h-full w-full border-0 bg-white"
                       allowFullScreen
@@ -287,7 +307,7 @@ export default function Media() {
                 className="mx-auto h-[760px] w-full max-w-[540px] overflow-hidden rounded-xl border border-gray-200 bg-white"
               >
                 <iframe
-                  src={`https://www.instagram.com/reel/${reel.id}/embed/`}
+                  src={reelEmbedUrl(reel)}
                   title={`Instagram reel ${reel.id}`}
                   className="h-full w-full border-0 bg-white"
                   allowFullScreen

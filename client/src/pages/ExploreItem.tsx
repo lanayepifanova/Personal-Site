@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { reels } from "@/pages/Media";
+import { reels, reelEmbedUrl } from "@/pages/Media";
 
 type ExploreItemProps = {
   params: {
@@ -197,7 +197,7 @@ function UilgPage() {
             className="h-[620px] overflow-hidden rounded-xl border border-black/10 bg-white sm:h-[700px]"
           >
             <iframe
-              src={`https://www.instagram.com/reel/${reel.id}/embed/`}
+              src={reelEmbedUrl(reel)}
               title={`Ultimate Ivy League Guide reel ${reel.id}`}
               className="h-full w-full border-0 bg-white"
               allowFullScreen

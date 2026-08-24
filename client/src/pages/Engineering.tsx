@@ -1,5 +1,42 @@
+import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { usePageMeta } from "@/hooks/usePageMeta";
+
+type Job = {
+  company: string;
+  role: string;
+  period: string;
+  description: ReactNode;
+  image: string;
+  imagePosition?: string;
+  link: string | null;
+};
+
+function JobGrid({ jobs }: { jobs: Job[] }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+      {jobs.map((job) => (
+        <article key={`${job.company}-${job.period}`} className="group flex flex-col text-left">
+          <div className="aspect-[16/9] overflow-hidden rounded-xl mb-4 bg-gray-100 shadow-sm border border-gray-100 relative">
+            <img
+              src={job.image}
+              alt={job.company}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              style={job.imagePosition ? { objectPosition: job.imagePosition } : undefined}
+            />
+          </div>
+          <div className="flex justify-between items-baseline mb-1">
+            <h3 className="text-base font-sans font-semibold text-black group-hover:underline decoration-1 underline-offset-4 transition-all">
+              {job.company}
+            </h3>
+            <span className="font-sans text-sm text-gray-400">{job.period}</span>
+          </div>
+          <div className="text-gray-500 font-sans text-sm leading-relaxed">{job.description}</div>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 export default function Engineering() {
   usePageMeta({
@@ -9,17 +46,7 @@ export default function Engineering() {
     canonicalPath: "/",
   });
 
-  const corporate = [
-    /*
-    {
-      company: "Macquarie Group",
-      role: "Incoming Commodities Trading Intern",
-      period: "2026",
-      description: "Power and gas desk. Supporting trading and structuring activities, modeling risk scenarios.",
-      image: "/images/macquarie1.JPG",
-      link: "https://www.macquarie.com"
-    },
-    */
+  const startups: Job[] = [
     {
       company: "Unitbot",
       role: "Property Management Platform",
@@ -31,15 +58,48 @@ export default function Engineering() {
       link: null
     },
     {
+      company: "Mixo Ads AI",
+      role: "Software Engineering Intern",
+      period: "2024",
+      description: (
+        <>
+          Founder&apos;s Associate. Worked 1-1 with founder in <a href="https://www.antler.co/residency" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>Antler Residency</a> on full stack dev and sales.
+        </>
+      ),
+      image: "/images/mixoads2.webp",
+      link: "https://mixoads.com"
+    },
+  ];
+
+  const corporate: Job[] = [
+    {
+      company: "Macquarie Group",
+      role: "",
+      period: "2026",
+      description:
+        "Commodities Trading. Supported the crude oil, power, and natural gas trading desks. Received return offer but decided to pursue a different path.",
+      image: "/images/macquarie-genscape.jpeg",
+      link: "https://www.macquarie.com"
+    },
+    {
+      company: "Xylem Robotics",
+      role: "",
+      period: "2026",
+      description:
+        "GTM Associate. Developed marketing, media and content strategy for the launch of a new consumer product.",
+      image: "/images/xylem-robotics.png",
+      link: null
+    },
+    {
       company: "JLL",
       role: "Software Engineering Intern",
       period: "2025",
       description: (
         <>
-          Developed data ingestion pipelines to aggregate leasing analytics. Proptech research for <a href="https://spark.jllt.com/portfolio/" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>JLL Spark</a> venture fund.
+          Capital Markets. Developed data ingestion pipelines to aggregate leasing analytics. Proptech research for <a href="https://spark.jllt.com/portfolio/" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>JLL Spark</a> venture fund.
         </>
       ),
-      image: "/images/jll_cad.png",
+      image: "/images/jll-capital-markets.jpeg",
       link: "https://www.jll.com"
     },
     {
@@ -55,24 +115,12 @@ export default function Engineering() {
       link: "https://oedk.rice.edu"
     },
     {
-      company: "Mixo Ads AI",
-      role: "Software Engineering Intern",
-      period: "2024",
-      description: (
-        <>
-          Ad automation platform. Worked 1-1 with founder in <a href="https://www.antler.co/residency" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>Antler Residency</a> on full stack dev and sales.
-        </>
-      ),
-      image: "/images/mixoads2.webp",
-      link: "https://mixoads.com"
-    },
-    {
       company: "Rudin",
       role: "Civil Engineering Intern",
       period: "2024",
       description: (
         <>
-          Construction projects across $5B+ real estate portfolio. IoT sensors and machine learning at <a href="https://www.nantum.ai" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>Nantum AI</a> capstone project.
+          Civil Engineering. Construction projects across $5B+ real estate portfolio. IoT sensors and machine learning at <a href="https://www.nantum.ai" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>Nantum AI</a> capstone project.
         </>
       ),
       image: "/images/rudin-cad-massive.png",
@@ -84,7 +132,7 @@ export default function Engineering() {
       period: "2023",
       description: (
         <>
-          Real estate <a href="https://1madisonnyc.com" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>development projects</a> across $4B+ Manhattan office portfolio. Auto CAD and Bluebeam.
+          Civil Engineering. Real estate <a href="https://1madisonnyc.com" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>development projects</a> across $4B+ Manhattan office portfolio. Auto CAD and Bluebeam.
         </>
       ),
       image: "/images/slgreen_cad.png",
@@ -95,7 +143,7 @@ export default function Engineering() {
       role: "Civil Engineering Intern",
       period: "2022",
       description:
-        "Hydraulic modeling and infrastructure mapping of stormwater systems using InfoWorks, maintaining databases.",
+        "Civil Engineering. Hydraulic modeling and infrastructure mapping of stormwater systems using InfoWorks, maintaining databases.",
       image: "/images/nyc-dep-cad-final.png",
       link: "https://www.nyc.gov/site/dep/water/drinking-water.page"
     },
@@ -104,7 +152,7 @@ export default function Engineering() {
       role: "Software Engineering",
       period: "2022",
       description:
-        "Built interactive maps using ArcGIS and Google Earth Engine displaying district-level environmental voting records.",
+        "Civil Engineering. Built interactive maps using ArcGIS and Google Earth Engine displaying district-level environmental voting records.",
       image: "/images/nyclv.png.jpeg",
       link: null
     }
@@ -115,37 +163,25 @@ export default function Engineering() {
   return (
     <div className="page-stagger space-y-20 animate-in fade-in duration-700 pt-8 pb-24 px-4">
       
-      <section className="-mt-2">
-        <section className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
-            {corporate.map((job) => (
-              <article
-                key={`${job.company}-${job.period}`}
-                className="group flex flex-col text-left"
-              >
-                <div className="aspect-[16/9] overflow-hidden rounded-xl mb-4 bg-gray-100 shadow-sm border border-gray-100 relative">
-                  <img
-                    src={job.image}
-                    alt={job.company}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    style={job.imagePosition ? { objectPosition: job.imagePosition } : undefined}
-                  />
-                </div>
-                <div className="flex justify-between items-baseline mb-1">
-                  <h3 className="text-base font-sans font-semibold text-black group-hover:underline decoration-1 underline-offset-4 transition-all">
-                    {job.company}
-                  </h3>
-                  <span className="font-sans text-sm text-gray-400">
-                    {job.period}
-                  </span>
-                </div>
-                <div className="text-gray-500 font-sans text-sm leading-relaxed">
-                  {job.description}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+      <section className="-mt-2 space-y-6">
+        <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+          Startup Experience
+        </h2>
+        <JobGrid jobs={startups} />
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+          Work Experience
+        </h2>
+        <JobGrid jobs={corporate} />
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-sans font-medium text-black tracking-tight">
+          Side Projects
+        </h2>
+        <p className="text-gray-500 font-sans text-sm leading-relaxed">coming soon...</p>
       </section>
 
       {workshopLinks.length > 0 && (

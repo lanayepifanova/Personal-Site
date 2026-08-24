@@ -49,48 +49,33 @@ export default function Engineering() {
     canonicalPath: "/",
   });
 
-  const startups: Job[] = [
-    {
-      company: "Unitbot",
-      role: "Property Management Platform",
-      period: "2025",
-      description:
-        "Solo Founder. Automated maintenance requests and rent reminders for NYC landlords. Acquired by early beta user.",
-      image: "/images/unitbot_true.png",
-      imagePosition: "0% center",
-      link: null
-    },
-    {
-      company: "Mixo Ads AI",
-      role: "Software Engineering Intern",
-      period: "2024",
-      description: (
-        <>
-          Founder&apos;s Associate. Worked 1-1 with founder in <a href="https://www.antler.co/residency" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>Antler Residency</a> on full stack dev and sales.
-        </>
-      ),
-      image: "/images/mixoads2.webp",
-      link: "https://mixoads.com"
-    },
-  ];
-
-  const corporate: Job[] = [
+  const jobs: Job[] = [
     {
       company: "Macquarie Group",
-      role: "",
+      role: "Commodities Trading Intern",
       period: "2026",
       description:
-        "Commodities Trading. Supported the crude oil, power, and natural gas trading desks. Received return offer but decided to pursue a different path.",
+        "Supported the crude oil, power, and natural gas trading desks. Received return offer but decided to pursue a different path.",
       image: "/images/macquarie-genscape.jpeg",
       link: "https://www.macquarie.com"
     },
     {
       company: "Xylem Robotics",
-      role: "",
+      role: "GTM Associate",
       period: "2026",
       description:
-        "GTM Associate. Developed marketing, media and content strategy for the launch of a new consumer product.",
+        "Developed marketing, media and content strategy for the launch of a new consumer product.",
       image: "/images/xylem-robotics.webp",
+      link: null
+    },
+    {
+      company: "Unitbot",
+      role: "Solo Founder",
+      period: "2025",
+      description:
+        "Automated maintenance requests and rent reminders for NYC landlords. Acquired by early beta user.",
+      image: "/images/unitbot_true.png",
+      imagePosition: "0% center",
       link: null
     },
     {
@@ -104,6 +89,18 @@ export default function Engineering() {
       ),
       image: "/images/jll-capital-markets.jpeg",
       link: "https://www.jll.com"
+    },
+    {
+      company: "Mixo Ads AI",
+      role: "Founder's Associate",
+      period: "2024",
+      description: (
+        <>
+          Worked 1-1 with founder in <a href="https://www.antler.co/residency" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>Antler Residency</a> on full stack dev and sales.
+        </>
+      ),
+      image: "/images/mixoads2.webp",
+      link: "https://mixoads.com"
     },
     {
       company: "Oshman Engineering Design Kitchen",
@@ -123,7 +120,7 @@ export default function Engineering() {
       period: "2024",
       description: (
         <>
-          Civil Engineering. Construction projects across $5B+ real estate portfolio. IoT sensors and machine learning at <a href="https://www.nantum.ai" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>Nantum AI</a> capstone project.
+          Construction projects across $5B+ real estate portfolio. IoT sensors and machine learning at <a href="https://www.nantum.ai" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>Nantum AI</a> capstone project.
         </>
       ),
       image: "/images/rudin-cad-massive.png",
@@ -135,7 +132,7 @@ export default function Engineering() {
       period: "2023",
       description: (
         <>
-          Civil Engineering. Real estate <a href="https://1madisonnyc.com" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>development projects</a> across $4B+ Manhattan office portfolio. Auto CAD and Bluebeam.
+          Real estate <a href="https://1madisonnyc.com" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>development projects</a> across $4B+ Manhattan office portfolio. Auto CAD and Bluebeam.
         </>
       ),
       image: "/images/slgreen_cad.png",
@@ -146,16 +143,16 @@ export default function Engineering() {
       role: "Civil Engineering Intern",
       period: "2022",
       description:
-        "Civil Engineering. Hydraulic modeling and infrastructure mapping of stormwater systems using InfoWorks, maintaining databases.",
+        "Hydraulic modeling and infrastructure mapping of stormwater systems using InfoWorks, maintaining databases.",
       image: "/images/nyc-dep-cad-final.png",
       link: "https://www.nyc.gov/site/dep/water/drinking-water.page"
     },
     {
       company: "NY Conservation League of Voters",
-      role: "Software Engineering",
+      role: "Civil Engineering Intern",
       period: "2022",
       description:
-        "Civil Engineering. Built interactive maps using ArcGIS and Google Earth Engine displaying district-level environmental voting records.",
+        "Built interactive maps using ArcGIS and Google Earth Engine displaying district-level environmental voting records.",
       image: "/images/nyclv.png.jpeg",
       link: null
     }
@@ -167,24 +164,7 @@ export default function Engineering() {
     <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-12 animate-in fade-in duration-700 pt-10 pb-24 px-1">
       
       <section className="space-y-6">
-        <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
-          Startup Experience
-        </h2>
-        <JobGrid jobs={startups} />
-      </section>
-
-      <section className="space-y-6">
-        <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
-          Work Experience
-        </h2>
-        <JobGrid jobs={corporate} />
-      </section>
-
-      <section className="space-y-6">
-        <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
-          Side Projects
-        </h2>
-        <p className="text-gray-500 font-sans text-[13px] leading-relaxed">coming soon...</p>
+        <JobGrid jobs={jobs} />
       </section>
 
       {workshopLinks.length > 0 && (

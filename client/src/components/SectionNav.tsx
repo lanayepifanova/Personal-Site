@@ -17,7 +17,7 @@ export default function SectionNav() {
   }
 
   return (
-    <nav className="flex justify-center gap-6 px-4 pt-2 text-sm font-sans text-black">
+    <nav className="flex justify-center gap-6 px-4 pt-2 pb-6 text-sm font-sans text-black">
       {links.map((link) => (
         <Link
           key={link.href}

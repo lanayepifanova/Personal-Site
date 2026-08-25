@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 type Job = {
+  id: string;
   company: string;
   role: string;
   period: string;
@@ -16,7 +18,11 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
   return (
     <div className="grid grid-cols-1 gap-y-12">
       {jobs.map((job) => (
-        <article key={`${job.company}-${job.period}`} className="group flex flex-col space-y-4 text-left">
+        <article
+          key={job.id}
+          id={job.id}
+          className="group flex flex-col space-y-4 text-left scroll-mt-8"
+        >
           <div className="space-y-1">
             <div className="flex justify-between items-baseline">
               <h3 className="text-[15px] font-sans font-semibold text-black tracking-tight">{job.company}</h3>
@@ -49,8 +55,33 @@ export default function Engineering() {
     canonicalPath: "/",
   });
 
+  useEffect(() => {
+    let isFirstRun = true;
+
+    const scrollToHash = () => {
+      const id = window.location.hash.slice(1);
+      if (!id) return;
+
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      target.scrollIntoView({ behavior: isFirstRun ? "auto" : "smooth", block: "start" });
+      isFirstRun = false;
+    };
+
+    // Wait a frame so the article elements exist before we try to scroll to one.
+    const frame = requestAnimationFrame(scrollToHash);
+    window.addEventListener("hashchange", scrollToHash);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
+
   const jobs: Job[] = [
     {
+      id: "macquarie",
       company: "Macquarie Group",
       role: "Commodities Trading Intern",
       period: "2026",
@@ -60,6 +91,7 @@ export default function Engineering() {
       link: "https://www.macquarie.com"
     },
     {
+      id: "xylem-robotics",
       company: "Xylem Robotics",
       role: "GTM Associate",
       period: "2026",
@@ -69,6 +101,7 @@ export default function Engineering() {
       link: null
     },
     {
+      id: "unitbot",
       company: "Unitbot",
       role: "Solo Founder",
       period: "2025",
@@ -79,6 +112,7 @@ export default function Engineering() {
       link: null
     },
     {
+      id: "jll",
       company: "JLL",
       role: "Software Engineering Intern",
       period: "2025",
@@ -91,6 +125,7 @@ export default function Engineering() {
       link: "https://www.jll.com"
     },
     {
+      id: "mixo-ads",
       company: "Mixo Ads AI",
       role: "Founder's Associate",
       period: "2024",
@@ -103,6 +138,7 @@ export default function Engineering() {
       link: "https://mixoads.com"
     },
     {
+      id: "oedk",
       company: "Oshman Engineering Design Kitchen",
       role: "PTeam Engineering Design",
       period: "2024",
@@ -115,6 +151,7 @@ export default function Engineering() {
       link: "https://oedk.rice.edu"
     },
     {
+      id: "rudin",
       company: "Rudin",
       role: "Civil Engineering Intern",
       period: "2024",
@@ -127,6 +164,7 @@ export default function Engineering() {
       link: "https://www.rudin.com"
     },
     {
+      id: "sl-green",
       company: "SL Green Realty Corp.",
       role: "Civil Engineering Intern",
       period: "2023",
@@ -139,6 +177,7 @@ export default function Engineering() {
       link: "https://www.slgreen.com"
     },
     {
+      id: "nyc-dep",
       company: "NYC Dept of Environmental Protection",
       role: "Civil Engineering Intern",
       period: "2022",
@@ -148,6 +187,7 @@ export default function Engineering() {
       link: "https://www.nyc.gov/site/dep/water/drinking-water.page"
     },
     {
+      id: "nyclv",
       company: "NY Conservation League of Voters",
       role: "Civil Engineering Intern",
       period: "2022",

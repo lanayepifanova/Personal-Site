@@ -40,8 +40,8 @@ export default function Home() {
           <A href="/engineering#jll">JLL</A>, <A href="/engineering#rudin">Rudin</A>,{" "}
           <A href="/engineering#sl-green">SL Green</A>, <A href="/engineering#nyc-dep">NYC DEP</A> and{" "}
           <A href="/engineering#nyclv">NYCLV</A>. Most recently, I worked in Commodities Trading at{" "}
-          <A href="/engineering#macquarie">Macquarie Group</A>. I have also worked at{" "}
-          <A href="/engineering#xylem-robotics">Xylem Robotics</A> and{" "}
+          <A href="/engineering#macquarie">Macquarie Group</A>. I also worked GTM at{" "}
+          <A href="/engineering#xylem-robotics">Xylem Robotics</A> and was the Founder&apos;s Associate at{" "}
           <A href="/engineering#mixo-ads">Mixo Ads AI</A>.
         </p>
 

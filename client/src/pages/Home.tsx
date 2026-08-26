@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="mx-auto max-w-[27rem] px-1 pt-10 pb-24 font-sans text-black animate-in fade-in duration-700">
       <h1 className="text-[15px] font-semibold tracking-tight">Lana Yepifanova</h1>
-      <p className="mt-1 text-[12px] font-normal tracking-tight text-gray-400">Updated Aug 25, 2026</p>
+      <p className="mt-1 text-[12px] font-normal tracking-tight text-gray-400">Updated Aug 26, 2026</p>
 
       <div className="mt-7 space-y-4 text-[13px] leading-[1.7] text-black">
         <p>
@@ -39,10 +39,7 @@ export default function Home() {
           for 300k. This idea came after working in real estate and infrastructure firms like{" "}
           <A href="/engineering#jll">JLL</A>, <A href="/engineering#rudin">Rudin</A>,{" "}
           <A href="/engineering#sl-green">SL Green</A>, <A href="/engineering#nyc-dep">NYC DEP</A> and{" "}
-          <A href="/engineering#nyclv">NYCLV</A>. Most recently, I worked in Commodities Trading at{" "}
-          <A href="/engineering#macquarie">Macquarie Group</A>. I also worked GTM at{" "}
-          <A href="/engineering#xylem-robotics">Xylem Robotics</A> and was the Founder&apos;s Associate at{" "}
-          <A href="/engineering#mixo-ads">Mixo Ads AI</A>.
+          <A href="/engineering#nyclv">NYCLV</A>.
         </p>
 
         <p>
@@ -59,6 +56,13 @@ export default function Home() {
           grown to 1M+ followers, the <A href="https://doerr.rice.edu/podcast">Leading Owls Podcast</A> that has 1k+
           monthly listeners, and my small{" "}
           <A href="https://www.youtube.com/@LanaYepifanova">Piano Youtube Channel</A> with 500+ subscribers.
+        </p>
+
+        <p>
+          Most recently, I worked in Commodities Trading at{" "}
+          <A href="/engineering#macquarie">Macquarie Group</A>. I also worked GTM at{" "}
+          <A href="/engineering#xylem-robotics">Xylem Robotics</A> and was the Founder&apos;s Associate at{" "}
+          <A href="/engineering#mixo-ads">Mixo Ads AI</A>.
         </p>
 
         <p className="pt-2 text-gray-500">

@@ -16,8 +16,14 @@ export default function SectionNav() {
     return null;
   }
 
+  const isHome = location === "/";
+
   return (
-    <nav className="mx-auto flex w-full max-w-[27rem] justify-between gap-x-2 px-1 pt-2 pb-6 text-[13px] font-sans text-black sm:text-sm">
+    <nav
+      className={`mx-auto flex w-full max-w-[27rem] justify-between gap-x-2 px-1 pt-2 text-[13px] font-sans sm:text-sm ${
+        isHome ? "pb-4 text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)]" : "pb-6 text-black"
+      }`}
+    >
       {links.map((link) => {
         const isActive = location === link.href;
 

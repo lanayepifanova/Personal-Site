@@ -143,7 +143,7 @@ export default function PianoYoutubeSection() {
   };
 
   return (
-    <section className="space-y-6 border-t border-gray-100 pt-12">
+    <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
       <div className="space-y-1">
         <div className="flex justify-between items-end">
           <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">

@@ -213,8 +213,8 @@ export default function Media() {
   };
 
   return (
-    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-12 px-1 pb-24 pt-10">
-      <section className="space-y-6">
+    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-6 px-1 pb-24 pt-2">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
@@ -335,7 +335,7 @@ export default function Media() {
         </noscript>
       </section>
 
-      <section className="space-y-6 border-t border-gray-100 pt-12">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
@@ -407,7 +407,7 @@ export default function Media() {
         </iframe>
       </section>
 
-      <section className="space-y-6 border-t border-gray-100 pt-12">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">

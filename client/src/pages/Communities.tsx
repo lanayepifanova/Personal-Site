@@ -368,9 +368,9 @@ export default function Communities() {
   };
 
   return (
-    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-12 animate-in fade-in duration-700 pt-10 pb-24 px-1">
+    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-6 animate-in fade-in duration-700 pt-2 pb-24 px-1">
       {/* Rice Residency Section */}
-      <section className="space-y-6">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Rice Residency</h2>
@@ -414,7 +414,7 @@ export default function Communities() {
       </section>
 
       {/* Harvard St Commons Section */}
-      <section className="space-y-6 border-t border-gray-100 pt-12">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Harvard St Commons</h2>
@@ -466,7 +466,7 @@ export default function Communities() {
       </section>
 
       {/* Sports */}
-      <section className="space-y-6 border-t border-gray-100 pt-12">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Sports</h2>
@@ -535,7 +535,7 @@ export default function Communities() {
       </section>
 
       {/* Music */}
-      <section className="space-y-6 border-t border-gray-100 pt-12">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Music</h2>
@@ -640,7 +640,7 @@ export default function Communities() {
       </section>
 
       {/* Dance */}
-      <section className="space-y-6 border-t border-gray-100 pt-12">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Dance</h2>
@@ -764,7 +764,7 @@ export default function Communities() {
       </section>
 
       {/* Volunteering */}
-      <section className="space-y-6 border-t border-gray-100 pt-12">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Volunteering</h2>
@@ -825,7 +825,7 @@ export default function Communities() {
 
 
       {/* Travel Documentation */}
-      <section className="space-y-6 border-t border-gray-100 pt-12">
+      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
             <h2 className="text-[15px] sm:text-[15px] font-sans font-semibold text-black tracking-tight">

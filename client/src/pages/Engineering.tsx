@@ -16,12 +16,12 @@ type Job = {
 
 function JobGrid({ jobs }: { jobs: Job[] }) {
   return (
-    <div className="grid grid-cols-1 gap-y-12">
+    <div className="grid grid-cols-1 gap-y-6">
       {jobs.map((job) => (
         <article
           key={job.id}
           id={job.id}
-          className="group flex flex-col space-y-4 text-left scroll-mt-8"
+          className="group flex flex-col space-y-4 rounded-2xl bg-white p-5 text-left shadow-sm scroll-mt-8"
         >
           <div className="space-y-1">
             <div className="flex justify-between items-baseline">
@@ -201,7 +201,7 @@ export default function Engineering() {
   const workshopLinks = [] as { title: string; href: string }[];
 
   return (
-    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-12 animate-in fade-in duration-700 pt-10 pb-24 px-1">
+    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-6 animate-in fade-in duration-700 pt-2 pb-24 px-1">
       
       <section className="space-y-6">
         <JobGrid jobs={jobs} />

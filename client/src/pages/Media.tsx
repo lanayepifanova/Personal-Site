@@ -165,6 +165,18 @@ export const reels = [
     id: "Dchs8SPAWYk",
     url: "https://www.instagram.com/reel/Dchs8SPAWYk/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
   },
+  {
+    id: "Dcm4J3LgF9J",
+    url: "https://www.instagram.com/reel/Dcm4J3LgF9J/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DcpaltrADSZ",
+    url: "https://www.instagram.com/reel/DcpaltrADSZ/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DcqkfinBthc",
+    url: "https://www.instagram.com/reel/DcqkfinBthc/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>

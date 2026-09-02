@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="mx-auto max-w-[27rem] px-1 pt-6 pb-2 font-sans text-white sm:pt-10 drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] animate-in fade-in duration-700">
       <h1 className="text-[15px] font-semibold tracking-tight">Lana Yepifanova</h1>
-      <p className="mt-1 text-[12px] font-normal tracking-tight text-white/70">Updated Aug 28, 2026</p>
+      <p className="mt-1 text-[12px] font-normal tracking-tight text-white/70">Updated Sep 1, 2026</p>
 
       <div className="mt-5 space-y-3.5 text-[13px] leading-[1.7] text-white">
         <p>

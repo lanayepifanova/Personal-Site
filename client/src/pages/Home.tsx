@@ -24,44 +24,53 @@ export default function Home() {
 
   return (
     <div className="mx-auto max-w-[27rem] px-1 pt-6 pb-2 font-sans text-white sm:pt-10 drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] animate-in fade-in duration-700">
-      <h1 className="text-[15px] font-semibold tracking-tight">Lana Yepifanova</h1>
-      <p className="mt-1 text-[12px] font-normal tracking-tight text-white/70">Updated Sep 1, 2026</p>
+      <h1 className="text-[15px] font-semibold tracking-tight">
+        Lana Yepifanova
+      </h1>
+      <p className="mt-1 text-[12px] font-normal tracking-tight text-white/70">
+        Updated Sep 1, 2026
+      </p>
 
       <div className="mt-5 space-y-3.5 text-[13px] leading-[1.7] text-white">
         <p>
-          Hi, I&apos;m Lana! I&apos;m a senior at <A href="https://www.rice.edu">Rice University</A> studying
-          History.
+          Hi, I&apos;m Lana! I&apos;m a senior at Rice University and I&apos;m
+          currently building{" "}
+          <span className="underline decoration-white/60 underline-offset-2">
+            Dumbiis
+          </span>
+          , a consumer app for turning what you learn into concrete actions,
+          skills, and real-world impact. We are currently in stealth and have
+          not launched yet.
         </p>
 
         <p>
-          I was the solo founder of <A href="/engineering#unitbot">UnitBot</A>, a property management platform.
-          <br />
-          I grew the platform to 30+ paying landlords, hit 7k+ MRR, and sold it for 300k. This idea came after working
-          in real estate firms like{" "}
-          <A href="/engineering#jll">JLL</A>, <A href="/engineering#rudin">Rudin</A>,{" "}
-          <A href="/engineering#sl-green">SL Green</A>, <A href="/engineering#nyc-dep">NYC DEP</A> and{" "}
-          <A href="/engineering#nyclv">NYCLV</A>.
+          Previously, I built and sold{" "}
+          <span className="underline decoration-white/60 underline-offset-2">
+            Unitbot
+          </span>
+          , a property management platform that helped landlords streamline
+          their leasing and tenant management. We grew to 30+ paying customers,
+          150+ buildings, hit 7k+ MRR, and sold for 300k.
         </p>
 
         <p>
-          I am the co-founder of <A href="https://www.riceresidency.com">Rice Residency</A>, a first hacker house in
-          Houston for early-stage student founders. Our residents have raised $2.5M+, with three in a16z speedrun, one
-          in the YC S26 batch, and seven in the Lile Summer Venture Studio.
+          I am active on social media! I post on{" "}
+          <A href="https://www.instagram.com/lana_yaps/">@lana_yaps</A> (21k+
+          followers) and{" "}
+          <A href="https://www.instagram.com/ultimateivyleagueguide/">
+            @ultimateivyleagueguide
+          </A>{" "}
+          (1M+ followers). I&apos;ve done many paid sponsorships in the tech and
+          finance space and have experience making high quality content that
+          converts.
         </p>
 
         <p>
-          I am the solo founder of{" "}
-          <span className="underline decoration-white/60 underline-offset-2">Kimchi Studio</span>, a marketing agency
-          that helps brands get in front of the right people and turn attention into growth. We build and execute
-          distribution strategies across organic social,
-          paid media, creators, UGC, and partnerships, then produce the content needed to power those channels.
-        </p>
-
-        <p>
-          I make social media content <A href="https://www.instagram.com/lana_yaps/">@lana_yaps</A> (20k+ followers),{" "}
-          <A href="https://www.ultimateivyleagueguide.com">@ultimateivyleagueguide</A> (1M+ followers), the{" "}
-          <A href="https://doerr.rice.edu/podcast">Leading Owls Podcast</A> (1k+ monthly listeners), and my{" "}
-          <A href="https://www.youtube.com/@LanaYepifanova">piano youtube channel</A> (for fun).
+          I love hosting events and building in person communities. I started{" "}
+          <A href="https://www.riceresidency.com">Rice Residency</A>, a hacker
+          house for early-stage student founders. Our residents have raised
+          $2.5M+, with 3 in a16z speedrun, 1 in the YC S26 batch, and 7 in Lilie
+          SVS.
         </p>
 
         <p className="pt-2 text-white/75">

@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { usePageMeta } from "@/hooks/usePageMeta";
 
 type Job = {
   id: string;
@@ -9,19 +7,21 @@ type Job = {
   role: string;
   period: string;
   description: ReactNode;
-  image: string;
+  image?: string;
   imagePosition?: string;
+  // Logos are letterboxed on their own brand colour instead of cropped.
+  imageContain?: string;
   link: string | null;
 };
 
 function JobGrid({ jobs }: { jobs: Job[] }) {
   return (
-    <div className="grid grid-cols-1 gap-y-6">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {jobs.map((job) => (
         <article
           key={job.id}
           id={job.id}
-          className="group flex flex-col space-y-4 rounded-2xl bg-white p-5 text-left shadow-sm scroll-mt-8"
+          className="group flex h-full flex-col space-y-4 rounded-2xl bg-white p-5 text-left shadow-sm scroll-mt-24"
         >
           <div className="space-y-1">
             <div className="flex justify-between items-baseline">
@@ -33,13 +33,20 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
 
           <div className="text-gray-600 font-sans text-[13px] leading-relaxed">{job.description}</div>
 
-          <div className="aspect-[16/9] overflow-hidden rounded-xl bg-gray-100 shadow-sm border border-gray-100 relative">
-            <img
-              src={job.image}
-              alt={job.company}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              style={job.imagePosition ? { objectPosition: job.imagePosition } : undefined}
-            />
+          <div
+            className="relative mt-auto aspect-[16/9] overflow-hidden rounded-xl border border-gray-100 bg-gray-100 shadow-sm"
+            style={job.imageContain ? { backgroundColor: job.imageContain } : undefined}
+          >
+            {job.image ? (
+              <img
+                src={job.image}
+                alt={job.company}
+                className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+                  job.imageContain ? "object-contain p-4" : "object-cover"
+                }`}
+                style={job.imagePosition ? { objectPosition: job.imagePosition } : undefined}
+              />
+            ) : null}
           </div>
         </article>
       ))}
@@ -47,38 +54,45 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
   );
 }
 
-export default function Engineering() {
-  usePageMeta({
-    title: "Lana Yepifanova | Engineering",
+const buildingJobs: Job[] = [
+  {
+    id: "dumbiis",
+    company: "Dumbiis",
+    role: "Co-Founder",
+    period: "2026",
     description:
-      "Lana Yepifanova founded Unitbot, wrote software at JLL and Mixo Ads AI, and prototyped hardware at Rice University's Oshman Engineering Design Kitchen.",
-    canonicalPath: "/",
-  });
+      "A consumer app that is an operating system for personal agency. Pre-launch stage.",
+    image: "/images/dumbiis-logo.png",
+    link: null,
+  },
+  {
+    id: "rice-residency",
+    company: "Rice Residency",
+    role: "Co-Founder",
+    period: "2026",
+    description:
+      "We started in May 2026, hosted 19 residents, 2.5M+ raised, 3 in a16z, 1 in YC, 7 in Lilie SVS.",
+    image: "/images/rice-residency-logo.png",
+    imageContain: "#00205b",
+    link: null,
+  },
+  {
+    id: "unitbot",
+    company: "Unitbot",
+    role: "Solo Founder",
+    period: "2025",
+    description:
+      "Property management platform. Grew to 30+ paying landlords, hit 7k+ MRR, and 300k exit.",
+    image: "/images/unitbot-logo.png",
+    link: null,
+  },
+];
 
-  useEffect(() => {
-    let isFirstRun = true;
+export function BuildingSection() {
+  return <JobGrid jobs={buildingJobs} />;
+}
 
-    const scrollToHash = () => {
-      const id = window.location.hash.slice(1);
-      if (!id) return;
-
-      const target = document.getElementById(id);
-      if (!target) return;
-
-      target.scrollIntoView({ behavior: isFirstRun ? "auto" : "smooth", block: "start" });
-      isFirstRun = false;
-    };
-
-    // Wait a frame so the article elements exist before we try to scroll to one.
-    const frame = requestAnimationFrame(scrollToHash);
-    window.addEventListener("hashchange", scrollToHash);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("hashchange", scrollToHash);
-    };
-  }, []);
-
+export default function EngineeringSection() {
   const jobs: Job[] = [
     {
       id: "macquarie",
@@ -101,24 +115,13 @@ export default function Engineering() {
       link: null
     },
     {
-      id: "unitbot",
-      company: "Unitbot",
-      role: "Solo Founder",
-      period: "2025",
-      description:
-        "Automated maintenance requests and rent reminders for NYC landlords. Acquired by early beta user.",
-      image: "/images/unitbot_true.png",
-      imagePosition: "0% center",
-      link: null
-    },
-    {
       id: "jll",
       company: "JLL",
-      role: "Software Engineering Intern",
+      role: "Capital Markets Intern",
       period: "2025",
       description: (
         <>
-          Capital Markets. Developed data ingestion pipelines to aggregate leasing analytics. Proptech research for <a href="https://spark.jllt.com/portfolio/" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>JLL Spark</a> venture fund.
+          Developed data ingestion pipelines to aggregate leasing analytics. Proptech research for <a href="https://spark.jllt.com/portfolio/" target="_blank" rel="noopener noreferrer" className="underline decoration-gray-400 underline-offset-2 transition-all text-gray-500 hover:text-gray-800" onClick={(e) => e.stopPropagation()}>JLL Spark</a> venture fund.
         </>
       ),
       image: "/images/jll-capital-markets.jpeg",
@@ -201,14 +204,11 @@ export default function Engineering() {
   const workshopLinks = [] as { title: string; href: string }[];
 
   return (
-    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-6 animate-in fade-in duration-700 pt-2 pb-24 px-1">
-      
-      <section className="space-y-6">
-        <JobGrid jobs={jobs} />
-      </section>
+    <div className="space-y-6">
+      <JobGrid jobs={jobs} />
 
       {workshopLinks.length > 0 && (
-        <section className="-mt-12 pb-20">
+        <section className="rounded-2xl bg-white p-5 shadow-sm">
           <div className="space-y-2">
             <h3 className="text-[11px] font-sans text-gray-400">Workshops</h3>
             {workshopLinks.map((link) => (

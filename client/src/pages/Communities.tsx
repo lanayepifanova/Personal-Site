@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type WheelEvent, type UIEvent } from "react";
 import { ExternalLink, Newspaper, Instagram, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation } from "wouter";
-import { usePageMeta } from "@/hooks/usePageMeta";
 import { atlasLocations, slugifyTravelCity } from "@/data/travelLocations";
 import "maplibre-gl/dist/maplibre-gl.css";
 
@@ -138,16 +137,9 @@ function LinkedInPostCarousel({
   );
 }
 
-export default function Communities() {
+export default function CommunitiesSection() {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const [, setLocation] = useLocation();
-
-  usePageMeta({
-    title: "Lana Yepifanova | Communities at Rice University",
-    description:
-      "Lana Yepifanova co-founded Rice Residency and takes part in sports, music, dance, and volunteering at Rice University. Explore the places she has traveled.",
-    canonicalPath: "/communities",
-  });
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
@@ -368,12 +360,12 @@ export default function Communities() {
   };
 
   return (
-    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-6 animate-in fade-in duration-700 pt-2 pb-24 px-1">
-      {/* Rice Residency Section */}
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
+    <div className="space-y-6">
+      {/* Rice Residency - the headline community, full width */}
+      <section className="space-y-6 rounded-2xl bg-white p-6 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Rice Residency</h2>
+            <h2 className="text-[18px] font-sans font-semibold text-black tracking-tight">Rice Residency</h2>
           </div>
           <div className="flex justify-between items-baseline">
             <div className="text-[13px] font-sans text-black">Co-Founder and Co-Lead</div>
@@ -384,7 +376,7 @@ export default function Communities() {
           Rice Residency is a selective, founder-led hacker house near Rice University in Houston for students and early-stage founders building software, hardware, and deep-tech startups. We've raised 2.5M+ in funding, had 3 residents get into a16z speedrun, 1 resident get into the YC S26 batch, and 7 residents in the Rice Summer Venture Studio.
         </p>
 
-        <div className="flex gap-4 text-[11px] font-sans">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
           <a 
             href="https://riceresidency.com" 
             target="_blank" 
@@ -403,6 +395,15 @@ export default function Communities() {
               <Newspaper className="h-3 w-3" />
               Featured in The Thresher
             </a>
+            <a
+              href="https://ricethresher.org/article/delusion-prevails-inside-houston-hacker-house-20260902"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+            >
+              <Newspaper className="h-3 w-3" />
+              Profiled in The Thresher
+            </a>
         </div>
 
         <LinkedInPostCarousel
@@ -413,11 +414,11 @@ export default function Communities() {
 
       </section>
 
-      {/* Harvard St Commons Section */}
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
+      {/* Harvard St Commons - the second headline community, full width */}
+      <section className="space-y-6 rounded-2xl bg-white p-6 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Harvard St Commons</h2>
+            <h2 className="text-[18px] font-sans font-semibold text-black tracking-tight">Harvard St Commons</h2>
           </div>
           <div className="flex justify-between items-baseline">
             <div className="text-[13px] font-sans text-black">Resident</div>
@@ -514,7 +515,7 @@ export default function Communities() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {sportsPhotos.map((item) => (
             <figure key={`sports-${item.title}-${item.image}`} className="w-full">
               <div className="gallery-card">
@@ -619,7 +620,7 @@ export default function Communities() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {musicPhotos.map((item) => (
             <figure key={`music-${item.image}`} className="w-full">
               <div className="gallery-card">
@@ -803,7 +804,7 @@ export default function Communities() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {volunteerPhotos.map((item) => (
             <figure key={`volunteer-${item.title}-${item.image}`} className="w-full">
               <div className="gallery-card">

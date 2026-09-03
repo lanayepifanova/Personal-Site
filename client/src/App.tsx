@@ -4,20 +4,30 @@ import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import Engineering from "./pages/Engineering";
-import Communities from "./pages/Communities";
 import TravelDestination from "./pages/TravelDestination";
-import Media from "./pages/Media";
 import Layout from "./components/Layout";
 import ExploreItem from "./pages/ExploreItem";
+
+// The three former pages are now bands on the home page, so their old URLs
+// hand off to the matching anchor.
+function SectionRedirect({ id }: { id: string }) {
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    window.location.hash = id;
+    setLocation("/", { replace: true });
+  }, [id, setLocation]);
+
+  return null;
+}
 
 function Routes({ location }: { location?: string }) {
   return (
     <Switch location={location}>
       <Route path="/" component={Home} />
-      <Route path="/engineering" component={Engineering} />
-      <Route path="/communities" component={Communities} />
-      <Route path="/media" component={Media} />
+      <Route path="/engineering">{() => <SectionRedirect id="engineering" />}</Route>
+      <Route path="/communities">{() => <SectionRedirect id="communities" />}</Route>
+      <Route path="/media">{() => <SectionRedirect id="media" />}</Route>
       <Route path="/explore/:slug" component={ExploreItem} />
       <Route path="/communities/travel/:city" component={TravelDestination} />
       <Route component={NotFound} />

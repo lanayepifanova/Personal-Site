@@ -155,7 +155,7 @@ export default function PianoYoutubeSection() {
         </div>
       </div>
 
-      <p className="text-gray-600 font-sans text-[13px] leading-relaxed max-w-2xl">
+      <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
         I started my piano YouTube channel to document my growth as a pianist, share performances beyond formal recitals, and make classical music feel more accessible online. It has grown to 500+ subscribers, 130k+ views, and 66 videos.
       </p>
 

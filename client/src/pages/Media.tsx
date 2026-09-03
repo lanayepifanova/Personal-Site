@@ -1,6 +1,5 @@
 import { type CSSProperties, type UIEvent, type WheelEvent } from "react";
 import { ExternalLink, Instagram, Newspaper, Twitter, Youtube } from "lucide-react";
-import { usePageMeta } from "@/hooks/usePageMeta";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 
 export const reels = [
@@ -177,19 +176,20 @@ export const reels = [
     id: "DcqkfinBthc",
     url: "https://www.instagram.com/reel/DcqkfinBthc/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
   },
+  {
+    id: "DcxKbo9gVvx",
+    url: "https://www.instagram.com/reel/DcxKbo9gVvx/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DcyS3siBeeb",
+    url: "https://www.instagram.com/reel/DcyS3siBeeb/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>
   `https://www.instagram.com/${reel.type ?? "reel"}/${reel.id}/embed/`;
 
-export default function Media() {
-  usePageMeta({
-    title: "Lana Yepifanova | Media",
-    description:
-      "Lana Yepifanova makes short-form video, performs piano on YouTube, and hosts a podcast. Find her work on Instagram, YouTube, X, and Substack.",
-    canonicalPath: "/media",
-  });
-
+export default function MediaSection() {
   const enableManualGallery = (target: HTMLDivElement) => {
     if (!target.classList.contains("is-manual")) {
       target.classList.add("is-manual");
@@ -225,132 +225,12 @@ export default function Media() {
   };
 
   return (
-    <div className="page-stagger mx-auto w-full max-w-[27rem] space-y-6 px-1 pb-24 pt-2">
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
+    <div className="space-y-6">
+      {/* @lana_yaps leads at full width; the rest sit in a smaller gallery. */}
+      <section className="space-y-6 rounded-2xl bg-white p-6 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
-              Ultimate Ivy League Guide
-            </h2>
-          </div>
-          <div className="flex justify-between items-baseline">
-            <div className="text-[13px] font-sans text-black">Content Creator</div>
-          </div>
-        </div>
-
-        <p className="text-gray-600 font-sans text-[13px] leading-relaxed max-w-2xl">
-          Ultimate Ivy League Guide is one of the fastest-growing college admissions mentorship companies, featured in Forbes, Business Insider, Yahoo, and other leading publications for its innovative approach to college admissions. Through personalized coaching, strategic planning, and its signature Narrative Method, the company empowers students to build standout applications that showcase their unique strengths and long-term potential.
-        </p>
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a
-            href="https://www.ultimateivyleagueguide.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Visit UltimateIvyLeagueGuide.com
-          </a>
-          <a
-            href="https://www.instagram.com/ultimateivyleagueguide/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Instagram className="h-3 w-3" />
-            Instagram
-          </a>
-          <a
-            href="https://www.tiktok.com/@ultimateivyleagueguide"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            TikTok
-          </a>
-          <a
-            href="https://www.youtube.com/@ultimateivyleagueguide/shorts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Youtube className="h-3 w-3" />
-            YouTube
-          </a>
-          <a
-            href="https://www.forbes.com/sites/meimeifox/2023/10/18/top-10-pro-tips-for-getting-into-your-dream-college/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            Featured in Forbes
-          </a>
-        </div>
-
-        <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
-          <div
-            className="gallery-marquee"
-            style={{ ["--marquee-duration" as string]: "90s" } as CSSProperties}
-          >
-            {[0, 1].map((duplicate) => (
-              <div
-                key={`ivy-guide-${duplicate}`}
-                className="flex gap-6 pr-6"
-                aria-hidden={duplicate === 1}
-              >
-                {reels.map((reel) => (
-                  <div
-                    key={`${reel.id}-${duplicate}`}
-                    className="h-[680px] w-[320px] shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-white sm:w-[380px]"
-                  >
-                    <iframe
-                      src={reelEmbedUrl(reel)}
-                      title={`Instagram reel ${reel.id}`}
-                      className="h-full w-full border-0 bg-white"
-                      allowFullScreen
-                      loading="lazy"
-                    >
-                      <a href={reel.url} target="_blank" rel="noopener noreferrer">
-                        View this reel on Instagram
-                      </a>
-                    </iframe>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-        <noscript>
-          <div className="grid gap-8">
-            {reels.map((reel) => (
-              <div
-                key={reel.id}
-                className="mx-auto h-[760px] w-full max-w-[540px] overflow-hidden rounded-xl border border-gray-200 bg-white"
-              >
-                <iframe
-                  src={reelEmbedUrl(reel)}
-                  title={`Instagram reel ${reel.id}`}
-                  className="h-full w-full border-0 bg-white"
-                  allowFullScreen
-                  loading="lazy"
-                >
-                  <a href={reel.url} target="_blank" rel="noopener noreferrer">
-                    View this reel on Instagram
-                  </a>
-                </iframe>
-              </div>
-            ))}
-          </div>
-        </noscript>
-      </section>
-
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
+            <h2 className="text-[18px] font-sans font-semibold text-black tracking-tight">
               Lana Yepifanova (@lana_yaps)
             </h2>
           </div>
@@ -359,7 +239,7 @@ export default function Media() {
           </div>
         </div>
 
-        <p className="text-gray-600 font-sans text-[13px] leading-relaxed max-w-2xl">
+        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
           I make short-form videos about tech, recent news, and startups. I like to make tutorials on how to use AI tools to build cool things like automating video editing with Claude, agent orchestration, MCP servers, and web scraping. I am also starting a series to explain technical ideas in math, physics, and machine learning to nontechnical viewers.
         </p>
 
@@ -419,6 +299,127 @@ export default function Media() {
         </iframe>
       </section>
 
+      <section className="space-y-6 rounded-2xl bg-white p-6 shadow-sm">
+        <div className="space-y-1">
+          <div className="flex justify-between items-end">
+            <h2 className="text-[18px] font-sans font-semibold text-black tracking-tight">
+              Ultimate Ivy League Guide
+            </h2>
+          </div>
+          <div className="flex justify-between items-baseline">
+            <div className="text-[13px] font-sans text-black">Content Creator</div>
+          </div>
+        </div>
+
+        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
+          Ultimate Ivy League Guide is one of the fastest-growing college admissions mentorship companies, featured in Forbes, Business Insider, Yahoo, and other leading publications for its innovative approach to college admissions. Through personalized coaching, strategic planning, and its signature Narrative Method, the company empowers students to build standout applications that showcase their unique strengths and long-term potential.
+        </p>
+
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
+          <a
+            href="https://www.ultimateivyleagueguide.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            Visit UltimateIvyLeagueGuide.com
+          </a>
+          <a
+            href="https://www.instagram.com/ultimateivyleagueguide/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Instagram className="h-3 w-3" />
+            Instagram
+          </a>
+          <a
+            href="https://www.tiktok.com/@ultimateivyleagueguide"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <ExternalLink className="h-3 w-3" />
+            TikTok
+          </a>
+          <a
+            href="https://www.youtube.com/@ultimateivyleagueguide/shorts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Youtube className="h-3 w-3" />
+            YouTube
+          </a>
+          <a
+            href="https://www.forbes.com/sites/meimeifox/2023/10/18/top-10-pro-tips-for-getting-into-your-dream-college/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+          >
+            <Newspaper className="h-3 w-3" />
+            Featured in Forbes
+          </a>
+        </div>
+
+        <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
+          <div
+            className="gallery-marquee"
+            style={{ ["--marquee-duration" as string]: "200s" } as CSSProperties}
+          >
+            {[0, 1].map((duplicate) => (
+              <div
+                key={`ivy-guide-${duplicate}`}
+                className="flex gap-6 pr-6"
+                aria-hidden={duplicate === 1}
+              >
+                {reels.map((reel) => (
+                  <div
+                    key={`${reel.id}-${duplicate}`}
+                    className="h-[680px] w-[320px] shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-white sm:w-[380px]"
+                  >
+                    <iframe
+                      src={reelEmbedUrl(reel)}
+                      title={`Instagram reel ${reel.id}`}
+                      className="h-full w-full border-0 bg-white"
+                      allowFullScreen
+                      loading="lazy"
+                    >
+                      <a href={reel.url} target="_blank" rel="noopener noreferrer">
+                        View this reel on Instagram
+                      </a>
+                    </iframe>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <noscript>
+          <div className="grid gap-8">
+            {reels.map((reel) => (
+              <div
+                key={reel.id}
+                className="mx-auto h-[760px] w-full max-w-[540px] overflow-hidden rounded-xl border border-gray-200 bg-white"
+              >
+                <iframe
+                  src={reelEmbedUrl(reel)}
+                  title={`Instagram reel ${reel.id}`}
+                  className="h-full w-full border-0 bg-white"
+                  allowFullScreen
+                  loading="lazy"
+                >
+                  <a href={reel.url} target="_blank" rel="noopener noreferrer">
+                    View this reel on Instagram
+                  </a>
+                </iframe>
+              </div>
+            ))}
+          </div>
+        </noscript>
+      </section>
+
       <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
         <div className="space-y-1">
           <div className="flex justify-between items-end">
@@ -431,7 +432,7 @@ export default function Media() {
           </div>
         </div>
 
-        <p className="text-gray-600 font-sans text-[13px] leading-relaxed max-w-2xl">
+        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
           The Leading Owls Podcast is the official leadership podcast of the Doerr Institute for New Leaders at Rice University, showcasing the students, faculty, alumni, and professionals who are shaping the future through leadership. Episodes are available on Spotify, Apple Podcasts, YouTube, Amazon Music, and other major podcast platforms.
         </p>
 

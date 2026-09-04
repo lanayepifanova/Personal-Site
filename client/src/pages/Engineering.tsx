@@ -100,7 +100,7 @@ export default function EngineeringSection() {
       role: "Commodities Trading Intern",
       period: "2026",
       description:
-        "Supported the crude oil, power, and natural gas trading desks. Received return offer but decided to pursue a different path.",
+        "Supported the crude oil, power, and natural gas trading desks. Received return offer.",
       image: "/images/macquarie-genscape.jpeg",
       link: "https://www.macquarie.com"
     },

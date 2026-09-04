@@ -71,7 +71,7 @@ const buildingJobs: Job[] = [
     role: "Co-Founder",
     period: "2026",
     description:
-      "Hacker House. 19 residents. 2.5M+ funding raised. Alumni in a16z speedrun and YC cohorts.",
+      "Hacker House. 19 residents. 2.5M+ funding raised. Alumni in a16z speedrun and YC.",
     image: "/images/rice-residency-logo.png",
     imageContain: "#00205b",
     link: null,

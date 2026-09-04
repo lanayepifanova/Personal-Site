@@ -58,7 +58,7 @@ const buildingJobs: Job[] = [
   {
     id: "dumbiis",
     company: "Dumbiis",
-    role: "Co-Founder",
+    role: "Solo Founder",
     period: "2026",
     description:
       "Consumer App. The daily briefing for people who care about tech, startups, and markets.",

@@ -61,7 +61,7 @@ const buildingJobs: Job[] = [
     role: "Co-Founder",
     period: "2026",
     description:
-      "A consumer app that is an operating system for personal agency. Pre-launch stage.",
+      "Consumer App. The daily briefing for people who care about tech, startups, and markets.",
     image: "/images/dumbiis-logo.png",
     link: null,
   },

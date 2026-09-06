@@ -33,11 +33,11 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
 
           <div className="text-gray-600 font-sans text-[13px] leading-relaxed">{job.description}</div>
 
-          <div
-            className="relative mt-auto aspect-[16/9] overflow-hidden rounded-xl border border-gray-100 bg-gray-100 shadow-sm"
-            style={job.imageContain ? { backgroundColor: job.imageContain } : undefined}
-          >
-            {job.image ? (
+          {job.image ? (
+            <div
+              className="relative mt-auto aspect-[16/9] overflow-hidden rounded-xl border border-gray-100 bg-gray-100 shadow-sm"
+              style={job.imageContain ? { backgroundColor: job.imageContain } : undefined}
+            >
               <img
                 src={job.image}
                 alt={job.company}
@@ -46,8 +46,8 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
                 }`}
                 style={job.imagePosition ? { objectPosition: job.imagePosition } : undefined}
               />
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </article>
       ))}
     </div>
@@ -56,13 +56,13 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
 
 const buildingJobs: Job[] = [
   {
-    id: "dumbiis",
-    company: "Dumbiis",
+    id: "kaze",
+    company: "Kaze",
     role: "Solo Founder",
     period: "2026",
     description:
       "Consumer App. The daily briefing for people who care about tech, startups, and markets.",
-    image: "/images/dumbiis-logo.png",
+    image: "/images/kaze-logo.png",
     link: null,
   },
   {

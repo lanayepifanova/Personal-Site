@@ -196,6 +196,14 @@ export const reels = [
     id: "Dc-CZkVAO5Q",
     url: "https://www.instagram.com/reel/Dc-CZkVAO5Q/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
+  {
+    id: "DdDF5URAhYj",
+    url: "https://www.instagram.com/reel/DdDF5URAhYj/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DdFm2kkBylZ",
+    url: "https://www.instagram.com/reel/DdFm2kkBylZ/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>

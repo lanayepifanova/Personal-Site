@@ -10,6 +10,7 @@ type Job = {
   image?: string;
   imagePosition?: string;
   // Logos are letterboxed on their own brand colour instead of cropped.
+  // Without an image, the card shows a plain panel in this colour.
   imageContain?: string;
   link: string | null;
 };
@@ -33,19 +34,21 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
 
           <div className="text-gray-600 font-sans text-[13px] leading-relaxed">{job.description}</div>
 
-          {job.image ? (
+          {job.image || job.imageContain ? (
             <div
               className="relative mt-auto aspect-[16/9] overflow-hidden rounded-xl border border-gray-100 bg-gray-100 shadow-sm"
               style={job.imageContain ? { backgroundColor: job.imageContain } : undefined}
             >
-              <img
-                src={job.image}
-                alt={job.company}
-                className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
-                  job.imageContain ? "object-contain p-4" : "object-cover"
-                }`}
-                style={job.imagePosition ? { objectPosition: job.imagePosition } : undefined}
-              />
+              {job.image ? (
+                <img
+                  src={job.image}
+                  alt={job.company}
+                  className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+                    job.imageContain ? "object-contain p-4" : "object-cover"
+                  }`}
+                  style={job.imagePosition ? { objectPosition: job.imagePosition } : undefined}
+                />
+              ) : null}
             </div>
           ) : null}
         </article>
@@ -56,13 +59,12 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
 
 const buildingJobs: Job[] = [
   {
-    id: "kaze",
-    company: "Kaze",
-    role: "Solo Founder",
+    id: "stealth",
+    company: "Stealth",
+    role: "Co-Founder",
     period: "2026",
-    description:
-      "Consumer App. The daily briefing for people who care about tech, startups, and markets.",
-    image: "/images/kaze-logo.png",
+    description: "...",
+    imageContain: "#000000",
     link: null,
   },
   {

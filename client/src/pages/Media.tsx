@@ -546,22 +546,39 @@ export default function MediaSection() {
           </a>
         </div>
 
-        <div className="space-y-4">
-          {podcastEpisodes.map((episode) => (
-            <iframe
-              key={episode.id}
-              src={episodeEmbedUrl(episode)}
-              title={episode.title}
-              className="h-[175px] w-full rounded-xl border border-gray-200 bg-white"
-              loading="lazy"
-              allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-            >
-              <a href={episode.url} target="_blank" rel="noopener noreferrer">
-                Listen to {episode.title}
-              </a>
-            </iframe>
-          ))}
+        <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
+          <div
+            className="gallery-marquee"
+            style={{ ["--marquee-duration" as string]: "40s" } as CSSProperties}
+          >
+            {[0, 1].map((duplicate) => (
+              <div
+                key={`leading-owls-${duplicate}`}
+                className="flex gap-6 pr-6"
+                aria-hidden={duplicate === 1}
+              >
+                {podcastEpisodes.map((episode) => (
+                  <div
+                    key={`${episode.id}-${duplicate}`}
+                    className="h-[175px] w-[320px] shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-white sm:w-[480px] lg:w-[560px]"
+                  >
+                    <iframe
+                      src={episodeEmbedUrl(episode)}
+                      title={episode.title}
+                      className="h-full w-full border-0 bg-white"
+                      loading="lazy"
+                      allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+                    >
+                      <a href={episode.url} target="_blank" rel="noopener noreferrer">
+                        Listen to {episode.title}
+                      </a>
+                    </iframe>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

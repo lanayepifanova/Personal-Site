@@ -217,6 +217,22 @@ export const reels = [
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>
   `https://www.instagram.com/${reel.type ?? "reel"}/${reel.id}/embed/`;
 
+export const podcastEpisodes = [
+  {
+    id: "1000783364521",
+    url: "https://podcasts.apple.com/us/podcast/leading-the-first-o-week-at-chao-college/id1775472900?i=1000783364521",
+    title: "Leading the First O-Week at Chao College",
+  },
+  {
+    id: "1000790045195",
+    url: "https://podcasts.apple.com/us/podcast/you-dont-have-to-be-loud-to-be-a-leader-with/id1775472900?i=1000790045195",
+    title: "You Don't Have to Be Loud to Be a Leader",
+  },
+];
+
+export const episodeEmbedUrl = (episode: { url: string }) =>
+  episode.url.replace("https://podcasts.apple.com", "https://embed.podcasts.apple.com");
+
 export default function MediaSection() {
   const enableManualGallery = (target: HTMLDivElement) => {
     if (!target.classList.contains("is-manual")) {
@@ -530,22 +546,23 @@ export default function MediaSection() {
           </a>
         </div>
 
-        <iframe
-          src="https://embed.podcasts.apple.com/us/podcast/leading-the-first-o-week-at-chao-college/id1775472900?i=1000783364521"
-          title="Leading the First O-Week at Chao College"
-          className="h-[175px] w-full rounded-xl border border-gray-200 bg-white"
-          loading="lazy"
-          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-        >
-          <a
-            href="https://podcasts.apple.com/us/podcast/leading-the-first-o-week-at-chao-college/id1775472900?i=1000783364521"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Listen to Leading the First O-Week at Chao College
-          </a>
-        </iframe>
+        <div className="space-y-4">
+          {podcastEpisodes.map((episode) => (
+            <iframe
+              key={episode.id}
+              src={episodeEmbedUrl(episode)}
+              title={episode.title}
+              className="h-[175px] w-full rounded-xl border border-gray-200 bg-white"
+              loading="lazy"
+              allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+            >
+              <a href={episode.url} target="_blank" rel="noopener noreferrer">
+                Listen to {episode.title}
+              </a>
+            </iframe>
+          ))}
+        </div>
       </section>
 
       <PianoYoutubeSection />

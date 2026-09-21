@@ -263,7 +263,7 @@ export default function CommunitiesSection() {
   // Filled in once the copy is ready; each block hides itself while empty.
   const sportsRole = "";
   const sportsDescription =
-    "I placed #1 at the Mayor's Cup Championship for Girls Wrestling in Jan 2023. In high school, I was a part of Girls JV Track & Field, Girls Varsity Tennis, Girls Varsity Swimming, Girls Varsity Flag Football, and CoEd Varsity Wrestling. At Rice University, I am part of the Rice Competitive Powerlifting Team, Rice Competitive Boxing Team, Rice Women's Club Lacrosse, and the Rice Club Sailing Team. I am also involved in Intramural Girls Basketball, Will Rice Women's Powderpuff, and the Will Rice Beer Bike Team.";
+    "I placed #1 at the Mayor's Cup Championship for Girls Wrestling in Jan 2023. In high school, I was a part of Girls JV Track & Field, Girls Varsity Tennis, Girls Varsity Swimming, Girls Varsity Flag Football, and CoEd Varsity Wrestling. At Rice University, I am part of the Rice Competitive Powerlifting Team, Rice Competitive Boxing Team, Rice Women's Club Lacrosse, and the Rice Club Sailing Team. I am also involved in Intramural Girls Basketball and the Will Rice Beer Bike Team.";
   const danceRole = "";
   const danceDescription =
     "When I was little, I was part of the American Ballet Theatre from age 7-12 and then Rose Academy of Ballet from age 12-18. " +

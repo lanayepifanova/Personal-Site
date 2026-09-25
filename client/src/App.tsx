@@ -36,7 +36,9 @@ function Routes({ location }: { location?: string }) {
 }
 
 function PageTransition() {
-  const [location] = useLocation();
+  const [rawLocation] = useLocation();
+  // /book is the home page with the notebook popup open, so it shouldn't trigger a page transition.
+  const location = rawLocation === "/book" ? "/" : rawLocation;
   const [displayLocation, setDisplayLocation] = useState(location);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobile, setIsMobile] = useState(false);

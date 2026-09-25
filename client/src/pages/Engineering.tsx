@@ -1,5 +1,7 @@
-import type { ReactNode } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { useEffect, type ReactNode } from "react";
+import { createPortal } from "react-dom";
+import { useLocation } from "wouter";
+import { ArrowUpRight, X } from "lucide-react";
 
 type Job = {
   id: string;
@@ -12,17 +14,19 @@ type Job = {
   // Logos are letterboxed on their own brand colour instead of cropped.
   // Without an image, the card shows a plain panel in this colour.
   imageContain?: string;
+  // Extra grid placement classes, e.g. to push a card to a specific column.
+  gridClass?: string;
   link: string | null;
 };
 
-function JobGrid({ jobs }: { jobs: Job[] }) {
+function JobGrid({ jobs, children }: { jobs: Job[]; children?: ReactNode }) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {jobs.map((job) => (
         <article
           key={job.id}
           id={job.id}
-          className="group flex h-full flex-col space-y-4 rounded-2xl bg-white p-5 text-left shadow-sm scroll-mt-24"
+          className={`group flex h-full flex-col space-y-4 rounded-2xl bg-white p-5 text-left shadow-sm scroll-mt-24 ${job.gridClass ?? ""}`}
         >
           <div className="space-y-1">
             <div className="flex justify-between items-baseline">
@@ -53,20 +57,12 @@ function JobGrid({ jobs }: { jobs: Job[] }) {
           ) : null}
         </article>
       ))}
+      {children}
     </div>
   );
 }
 
 const buildingJobs: Job[] = [
-  {
-    id: "stealth",
-    company: "Stealth",
-    role: "Co-Founder",
-    period: "2026",
-    description: "...",
-    imageContain: "#000000",
-    link: null,
-  },
   {
     id: "rice-residency",
     company: "Rice Residency",
@@ -86,12 +82,130 @@ const buildingJobs: Job[] = [
     description:
       "Property management platform. Grew to 30+ paying landlords, hit 7k+ MRR, and 300k exit.",
     image: "/images/unitbot-logo.png",
+    gridClass: "xl:col-start-3",
     link: null,
   },
 ];
 
+// Edit these to change what's written in the notebook between the Building cards.
+const notebookPages = {
+  title: "a collection of my favorite words",
+  quotes: [
+    {
+      text: "I have so much to say to you that I am afraid I shall tell you nothing.",
+      author: "Fyodor Dostoyevsky, The Brothers Karamazov",
+    },
+    {
+      text: "We should not spoil what we have by desiring what we do not have, but remember that what we have too was the gift of fortune.",
+      author: "Epicurus, Vatican Sayings, no. 35",
+    },
+    {
+      text: "This heart within me I can feel, and I judge that it exists. This world I can touch, and I likewise judge that it exists. There ends all my knowledge, and the rest is construction. (...) Forever I shall be a stranger to myself",
+      author: "Albert Camus, The Myth of Sisyphus",
+    },
+    {
+      text: "I imagine one of the reasons people cling to their hates so stubbornly is because they sense, once hate is gone, they will be forced to deal with pain.",
+      author: "James Baldwin, The Fire Next Time",
+    },
+    {
+      text: "The fault-finder will find faults even in paradise. Love your life, difficult as it is. You must live in the present, launch yourself on every wave, find your eternity in each moment. Fools stand on their island of opportunities and look toward other land. There is no other land; there is no other life but this.",
+      author: "Henry David Thoreau, Walden and Journal",
+    },
+  ],
+};
+
+function Notebook() {
+  // The popup lives at /book so it survives a refresh and can be linked to directly.
+  const [location, setLocation] = useLocation();
+  const open = location === "/book";
+  const setOpen = (next: boolean) => setLocation(next ? "/book" : "/");
+
+  // Close on Escape and stop the page behind from scrolling while the popup is open.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <>
+      {/* Wide screens: middle column, top row. Two columns: centered on its own row under the cards. Phones: after the cards. */}
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-haspopup="dialog"
+        aria-label="Open notebook"
+        className="group mt-12 block w-4/5 cursor-pointer self-start justify-self-center text-left sm:col-span-2 sm:w-2/5 xl:col-span-1 xl:col-start-2 xl:row-start-1 xl:w-4/5"
+      >
+        <span className="mb-2 block translate-y-4 text-center font-sans text-[11px] text-white">click me!</span>
+        <svg
+          viewBox="0 0 400 260"
+          className="w-full h-auto drop-shadow-sm transition-transform duration-300 group-hover:-translate-y-1"
+          aria-hidden="true"
+        >
+          <path d="M200 30 C150 10 60 12 14 24 L14 240 C60 228 150 226 200 246 Z" fill="#ffffff" stroke="#e5e7eb" strokeWidth="2" />
+          <path d="M200 30 C250 10 340 12 386 24 L386 240 C340 228 250 226 200 246 Z" fill="#ffffff" stroke="#e5e7eb" strokeWidth="2" />
+          <path d="M14 240 C60 228 150 226 200 246 C250 226 340 228 386 240 L386 250 C340 238 250 236 200 256 C150 236 60 238 14 250 Z" fill="#e5e7eb" />
+          <line x1="200" y1="30" x2="200" y2="246" stroke="#d1d5db" strokeWidth="2" />
+        </svg>
+      </button>
+
+      {open
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 px-10 py-4 backdrop-blur-md sm:px-20"
+              onClick={() => setOpen(false)}
+            >
+              <div
+                role="dialog"
+                aria-modal="true"
+                aria-label="Notebook"
+                onClick={(e) => e.stopPropagation()}
+                className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl md:p-8"
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close notebook"
+                  className="absolute right-4 top-4 rounded-full p-1 text-gray-400 transition-colors hover:text-black"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+                {/* Plain, early-web styling: Times, black, left-aligned, browser-default look. */}
+                <h2 className="mb-3 font-['Times_New_Roman',Times,serif] text-[14px] font-bold text-black">
+                  {notebookPages.title}
+                </h2>
+                <ul className="space-y-3">
+                  {notebookPages.quotes.map((q) => (
+                    <li key={q.text} className="font-['Times_New_Roman',Times,serif] text-[12px] leading-snug text-black">
+                      <blockquote>"{q.text}"</blockquote>
+                      <p className="mt-0.5">- {q.author}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
+    </>
+  );
+}
+
 export function BuildingSection() {
-  return <JobGrid jobs={buildingJobs} />;
+  return (
+    <JobGrid jobs={buildingJobs}>
+      <Notebook />
+    </JobGrid>
+  );
 }
 
 export default function EngineeringSection() {

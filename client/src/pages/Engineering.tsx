@@ -95,8 +95,8 @@ const favoriteWords = {
       author: "Albert Camus, The Myth of Sisyphus",
     },
     {
-      text: "I imagine one of the reasons people cling to their hates so stubbornly is because they sense, once hate is gone, they will be forced to deal with pain.",
-      author: "James Baldwin, The Fire Next Time",
+      text: "I imagine that one of the reasons people cling to their hates so stubbornly is because they sense, once hate is gone, that they will be forced to deal with pain.",
+      author: "James Baldwin, Notes of a Native Son",
     },
     {
       text: "The fault-finder will find faults even in paradise. Love your life, difficult as it is. You must live in the present, launch yourself on every wave, find your eternity in each moment. Fools stand on their island of opportunities and look toward other land. There is no other land; there is no other life but this.",

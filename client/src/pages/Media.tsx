@@ -321,7 +321,6 @@ export default function MediaSection() {
             },
           ]}
         />
-        <p className="text-[14px] text-gray-600">Reels ({reels.length}), scroll sideways:</p>
         <div className="plain-row">
           {reels.map((reel) => (
             <iframe
@@ -358,13 +357,14 @@ export default function MediaSection() {
             },
           ]}
         />
-        <div className="space-y-3">
+        {/* Episodes side by side in one sideways-scrolling row. */}
+        <div className="plain-row">
           {podcastEpisodes.map((episode) => (
             <iframe
               key={episode.id}
               src={episodeEmbedUrl(episode)}
               title={episode.title}
-              className="block h-[175px] w-full max-w-[660px] border border-gray-400 bg-white"
+              className="h-[175px] w-[min(85vw,480px)] border border-gray-400 bg-white"
               loading="lazy"
               allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
               sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"

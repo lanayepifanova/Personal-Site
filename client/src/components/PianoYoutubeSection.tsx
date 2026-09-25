@@ -120,7 +120,6 @@ export default function PianoYoutubeSection() {
       </p>
       <LinkList links={[{ label: "Piano YouTube Channel", href: "https://www.youtube.com/@LanaYepifanova" }]} />
 
-      <p className="text-[14px] text-gray-600">Performances, scroll sideways:</p>
       <div className="plain-row">
         {pianoLongFormVideos.map((url, index) => (
           <Thumbnail
@@ -133,7 +132,6 @@ export default function PianoYoutubeSection() {
         ))}
       </div>
 
-      <p className="text-[14px] text-gray-600">Shorts:</p>
       <div className="plain-row">
         {pianoShorts.map((url, index) => (
           <Thumbnail

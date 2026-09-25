@@ -287,9 +287,9 @@ export default function MediaSection() {
             { label: "X", href: "https://x.com/lana_yaps" },
           ]}
         />
-        {/* Instagram and TikTok side by side (stacked on narrow screens). TikTok's creator card
-            is a fixed 288x388, so Instagram is cut to the same size. */}
-        <div className="flex flex-wrap items-start gap-4">
+        {/* Instagram and TikTok always side by side; on phones the row scrolls sideways. TikTok's
+            creator card is a fixed 288x388, so Instagram is cut to the same size. */}
+        <div className="plain-row items-start gap-4">
           <iframe
             src="https://www.instagram.com/lana_yaps/embed/"
             title="Lana Yepifanova on Instagram"

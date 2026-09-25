@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type CSSProperties, type WheelEvent, type UIEvent } from "react";
-import { ExternalLink, Newspaper, Instagram, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { Entry, LinkList, PhotoRow } from "@/components/Plain";
 import { useLocation } from "wouter";
 import { atlasLocations, slugifyTravelCity } from "@/data/travelLocations";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -16,123 +16,29 @@ type LinkedInPost = {
   title: string;
 };
 
-function LinkedInPostCarousel({
+function LinkedInPostRow({
   posts,
   height,
-  label,
+  children,
 }: {
   posts: LinkedInPost[];
   height: number;
-  label: string;
+  children?: ReactNode;
 }) {
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const scrollToPost = (index: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const clamped = Math.max(0, Math.min(posts.length - 1, index));
-    const card = track.children[clamped] as HTMLElement | undefined;
-    if (!card) return;
-    track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
-  };
-
-  const handleScroll = (event: UIEvent<HTMLDivElement>) => {
-    const track = event.currentTarget;
-    const cards = Array.from(track.children) as HTMLElement[];
-    let nearest = 0;
-    let smallest = Number.POSITIVE_INFINITY;
-    cards.forEach((card, index) => {
-      const distance = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
-      if (distance < smallest) {
-        smallest = distance;
-        nearest = index;
-      }
-    });
-    setActiveIndex(nearest);
-  };
-
-  const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
-    const { deltaX, deltaY } = event;
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      return;
-    }
-
-    const track = event.currentTarget;
-    const maxScrollLeft = track.scrollWidth - track.clientWidth;
-    if (maxScrollLeft <= 0) {
-      return;
-    }
-
-    const next = Math.max(0, Math.min(maxScrollLeft, track.scrollLeft + deltaY));
-    if (next === track.scrollLeft) {
-      return;
-    }
-
-    event.preventDefault();
-    track.scrollLeft = next;
-  };
-
   return (
-    <div className="space-y-3">
-      <div
-        ref={trackRef}
-        onScroll={handleScroll}
-        onWheel={handleWheel}
-        tabIndex={0}
-        aria-label={label}
-        className="flex gap-4 overflow-x-auto snap-x snap-proximity pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {posts.map((post) => (
-          <div key={post.url} className="snap-start shrink-0 w-[min(100%,504px)]">
-            <iframe
-              src={post.url}
-              title={post.title}
-              style={{ height }}
-              className="w-full rounded-xl border border-gray-200 bg-white"
-              loading="lazy"
-              allowFullScreen
-            ></iframe>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex items-center gap-3">
-        <button
-          type="button"
-          onClick={() => scrollToPost(activeIndex - 1)}
-          disabled={activeIndex === 0}
-          aria-label="Previous post"
-          className="h-8 w-8 rounded-full border border-gray-200 flex items-center justify-center text-black transition-colors hover:border-black disabled:opacity-30 disabled:hover:border-gray-200"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollToPost(activeIndex + 1)}
-          disabled={activeIndex === posts.length - 1}
-          aria-label="Next post"
-          className="h-8 w-8 rounded-full border border-gray-200 flex items-center justify-center text-black transition-colors hover:border-black disabled:opacity-30 disabled:hover:border-gray-200"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </button>
-        <div className="flex items-center gap-1.5">
-          {posts.map((post, index) => (
-            <button
-              key={`dot-${post.url}`}
-              type="button"
-              onClick={() => scrollToPost(index)}
-              aria-label={`Go to post ${index + 1}`}
-              className={`h-1.5 rounded-full transition-all ${
-                index === activeIndex ? "w-5 bg-black" : "w-1.5 bg-gray-300 hover:bg-gray-400"
-              }`}
-            />
-          ))}
-        </div>
-        <span className="font-sans text-[10px] text-gray-500 uppercase tracking-wider ml-auto">
-          {activeIndex + 1} / {posts.length}
-        </span>
-      </div>
+    <div className="plain-row">
+      {children}
+      {posts.map((post) => (
+        <iframe
+          key={post.url}
+          src={post.url}
+          title={post.title}
+          style={{ height }}
+          className="w-[min(90vw,504px)] border border-gray-400 bg-white"
+          loading="lazy"
+          allowFullScreen
+        ></iframe>
+      ))}
     </div>
   );
 }
@@ -267,7 +173,7 @@ export default function CommunitiesSection() {
   const danceRole = "";
   const danceDescription =
     "When I was little, I was part of the American Ballet Theatre from age 7-12 and then Rose Academy of Ballet from age 12-18. " +
-    "At Rice University, I am part of the BASYK Dance Team. When I took my gap semester in Boston, I joined the Harvard AADT Dance Team for the semester and performed in their fall showcase.";
+    "At Rice University, I am part of the BASYK Dance Team and joined Wiess Tabletop Theatre as a Cabaret Dancer. When I took my gap semester in Boston, I joined the Harvard AADT Dance Team for the semester and performed in their fall showcase.";
   const volunteerRole = "";
   const musicRole = "";
   const musicDescription =
@@ -325,524 +231,143 @@ export default function CommunitiesSection() {
       url: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7394450878885384193?collapsed=1",
     },
   ];
-  const enableManualGallery = (target: HTMLDivElement) => {
-    if (!target.classList.contains("is-manual")) {
-      target.classList.add("is-manual");
-    }
-  };
-
-  const handleGalleryScroll = (event: UIEvent<HTMLDivElement>) => {
-    enableManualGallery(event.currentTarget);
-  };
-
-  const handleGalleryWheel = (event: WheelEvent<HTMLDivElement>) => {
-    const { deltaX, deltaY } = event;
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      return;
-    }
-
-    const target = event.currentTarget;
-    enableManualGallery(target);
-    const maxScrollLeft = target.scrollWidth - target.clientWidth;
-    if (maxScrollLeft <= 0) {
-      return;
-    }
-
-    const nextScrollLeft = target.scrollLeft + deltaY;
-    const clampedScrollLeft = Math.max(0, Math.min(maxScrollLeft, nextScrollLeft));
-
-    if (clampedScrollLeft === target.scrollLeft) {
-      return;
-    }
-
-    event.preventDefault();
-    target.scrollLeft = clampedScrollLeft;
-  };
-
   return (
-    <div className="space-y-6">
-      {/* Rice Residency - the headline community, full width */}
-      <section className="space-y-6 rounded-2xl bg-white p-6 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[18px] font-sans font-semibold text-black tracking-tight">Rice Residency</h2>
-          </div>
-          <div className="flex justify-between items-baseline">
-            <div className="text-[13px] font-sans text-black">Co-Founder and Co-Lead</div>
-          </div>
-        </div>
-
-        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
+    <div className="space-y-10">
+      <Entry title="Rice Residency" role="Co-Founder and Co-Lead">
+        <p>
           Rice Residency is a selective, founder-led hacker house near Rice University in Houston for students and early-stage founders building software, hardware, and deep-tech startups. We've raised 2.5M+ in funding, had 3 residents get into a16z speedrun, 1 resident get into the YC S26 batch, and 7 residents in the Rice Summer Venture Studio.
         </p>
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a 
-            href="https://riceresidency.com" 
-            target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-            >
-              <ExternalLink className="h-3 w-3" />
-              Visit RiceResidency.com
-            </a>
-            <a 
-              href="https://www.ricethresher.org/article/rice-residency-hacker-house-opens-application-for-first-cohort-20251119" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-            >
-              <Newspaper className="h-3 w-3" />
-              Featured in The Thresher
-            </a>
-            <a
-              href="https://ricethresher.org/article/delusion-prevails-inside-houston-hacker-house-20260902"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-            >
-              <Newspaper className="h-3 w-3" />
-              Profiled in The Thresher
-            </a>
-        </div>
-
-        <LinkedInPostCarousel
-          posts={riceResidencyPosts}
-          height={668}
-          label="Rice Residency LinkedIn posts"
+        <LinkList
+          links={[
+            { label: "RiceResidency.com", href: "https://riceresidency.com" },
+            {
+              label: "Featured in The Thresher",
+              href: "https://www.ricethresher.org/article/rice-residency-hacker-house-opens-application-for-first-cohort-20251119",
+            },
+            {
+              label: "Profiled in The Thresher",
+              href: "https://ricethresher.org/article/delusion-prevails-inside-houston-hacker-house-20260902",
+            },
+          ]}
         />
+        <LinkedInPostRow posts={riceResidencyPosts} height={668} />
+      </Entry>
 
-      </section>
-
-      {/* Harvard St Commons - the second headline community, full width */}
-      <section className="space-y-6 rounded-2xl bg-white p-6 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[18px] font-sans font-semibold text-black tracking-tight">Harvard St Commons</h2>
-          </div>
-          <div className="flex justify-between items-baseline">
-            <div className="text-[13px] font-sans text-black">Resident</div>
-          </div>
-        </div>
-
-        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
+      <Entry title="Harvard St Commons" role="Resident">
+        <p>
           I took a gap semester from Rice University to live at the hacker house for Harvard and MIT. This experience changed my life. Alumni and affiliated founders have gone on to raise from top firms including Greylock Partners, Sequoia Capital, General Catalyst, Pear VC, Felicis Ventures, and Z Fellows.
         </p>
-
-        <div className="flex gap-4 text-[11px] font-sans">
-          <a
-            href="https://harvardst.co"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Visit HarvardSt.co
-          </a>
-          <a
-            href="https://www.instagram.com/harvardstcommons/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Instagram className="h-3 w-3" />
-            See Cohort Pictures
-          </a>
-        </div>
-
-        <div className="w-full overflow-hidden rounded-sm border border-gray-200">
+        <LinkList
+          links={[
+            { label: "HarvardSt.co", href: "https://harvardst.co" },
+            { label: "Cohort Pictures", href: "https://www.instagram.com/harvardstcommons/" },
+          ]}
+        />
+        {/* Group photo and LinkedIn posts share one sideways-scrolling row. */}
+        <LinkedInPostRow posts={harvardStPosts} height={627}>
           <img
             src="/images/harvard-st-commons.jpeg"
             alt="Harvard St Commons Community"
-            className="w-full h-auto object-cover"
+            className="h-[627px] w-auto max-w-none border border-gray-400 object-cover"
             loading="lazy"
           />
-        </div>
+        </LinkedInPostRow>
+      </Entry>
 
-        <LinkedInPostCarousel
-          posts={harvardStPosts}
-          height={627}
-          label="Harvard St Commons LinkedIn posts"
+      <Entry title="Sports" role={sportsRole || undefined}>
+        {sportsDescription && <p>{sportsDescription}</p>}
+        <LinkList
+          links={[
+            {
+              label: "NYC Mayor's Cup Results",
+              href: "https://www.btsny.org/post/beat-the-streets-academy-win-titles-2023-nyc-mayors-cup-wrestling-results",
+            },
+            {
+              label: "Queens Borough Champions",
+              href: "https://thhsclassic.com/12147/sport/girls-jv-cross-country-holds-title-of-queens-borough-champions-for-27th-year/",
+            },
+            {
+              label: "PSAL Season Standouts",
+              href: "https://thhsclassic.com/18762/sport/psal-winter-season-five-thhs-athletes-with-outstanding-stats/",
+            },
+          ]}
         />
-      </section>
+        <PhotoRow photos={sportsPhotos} />
+      </Entry>
 
-      {/* Sports */}
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Sports</h2>
-          </div>
-          {sportsRole && (
-            <div className="flex justify-between items-baseline">
-              <div className="text-[13px] font-sans text-black">{sportsRole}</div>
-            </div>
-          )}
-        </div>
+      <Entry title="Music" role={musicRole || undefined}>
+        {musicDescription && <p>{musicDescription}</p>}
+        <LinkList
+          links={[
+            {
+              label: "Young Musicians Concert",
+              href: "https://www.chambermusicsociety.org/education-and-community-engagement/for-emerging-artists/ymc",
+            },
+            { label: "Featured in Playbill", href: "https://playbill.com/article/young-musicians-on-the-tully-stage" },
+            { label: "Nino Rota", href: "https://youtu.be/_DiAbZRqQZg" },
+            { label: "Sarasate", href: "https://youtu.be/9fDRZKqb4Uo" },
+            {
+              label: "NYSSMA Festival",
+              href: "https://thhsclassic.com/16500/arts-entertainment/thhs-music-program-performs-in-an-eventful-month-of-concerts-and-festivals/",
+            },
+            {
+              label: "NYC Honors Music Festival",
+              href: "https://thhsclassic.com/16181/arts-entertainment/harrisites-earn-multiples-seats-in-nyc-honors-music-festival/",
+            },
+            {
+              label: "Chamber Strings",
+              href: "https://thhsclassic.com/15654/news/winter-concert-canceled-as-covid-19-cases-surge-in-nyc/",
+            },
+          ]}
+        />
+        <PhotoRow photos={musicPhotos} />
+      </Entry>
 
-        {sportsDescription && (
-          <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
-            {sportsDescription}
-          </p>
-        )}
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a
-            href="https://www.btsny.org/post/beat-the-streets-academy-win-titles-2023-nyc-mayors-cup-wrestling-results"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            NYC Mayor&apos;s Cup Results
-          </a>
-          <a
-            href="https://thhsclassic.com/12147/sport/girls-jv-cross-country-holds-title-of-queens-borough-champions-for-27th-year/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            Queens Borough Champions
-          </a>
-          <a
-            href="https://thhsclassic.com/18762/sport/psal-winter-season-five-thhs-athletes-with-outstanding-stats/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            PSAL Season Standouts
-          </a>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {sportsPhotos.map((item) => (
-            <figure key={`sports-${item.title}-${item.image}`} className="w-full">
-              <div className="gallery-card">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="gallery-image"
-                  style={{
-                    ...(item.objectPosition ? { objectPosition: item.objectPosition } : {}),
-                    ...(item.scale ? { transform: `scale(${item.scale})` } : {}),
-                  }}
-                  loading="lazy"
-                />
-              </div>
-            </figure>
+      <Entry title="Dance" role={danceRole || undefined}>
+        {danceDescription && <p>{danceDescription}</p>}
+        <LinkList
+          links={[
+            { label: "BASYK Dance Team", href: "https://www.instagram.com/basyk.rice/?hl=en" },
+            { label: "Harvard AADT Dance Team", href: "https://www.harvardaadt.org" },
+            { label: "American Ballet Theatre", href: "https://www.abt.org/" },
+            { label: "Baby Lana Ballet Photo", href: "https://www.roseacademyofballet.com/" },
+          ]}
+        />
+        <div className="plain-row">
+          {danceVideos.map((url, index) => (
+            <iframe
+              key={url}
+              src={url}
+              title={`Dance Performance ${index + 1}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+              className="aspect-video w-72 border border-gray-400"
+            ></iframe>
           ))}
         </div>
-      </section>
+        <PhotoRow photos={dancePhotos} />
+      </Entry>
 
-      {/* Music */}
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Music</h2>
-          </div>
-          {musicRole && (
-            <div className="flex justify-between items-baseline">
-              <div className="text-[13px] font-sans text-black">{musicRole}</div>
-            </div>
-          )}
-        </div>
+      <Entry title="Volunteering" role={volunteerRole || undefined}>
+        {volunteerDescription && <p>{volunteerDescription}</p>}
+        <LinkList
+          links={[
+            { label: "Repairing the Leak Project", href: "https://sites.google.com/rice.edu/repairing-the-leak/home" },
+            { label: "Bringing Health Home", href: "https://sites.google.com/rice.edu/asbdigitalshowcase/home" },
+          ]}
+        />
+        <PhotoRow photos={volunteerPhotos} />
+      </Entry>
 
-        {musicDescription && (
-          <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
-            {musicDescription}
-          </p>
-        )}
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a
-            href="https://www.chambermusicsociety.org/education-and-community-engagement/for-emerging-artists/ymc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Young Musicians Concert
-          </a>
-          <a
-            href="https://playbill.com/article/young-musicians-on-the-tully-stage"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            Featured in Playbill
-          </a>
-          <a
-            href="https://youtu.be/_DiAbZRqQZg"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Youtube className="h-3 w-3" />
-            Nino Rota
-          </a>
-          <a
-            href="https://youtu.be/9fDRZKqb4Uo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Youtube className="h-3 w-3" />
-            Sarasate
-          </a>
-          <a
-            href="https://thhsclassic.com/16500/arts-entertainment/thhs-music-program-performs-in-an-eventful-month-of-concerts-and-festivals/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            NYSSMA Festival
-          </a>
-          <a
-            href="https://thhsclassic.com/16181/arts-entertainment/harrisites-earn-multiples-seats-in-nyc-honors-music-festival/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            NYC Honors Music Festival
-          </a>
-          <a
-            href="https://thhsclassic.com/15654/news/winter-concert-canceled-as-covid-19-cases-surge-in-nyc/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            Chamber Strings
-          </a>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {musicPhotos.map((item) => (
-            <figure key={`music-${item.image}`} className="w-full">
-              <div className="gallery-card">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="gallery-image"
-                  style={{
-                    ...(item.objectPosition ? { objectPosition: item.objectPosition } : {}),
-                    ...(item.scale ? { transform: `scale(${item.scale})` } : {}),
-                  }}
-                  loading="lazy"
-                />
-              </div>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      {/* Dance */}
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Dance</h2>
-          </div>
-          {danceRole && (
-            <div className="flex justify-between items-baseline">
-              <div className="text-[13px] font-sans text-black">{danceRole}</div>
-            </div>
-          )}
-        </div>
-
-        {danceDescription && (
-          <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
-            {danceDescription}
-          </p>
-        )}
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a
-            href="https://www.instagram.com/basyk.rice/?hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Instagram className="h-3 w-3" />
-            BASYK Dance Team
-          </a>
-          <a
-            href="https://www.harvardaadt.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Harvard AADT Dance Team
-          </a>
-          <a
-            href="https://www.abt.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            American Ballet Theatre
-          </a>
-          <a
-            href="https://www.roseacademyofballet.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Baby Lana Ballet Photo
-          </a>
-        </div>
-
-        <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
-          <div
-            className="gallery-marquee"
-            style={
-              { ["--marquee-duration" as string]: "28s" } as CSSProperties
-            }
-          >
-            {[0, 1].map((duplicate) => (
-              <div
-                key={`dance-${duplicate}`}
-                className="flex gap-6 pr-6"
-                aria-hidden={duplicate === 1}
-              >
-                {danceVideos.map((url, index) => (
-                  <div key={`dance-${index}`} className="w-64 sm:w-72 shrink-0">
-                    <div className="aspect-video w-full bg-gray-100 overflow-hidden border border-gray-200 rounded-sm relative">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={url}
-                        title={`Dance Performance ${index + 1}`}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        loading="lazy"
-                        className="w-full h-full"
-                      ></iframe>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
-          <div
-            className="gallery-marquee"
-            style={
-              { ["--marquee-duration" as string]: "28s" } as CSSProperties
-            }
-          >
-            {[0, 1].map((duplicate) => (
-              <div
-                key={`dance-photos-${duplicate}`}
-                className="gallery-row"
-                aria-hidden={duplicate === 1}
-              >
-                {dancePhotos.map((item) => (
-                  <figure key={`${item.image}-${duplicate}`} className="gallery-item">
-                    <div className="gallery-card">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="gallery-image"
-                        loading="lazy"
-                      />
-                    </div>
-                  </figure>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Volunteering */}
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">Volunteering</h2>
-          </div>
-          {volunteerRole && (
-            <div className="flex justify-between items-baseline">
-              <div className="text-[13px] font-sans text-black">{volunteerRole}</div>
-            </div>
-          )}
-        </div>
-
-        {volunteerDescription && (
-          <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
-            {volunteerDescription}
-          </p>
-        )}
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a
-            href="https://sites.google.com/rice.edu/repairing-the-leak/home"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Repairing the Leak Project
-          </a>
-          <a
-            href="https://sites.google.com/rice.edu/asbdigitalshowcase/home"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Bringing Health Home
-          </a>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {volunteerPhotos.map((item) => (
-            <figure key={`volunteer-${item.title}-${item.image}`} className="w-full">
-              <div className="gallery-card">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="gallery-image"
-                  style={{
-                    ...(item.objectPosition ? { objectPosition: item.objectPosition } : {}),
-                    ...(item.scale ? { transform: `scale(${item.scale})` } : {}),
-                  }}
-                  loading="lazy"
-                />
-              </div>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-
-      {/* Travel Documentation */}
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[15px] sm:text-[15px] font-sans font-semibold text-black tracking-tight">
-              Travel Documentation
-            </h2>
-          </div>
-          <div className="flex justify-between items-baseline">
-            <div className="text-[13px] font-sans text-black">Hover and Click on the Pins!</div>
-          </div>
-        </div>
-
+      <Entry title="Travel Documentation">
+        <p>Click on a pin to see photos from that place.</p>
         <div
           ref={mapContainerRef}
-          className="relative aspect-[16/10] min-h-[300px] w-full min-w-0 overflow-hidden border border-gray-200 bg-gray-50 sm:min-h-[360px] lg:min-h-0"
+          className="relative aspect-[16/10] min-h-[300px] w-full max-w-[960px] overflow-hidden border border-gray-400 bg-gray-50"
         />
-      </section>
+      </Entry>
     </div>
   );
 }

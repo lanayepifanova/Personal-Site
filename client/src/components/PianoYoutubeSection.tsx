@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
-import { useState, type CSSProperties, type UIEvent, type WheelEvent } from "react";
-import { ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { Entry, LinkList } from "@/components/Plain";
 
 const pianoShorts = [
   "https://youtube.com/shorts/CQx9n07sxpc?feature=share",
@@ -74,16 +74,6 @@ const pianoLongFormVideos = [
   "https://www.youtube.com/embed/ACmF4cCZjkY",
 ];
 
-const pianoShortRows = [
-  pianoShorts.slice(0, Math.ceil(pianoShorts.length / 2)),
-  pianoShorts.slice(Math.ceil(pianoShorts.length / 2)),
-];
-
-const pianoLongFormRows = [
-  pianoLongFormVideos.slice(0, Math.ceil(pianoLongFormVideos.length / 2)),
-  pianoLongFormVideos.slice(Math.ceil(pianoLongFormVideos.length / 2)),
-];
-
 const getYoutubeId = (url: string) => {
   const embedMatch = url.match(/\/embed\/([a-zA-Z0-9_-]+)/);
   if (embedMatch) return embedMatch[1];
@@ -111,176 +101,62 @@ const getYoutubeThumbnail = (url: string) => {
   return id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : "";
 };
 
+function Thumbnail({ url, alt, className, onOpen }: { url: string; alt: string; className: string; onOpen: () => void }) {
+  return (
+    <button type="button" onClick={onOpen} className={`relative block border border-gray-400 bg-gray-100 ${className}`}>
+      <img src={getYoutubeThumbnail(url)} alt={alt} className="h-full w-full object-cover" loading="lazy" />
+      <span className="absolute bottom-1 left-1 bg-white px-1 text-[12px] text-black">&#9654; play</span>
+    </button>
+  );
+}
+
 export default function PianoYoutubeSection() {
   const [activeLightboxUrl, setActiveLightboxUrl] = useState<string | null>(null);
 
-  const enableManualGallery = (target: HTMLDivElement) => {
-    if (!target.classList.contains("is-manual")) {
-      target.classList.add("is-manual");
-    }
-  };
-
-  const handleGalleryScroll = (event: UIEvent<HTMLDivElement>) => {
-    enableManualGallery(event.currentTarget);
-  };
-
-  const handleGalleryWheel = (event: WheelEvent<HTMLDivElement>) => {
-    const { deltaX, deltaY } = event;
-    if (Math.abs(deltaX) > Math.abs(deltaY)) return;
-
-    const target = event.currentTarget;
-    enableManualGallery(target);
-    const maxScrollLeft = target.scrollWidth - target.clientWidth;
-    if (maxScrollLeft <= 0) return;
-
-    const nextScrollLeft = target.scrollLeft + deltaY;
-    const clampedScrollLeft = Math.max(0, Math.min(maxScrollLeft, nextScrollLeft));
-
-    if (clampedScrollLeft === target.scrollLeft) return;
-
-    event.preventDefault();
-    target.scrollLeft = clampedScrollLeft;
-  };
-
   return (
-    <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
-      <div className="space-y-1">
-        <div className="flex justify-between items-end">
-          <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
-            Piano YouTube Channel
-          </h2>
-        </div>
-        <div className="flex justify-between items-baseline">
-          <div className="text-[13px] font-sans text-black">Pianist and Creator</div>
-        </div>
-      </div>
-
-      <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
+    <Entry title="Piano YouTube Channel" role="Pianist and Creator">
+      <p>
         I started my piano YouTube channel to document my growth as a pianist, share performances beyond formal recitals, and make classical music feel more accessible online. It has grown to 500+ subscribers, 130k+ views, and 66 videos.
       </p>
+      <LinkList links={[{ label: "Piano YouTube Channel", href: "https://www.youtube.com/@LanaYepifanova" }]} />
 
-      <div className="flex gap-4 text-[11px] font-sans">
-        <a
-          href="https://www.youtube.com/@LanaYepifanova"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-        >
-          <ExternalLink className="h-3 w-3" />
-          Visit Piano YouTube Channel
-        </a>
-      </div>
-
-      <div className="space-y-4">
-        {pianoLongFormRows.map((row, rowIndex) => (
-          <div
-            key={`piano-longform-row-${rowIndex}`}
-            className="gallery-track"
-            onWheel={handleGalleryWheel}
-            onScroll={handleGalleryScroll}
-          >
-            <div
-              className={`gallery-marquee${rowIndex === 1 ? " reverse" : ""}`}
-              style={{ ["--marquee-duration" as string]: "54s" } as CSSProperties}
-            >
-              {[0, 1].map((duplicate) => (
-                <div
-                  key={`piano-longform-${rowIndex}-${duplicate}`}
-                  className="flex gap-6 pr-6"
-                  aria-hidden={duplicate === 1}
-                >
-                  {row.map((url, index) => (
-                    <div key={`long-${rowIndex}-${index}-${duplicate}`} className="w-60 sm:w-72 md:w-80 shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => setActiveLightboxUrl(getYoutubeEmbedUrl(url))}
-                        className="group w-full text-left"
-                      >
-                        <div className="aspect-[16/9] w-full bg-gray-100 overflow-hidden rounded-xl shadow-sm border border-gray-100 relative">
-                          <img
-                            src={getYoutubeThumbnail(url)}
-                            alt={`Piano Performance ${rowIndex * Math.ceil(pianoLongFormVideos.length / 2) + index + 1}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors duration-300 group-hover:bg-black/35">
-                            <div className="h-10 w-10 rounded-full bg-white/90 flex items-center justify-center">
-                              <div className="ml-0.5 h-0 w-0 border-y-[6px] border-y-transparent border-l-[10px] border-l-black"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
+      <p className="text-[14px] text-gray-600">Performances, scroll sideways:</p>
+      <div className="plain-row">
+        {pianoLongFormVideos.map((url, index) => (
+          <Thumbnail
+            key={url}
+            url={url}
+            alt={`Piano Performance ${index + 1}`}
+            className="aspect-[16/9] w-64"
+            onOpen={() => setActiveLightboxUrl(getYoutubeEmbedUrl(url))}
+          />
         ))}
       </div>
 
-      <div className="space-y-4">
-        {pianoShortRows.map((row, rowIndex) => (
-          <div
-            key={`piano-shorts-row-${rowIndex}`}
-            className="gallery-track"
-            onWheel={handleGalleryWheel}
-            onScroll={handleGalleryScroll}
-          >
-            <div
-              className={`gallery-marquee${rowIndex === 1 ? " reverse" : ""}`}
-              style={{ ["--marquee-duration" as string]: "48s" } as CSSProperties}
-            >
-              {[0, 1].map((duplicate) => (
-                <div
-                  key={`piano-shorts-${rowIndex}-${duplicate}`}
-                  className="flex gap-4 pr-4"
-                  aria-hidden={duplicate === 1}
-                >
-                  {row.map((url, index) => (
-                    <div key={`short-${rowIndex}-${index}-${duplicate}`} className="w-28 sm:w-32 md:w-36 shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => setActiveLightboxUrl(getYoutubeEmbedUrl(url))}
-                        className="group w-full text-left"
-                      >
-                        <div className="aspect-[9/16] w-full bg-gray-100 overflow-hidden border border-gray-200 rounded-sm relative">
-                          <img
-                            src={getYoutubeThumbnail(url)}
-                            alt={`Piano Short ${rowIndex * Math.ceil(pianoShorts.length / 2) + index + 1}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors duration-300 group-hover:bg-black/35">
-                            <div className="h-9 w-9 rounded-full bg-white/90 flex items-center justify-center">
-                              <div className="ml-0.5 h-0 w-0 border-y-[5px] border-y-transparent border-l-[9px] border-l-black"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
+      <p className="text-[14px] text-gray-600">Shorts:</p>
+      <div className="plain-row">
+        {pianoShorts.map((url, index) => (
+          <Thumbnail
+            key={url}
+            url={url}
+            alt={`Piano Short ${index + 1}`}
+            className="aspect-[9/16] w-28"
+            onOpen={() => setActiveLightboxUrl(getYoutubeEmbedUrl(url))}
+          />
         ))}
       </div>
 
       {activeLightboxUrl &&
         createPortal(
           <div
-            className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4"
             onClick={() => setActiveLightboxUrl(null)}
           >
-            <div
-              className="relative w-full max-w-4xl bg-black"
-              onClick={(event) => event.stopPropagation()}
-            >
+            <div className="relative w-full max-w-4xl bg-black" onClick={(event) => event.stopPropagation()}>
               <button
                 type="button"
                 onClick={() => setActiveLightboxUrl(null)}
-                className="absolute -top-10 right-0 text-white text-[13px] tracking-widest uppercase"
+                className="absolute -top-8 right-0 font-['Times_New_Roman',Times,serif] text-[15px] text-white underline"
               >
                 close
               </button>
@@ -293,13 +169,13 @@ export default function PianoYoutubeSection() {
                   frameBorder="0"
                   allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
-                  className="w-full h-full"
+                  className="h-full w-full"
                 ></iframe>
               </div>
             </div>
           </div>,
           document.body,
         )}
-    </section>
+    </Entry>
   );
 }

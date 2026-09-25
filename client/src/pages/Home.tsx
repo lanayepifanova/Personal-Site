@@ -1,19 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
+import { Link, useLocation } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import LazyMount from "@/components/LazyMount";
 import EngineeringSection, { BuildingSection } from "./Engineering";
 import MediaSection from "./Media";
 import CommunitiesSection from "./Communities";
 
-function SectionHeading({ title }: { title: string }) {
-  return (
-    <h2 className="mb-6 text-[15px] font-semibold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)]">
-      {title}
-    </h2>
-  );
-}
+const tabIds = ["engineering", "media", "communities"];
 
 export default function Home() {
+  const [, setLocation] = useLocation();
+
   usePageMeta({
     title: "Lana Yepifanova",
     description:
@@ -22,43 +18,91 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // Deep links like /#media (and the old /media redirects) land on the right
-    // band once the sections have laid out.
+    // Old one-page links like /#media now live on their own tab (#building stays here).
     const id = window.location.hash.slice(1);
-    if (!id) return;
-
-    const frame = requestAnimationFrame(() => {
-      document.getElementById(id)?.scrollIntoView({ block: "start" });
-    });
-
-    return () => cancelAnimationFrame(frame);
-  }, []);
+    if (tabIds.includes(id)) setLocation(`/${id}`, { replace: true });
+    else if (id === "building") document.getElementById("building")?.scrollIntoView();
+  }, [setLocation]);
 
   return (
-    <div className="container mx-auto max-w-6xl px-4 pb-32">
-      <section id="building" className="scroll-mt-20 pt-6 sm:pt-10">
-        <SectionHeading title="building" />
+    <div className="space-y-6">
+      <p>
+        I am a senior at Rice University studying Electrical Engineering and History.
+      </p>
+
+      <ul className="list-disc space-y-1 pl-6">
+        <li>
+          <Link href="/engineering">Engineering</Link>: internships and engineering work.
+        </li>
+        <li>
+          <Link href="/media">Media</Link>: short-form video, podcast, and piano.
+        </li>
+        <li>
+          <Link href="/communities">Communities</Link>: hacker houses, sports, music, dance, volunteering, and travel.
+        </li>
+      </ul>
+
+      <section id="building" className="space-y-6 pt-4">
+        <h2 className="text-[22px] font-bold">Building</h2>
         <BuildingSection />
       </section>
-
-      <section id="engineering" className="scroll-mt-20 pt-24 sm:pt-32">
-        <SectionHeading title="engineering" />
-        <EngineeringSection />
-      </section>
-
-      <section id="media" className="scroll-mt-20 pt-24 sm:pt-32">
-        <SectionHeading title="media" />
-        <LazyMount minHeight={800}>
-          <MediaSection />
-        </LazyMount>
-      </section>
-
-      <section id="communities" className="scroll-mt-20 pt-24 sm:pt-32">
-        <SectionHeading title="communities" />
-        <LazyMount minHeight={800}>
-          <CommunitiesSection />
-        </LazyMount>
-      </section>
     </div>
+  );
+}
+
+function TabPage({
+  title,
+  path,
+  description,
+  children,
+}: {
+  title: string;
+  path: string;
+  description: string;
+  children: ReactNode;
+}) {
+  usePageMeta({ title: `${title} | Lana Yepifanova`, description, canonicalPath: path });
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-[22px] font-bold">{title}</h2>
+      {children}
+    </div>
+  );
+}
+
+export function EngineeringPage() {
+  return (
+    <TabPage
+      title="Engineering"
+      path="/engineering"
+      description="Lana Yepifanova's internships and engineering work, from commodities trading to civil engineering."
+    >
+      <EngineeringSection />
+    </TabPage>
+  );
+}
+
+export function MediaPage() {
+  return (
+    <TabPage
+      title="Media"
+      path="/media"
+      description="Lana Yepifanova's short-form videos, the Leading Owls Podcast, and her piano YouTube channel."
+    >
+      <MediaSection />
+    </TabPage>
+  );
+}
+
+export function CommunitiesPage() {
+  return (
+    <TabPage
+      title="Communities"
+      path="/communities"
+      description="Hacker houses, sports, music, dance, volunteering, and travel."
+    >
+      <CommunitiesSection />
+    </TabPage>
   );
 }

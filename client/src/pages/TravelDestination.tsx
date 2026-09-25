@@ -1,4 +1,4 @@
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { getTravelLocationBySlug } from "@/data/travelLocations";
 
@@ -18,29 +18,26 @@ export default function TravelDestination() {
   });
 
   return (
-    <div className="animate-in fade-in duration-700 pt-8 pb-32 px-4 max-w-5xl mx-auto">
-      <header className="space-y-3 mb-12">
-        <h1 className="text-2xl sm:text-3xl font-sans font-medium text-black leading-snug">
-          {title}
-        </h1>
-      </header>
+    <div className="space-y-6">
+      <p>
+        <Link href="/communities">&larr; back to communities</Link>
+      </p>
+      <h2 className="text-[22px] font-bold">{title}</h2>
 
       {photos.length > 0 ? (
-        <div className="columns-1 gap-4 space-y-4 sm:columns-2 lg:columns-3">
+        <div className="columns-1 gap-3 sm:columns-2 lg:columns-3">
           {photos.map((photo, index) => (
             <img
               key={photo}
               src={photo}
               alt={`${title} travel photo ${index + 1}`}
               loading={index < 3 ? "eager" : "lazy"}
-              className="mb-4 w-full break-inside-avoid border border-gray-200 object-cover"
+              className="mb-3 w-full break-inside-avoid border border-gray-400 object-cover"
             />
           ))}
         </div>
       ) : (
-        <div className="font-sans text-[15px] leading-relaxed text-gray-800">
-          <p>Coming Soon</p>
-        </div>
+        <p>Coming soon.</p>
       )}
     </div>
   );

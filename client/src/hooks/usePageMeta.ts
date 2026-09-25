@@ -9,7 +9,7 @@ type PageMetaOptions = {
 
 const SITE_URL = "https://lanayepifanova.com";
 const SITE_DESCRIPTION =
-  "Lana Yepifanova studies Electrical Engineering and Applied Mathematics at Rice University. She builds software, makes media, and grows communities.";
+  "Lana Yepifanova studies Electrical Engineering and History at Rice University. She builds software, makes media, and grows communities.";
 
 function setMetaTag(attribute: "name" | "property", value: string, content: string) {
   let tag = document.querySelector<HTMLMetaElement>(`meta[${attribute}="${value}"]`);

@@ -1,5 +1,5 @@
-import { type CSSProperties, type UIEvent, type WheelEvent } from "react";
-import { ExternalLink, Instagram, Newspaper, Twitter, Youtube } from "lucide-react";
+import { useEffect } from "react";
+import { Entry, LinkList } from "@/components/Plain";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 
 export const reels = [
@@ -241,354 +241,141 @@ export const podcastEpisodes = [
 export const episodeEmbedUrl = (episode: { url: string }) =>
   episode.url.replace("https://podcasts.apple.com", "https://embed.podcasts.apple.com");
 
-export default function MediaSection() {
-  const enableManualGallery = (target: HTMLDivElement) => {
-    if (!target.classList.contains("is-manual")) {
-      target.classList.add("is-manual");
-    }
-  };
+// TikTok's official creator embed: a blockquote that their embed.js script turns into a profile card.
+function TikTokProfile({ username }: { username: string }) {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.tiktok.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => script.remove();
+  }, []);
 
-  const handleGalleryScroll = (event: UIEvent<HTMLDivElement>) => {
-    enableManualGallery(event.currentTarget);
-  };
-
-  const handleGalleryWheel = (event: WheelEvent<HTMLDivElement>) => {
-    const { deltaX, deltaY } = event;
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      return;
-    }
-
-    const target = event.currentTarget;
-    enableManualGallery(target);
-    const maxScrollLeft = target.scrollWidth - target.clientWidth;
-    if (maxScrollLeft <= 0) {
-      return;
-    }
-
-    const nextScrollLeft = target.scrollLeft + deltaY;
-    const clampedScrollLeft = Math.max(0, Math.min(maxScrollLeft, nextScrollLeft));
-
-    if (clampedScrollLeft === target.scrollLeft) {
-      return;
-    }
-
-    event.preventDefault();
-    target.scrollLeft = clampedScrollLeft;
-  };
+  const profileUrl = `https://www.tiktok.com/@${username}`;
 
   return (
-    <div className="space-y-6">
-      {/* @lana_yaps leads at full width; the rest sit in a smaller gallery. */}
-      <section className="space-y-6 rounded-2xl bg-white p-6 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[18px] font-sans font-semibold text-black tracking-tight">
-              Lana Yepifanova (@lana_yaps)
-            </h2>
-          </div>
-          <div className="flex justify-between items-baseline">
-            <div className="text-[13px] font-sans text-black">Personal Branding</div>
-          </div>
-        </div>
+    <div className="w-[288px] overflow-hidden border border-gray-400 bg-white">
+      <blockquote
+        className="tiktok-embed !m-0"
+        cite={profileUrl}
+        data-unique-id={username}
+        data-embed-type="creator"
+        style={{ maxWidth: 780, minWidth: 288 }}
+      >
+        <section>
+          <a href={profileUrl} target="_blank" rel="noopener noreferrer">
+            @{username} on TikTok
+          </a>
+        </section>
+      </blockquote>
+    </div>
+  );
+}
 
-        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
+export default function MediaSection() {
+  return (
+    <div className="space-y-10">
+      <Entry title="Lana Yepifanova (@lana_yaps)" role="Personal Branding">
+        <p>
           I make short-form videos about tech, recent news, and startups. I like to make tutorials on how to use AI tools to build cool things like automating video editing with Claude, agent orchestration, MCP servers, and web scraping. I am also starting a series to explain technical ideas in math, physics, and machine learning to nontechnical viewers.
         </p>
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a
-            href="https://www.instagram.com/lana_yaps/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
+        <LinkList
+          links={[
+            { label: "Instagram", href: "https://www.instagram.com/lana_yaps/" },
+            { label: "TikTok", href: "https://www.tiktok.com/@lana_yaps" },
+            { label: "YouTube", href: "https://www.youtube.com/@lana_yaps" },
+            { label: "X", href: "https://x.com/lana_yaps" },
+          ]}
+        />
+        {/* Instagram and TikTok side by side (stacked on narrow screens). TikTok's creator card
+            is a fixed 288x388, so Instagram is cut to the same size. */}
+        <div className="flex flex-wrap items-start gap-4">
+          <iframe
+            src="https://www.instagram.com/lana_yaps/embed/"
+            title="Lana Yepifanova on Instagram"
+            className="h-[388px] w-[288px] border border-gray-400 bg-white"
+            allowFullScreen
+            loading="lazy"
           >
-            <Instagram className="h-3 w-3" />
-            @lana_yaps on Instagram
-          </a>
-          <a
-            href="https://www.tiktok.com/@lana_yaps"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            @lana_yaps on TikTok
-          </a>
-          <a
-            href="https://www.youtube.com/@lana_yaps"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Youtube className="h-3 w-3" />
-            @lana_yaps on YouTube
-          </a>
-          <a
-            href="https://x.com/lana_yaps"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Twitter className="h-3 w-3" />
-            @lana_yaps on X
-          </a>
+            <a href="https://www.instagram.com/lana_yaps/?hl=en" target="_blank" rel="noopener noreferrer">
+              View @lana_yaps on Instagram
+            </a>
+          </iframe>
+          <TikTokProfile username="lana_yaps" />
         </div>
+      </Entry>
 
-        <iframe
-          src="https://www.instagram.com/lana_yaps/embed/"
-          title="Lana Yepifanova on Instagram"
-          className="h-[760px] w-full rounded-xl border border-gray-200 bg-white"
-          allowFullScreen
-          loading="lazy"
-        >
-          <a
-            href="https://www.instagram.com/lana_yaps/?hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View @lana_yaps on Instagram
-          </a>
-        </iframe>
-      </section>
-
-      <section className="space-y-6 rounded-2xl bg-white p-6 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[18px] font-sans font-semibold text-black tracking-tight">
-              Ultimate Ivy League Guide
-            </h2>
-          </div>
-          <div className="flex justify-between items-baseline">
-            <div className="text-[13px] font-sans text-black">Content Creator</div>
-          </div>
-        </div>
-
-        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
+      <Entry title="Ultimate Ivy League Guide" role="Content Creator">
+        <p>
           Ultimate Ivy League Guide is one of the fastest-growing college admissions mentorship companies, featured in Forbes, Business Insider, Yahoo, and other leading publications for its innovative approach to college admissions. Through personalized coaching, strategic planning, and its signature Narrative Method, the company empowers students to build standout applications that showcase their unique strengths and long-term potential.
         </p>
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a
-            href="https://www.ultimateivyleagueguide.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Visit UltimateIvyLeagueGuide.com
-          </a>
-          <a
-            href="https://www.instagram.com/ultimateivyleagueguide/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Instagram className="h-3 w-3" />
-            Instagram
-          </a>
-          <a
-            href="https://www.tiktok.com/@ultimateivyleagueguide"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            TikTok
-          </a>
-          <a
-            href="https://www.youtube.com/@ultimateivyleagueguide/shorts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Youtube className="h-3 w-3" />
-            YouTube
-          </a>
-          <a
-            href="https://www.forbes.com/sites/meimeifox/2023/10/18/top-10-pro-tips-for-getting-into-your-dream-college/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Newspaper className="h-3 w-3" />
-            Featured in Forbes
-          </a>
+        <LinkList
+          links={[
+            { label: "UltimateIvyLeagueGuide.com", href: "https://www.ultimateivyleagueguide.com" },
+            { label: "Instagram", href: "https://www.instagram.com/ultimateivyleagueguide/" },
+            { label: "TikTok", href: "https://www.tiktok.com/@ultimateivyleagueguide" },
+            { label: "YouTube", href: "https://www.youtube.com/@ultimateivyleagueguide/shorts" },
+            {
+              label: "Featured in Forbes",
+              href: "https://www.forbes.com/sites/meimeifox/2023/10/18/top-10-pro-tips-for-getting-into-your-dream-college/",
+            },
+          ]}
+        />
+        <p className="text-[14px] text-gray-600">Reels ({reels.length}), scroll sideways:</p>
+        <div className="plain-row">
+          {reels.map((reel) => (
+            <iframe
+              key={reel.id}
+              src={reelEmbedUrl(reel)}
+              title={`Instagram reel ${reel.id}`}
+              className="h-[600px] w-[300px] border border-gray-400 bg-white"
+              allowFullScreen
+              loading="lazy"
+            >
+              <a href={reel.url} target="_blank" rel="noopener noreferrer">
+                View this reel on Instagram
+              </a>
+            </iframe>
+          ))}
         </div>
+      </Entry>
 
-        <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
-          <div
-            className="gallery-marquee"
-            style={{ ["--marquee-duration" as string]: "200s" } as CSSProperties}
-          >
-            {[0, 1].map((duplicate) => (
-              <div
-                key={`ivy-guide-${duplicate}`}
-                className="flex gap-6 pr-6"
-                aria-hidden={duplicate === 1}
-              >
-                {reels.map((reel) => (
-                  <div
-                    key={`${reel.id}-${duplicate}`}
-                    className="h-[680px] w-[320px] shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-white sm:w-[380px]"
-                  >
-                    <iframe
-                      src={reelEmbedUrl(reel)}
-                      title={`Instagram reel ${reel.id}`}
-                      className="h-full w-full border-0 bg-white"
-                      allowFullScreen
-                      loading="lazy"
-                    >
-                      <a href={reel.url} target="_blank" rel="noopener noreferrer">
-                        View this reel on Instagram
-                      </a>
-                    </iframe>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-        <noscript>
-          <div className="grid gap-8">
-            {reels.map((reel) => (
-              <div
-                key={reel.id}
-                className="mx-auto h-[760px] w-full max-w-[540px] overflow-hidden rounded-xl border border-gray-200 bg-white"
-              >
-                <iframe
-                  src={reelEmbedUrl(reel)}
-                  title={`Instagram reel ${reel.id}`}
-                  className="h-full w-full border-0 bg-white"
-                  allowFullScreen
-                  loading="lazy"
-                >
-                  <a href={reel.url} target="_blank" rel="noopener noreferrer">
-                    View this reel on Instagram
-                  </a>
-                </iframe>
-              </div>
-            ))}
-          </div>
-        </noscript>
-      </section>
-
-      <section className="space-y-6 rounded-2xl bg-white p-5 shadow-sm">
-        <div className="space-y-1">
-          <div className="flex justify-between items-end">
-            <h2 className="text-[15px] font-sans font-semibold text-black tracking-tight">
-              Leading Owls Podcast
-            </h2>
-          </div>
-          <div className="flex justify-between items-baseline">
-            <div className="text-[13px] font-sans text-black">Podcast Host</div>
-          </div>
-        </div>
-
-        <p className="text-gray-600 font-sans text-[13px] leading-relaxed">
+      <Entry title="Leading Owls Podcast" role="Podcast Host">
+        <p>
           The Leading Owls Podcast is the official leadership podcast of the Doerr Institute for New Leaders at Rice University, showcasing the students, faculty, alumni, and professionals who are shaping the future through leadership. Episodes are available on Spotify, Apple Podcasts, YouTube, Amazon Music, and other major podcast platforms.
         </p>
-
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-sans">
-          <a
-            href="https://doerr.rice.edu/podcast"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Leading Owls Podcast
-          </a>
-          <a
-            href="https://podcasts.apple.com/us/podcast/leading-owls-podcast/id1775472900"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Listen on Apple Podcasts
-          </a>
-          <a
-            href="https://open.spotify.com/show/4pq6hc0C02oQZYtS3HVjId"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Listen on Spotify
-          </a>
-          <a
-            href="https://www.iheart.com/podcast/1333-leading-owls-podcast-191934518/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Listen on iHeart
-          </a>
-          <a
-            href="https://www.buzzsprout.com/2382212"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Listen on Buzzsprout
-          </a>
-          <a
-            href="https://www.amazon.in/Leading-Owls-Podcast/dp/B0D8QS1CTV"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <ExternalLink className="h-3 w-3" />
-            Listen on Amazon Music
-          </a>
-          <a
-            href="https://music.youtube.com/playlist?list=PLfuAYIKsj9tCv8zMzCAjALedFgNPQA-Ra"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-black hover:text-gray-600 transition-colors border-b border-black/20 hover:border-black pb-0.5"
-          >
-            <Youtube className="h-3 w-3" />
-            Listen on YouTube Music
-          </a>
+        <LinkList
+          links={[
+            { label: "Leading Owls Podcast", href: "https://doerr.rice.edu/podcast" },
+            { label: "Apple Podcasts", href: "https://podcasts.apple.com/us/podcast/leading-owls-podcast/id1775472900" },
+            { label: "Spotify", href: "https://open.spotify.com/show/4pq6hc0C02oQZYtS3HVjId" },
+            { label: "iHeart", href: "https://www.iheart.com/podcast/1333-leading-owls-podcast-191934518/" },
+            { label: "Buzzsprout", href: "https://www.buzzsprout.com/2382212" },
+            { label: "Amazon Music", href: "https://www.amazon.in/Leading-Owls-Podcast/dp/B0D8QS1CTV" },
+            {
+              label: "YouTube Music",
+              href: "https://music.youtube.com/playlist?list=PLfuAYIKsj9tCv8zMzCAjALedFgNPQA-Ra",
+            },
+          ]}
+        />
+        <div className="space-y-3">
+          {podcastEpisodes.map((episode) => (
+            <iframe
+              key={episode.id}
+              src={episodeEmbedUrl(episode)}
+              title={episode.title}
+              className="block h-[175px] w-full max-w-[660px] border border-gray-400 bg-white"
+              loading="lazy"
+              allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+            >
+              <a href={episode.url} target="_blank" rel="noopener noreferrer">
+                Listen to {episode.title}
+              </a>
+            </iframe>
+          ))}
         </div>
-
-        <div className="gallery-track" onWheel={handleGalleryWheel} onScroll={handleGalleryScroll}>
-          <div
-            className="gallery-marquee"
-            style={{ ["--marquee-duration" as string]: "40s" } as CSSProperties}
-          >
-            {[0, 1].map((duplicate) => (
-              <div
-                key={`leading-owls-${duplicate}`}
-                className="flex gap-6 pr-6"
-                aria-hidden={duplicate === 1}
-              >
-                {podcastEpisodes.map((episode) => (
-                  <div
-                    key={`${episode.id}-${duplicate}`}
-                    className="h-[175px] w-[320px] shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-white sm:w-[480px] lg:w-[560px]"
-                  >
-                    <iframe
-                      src={episodeEmbedUrl(episode)}
-                      title={episode.title}
-                      className="h-full w-full border-0 bg-white"
-                      loading="lazy"
-                      allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-                      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-                    >
-                      <a href={episode.url} target="_blank" rel="noopener noreferrer">
-                        Listen to {episode.title}
-                      </a>
-                    </iframe>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      </Entry>
 
       <PianoYoutubeSection />
     </div>

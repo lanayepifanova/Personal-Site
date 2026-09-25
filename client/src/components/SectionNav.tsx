@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { Fragment } from "react";
+import { Link, useLocation } from "wouter";
 import { Github, Instagram, Linkedin } from "lucide-react";
 
 export const sections = [
-  { id: "building", label: "building" },
-  { id: "engineering", label: "engineering" },
-  { id: "media", label: "media" },
-  { id: "communities", label: "communities" },
+  { path: "/", label: "home" },
+  { path: "/engineering", label: "engineering" },
+  { path: "/media", label: "media" },
+  { path: "/communities", label: "communities" },
 ];
 
 const socials = [
@@ -15,89 +16,49 @@ const socials = [
 ];
 
 export default function SectionNav() {
-  const [activeId, setActiveId] = useState<string>(sections[0].id);
-
-  useEffect(() => {
-    // Whichever section heading sits closest under the sticky bar wins.
-    const updateActive = () => {
-      const marker = window.innerHeight * 0.3;
-      let current = sections[0].id;
-
-      for (const section of sections) {
-        const node = document.getElementById(section.id);
-        if (!node) continue;
-        if (node.getBoundingClientRect().top <= marker) {
-          current = section.id;
-        }
-      }
-
-      setActiveId(current);
-    };
-
-    updateActive();
-    window.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive);
-
-    return () => {
-      window.removeEventListener("scroll", updateActive);
-      window.removeEventListener("resize", updateActive);
-    };
-  }, []);
-
-  const goTo = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    const node = document.getElementById(id);
-    if (!node) return;
-
-    event.preventDefault();
-    node.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.replaceState(null, "", id === "home" ? "/" : `#${id}`);
-  };
+  const [current] = useLocation();
 
   return (
-    <nav className="sticky top-0 z-30 border-b border-white/10 bg-black/55 py-3 backdrop-blur-md">
-      {/* Name left, sections centred, socials right. On mobile the sections
-          drop to their own row so the three groups never collide. */}
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)]">
-        <h1 className="order-1 shrink-0 text-[13px] font-semibold tracking-tight text-white sm:text-sm">
-          Lana Yepifanova
+    <header className="space-y-2">
+      {/* Name on the left, social icons top right. */}
+      <div className="flex items-start justify-between gap-4">
+        <h1 className="text-[28px] font-bold leading-tight">
+          <Link href="/" className="!text-black !no-underline">
+            Lana Yepifanova
+          </Link>
         </h1>
-
-        <div className="order-3 flex w-full justify-between gap-x-2 text-[13px] font-sans text-white sm:order-2 sm:w-auto sm:flex-1 sm:justify-center sm:gap-x-7 sm:text-sm">
-          {sections.map((section) => {
-            const isActive = activeId === section.id;
-
-            return (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                onClick={(event) => goTo(event, section.id)}
-                aria-current={isActive ? "true" : undefined}
-                className={`whitespace-nowrap decoration-1 underline-offset-4 transition-all ${
-                  isActive ? "underline" : "text-white/75 hover:text-white hover:underline"
-                }`}
-              >
-                {section.label}
-              </a>
-            );
-          })}
-        </div>
-
-        <div className="order-2 ml-auto flex shrink-0 items-center gap-3 sm:order-3 sm:ml-0">
+        <div className="flex items-center gap-3 pt-2">
           {socials.map(({ label, href, Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label={label}
-              title={label}
-              className="text-white/70 transition-colors hover:text-white"
-            >
-              <Icon className="h-4 w-4" />
+            <a key={label} href={href} target="_blank" rel="noreferrer noopener" aria-label={label} title={label}>
+              <Icon className="h-5 w-5" />
             </a>
           ))}
         </div>
       </div>
-    </nav>
+
+      {/* Tabs on the left (current one in bold), contact details on the right under the socials. */}
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 text-[16px]">
+        <nav>
+          [{" "}
+          {sections.map((section, index) => (
+            <Fragment key={section.path}>
+              {index > 0 ? " | " : null}
+              {current === section.path ? (
+                <b aria-current="page">{section.label}</b>
+              ) : (
+                <Link href={section.path}>{section.label}</Link>
+              )}
+            </Fragment>
+          ))}{" "}
+          ]
+        </nav>
+        <p className="text-[15px]">
+          <a href="tel:+13475965835" className="!no-underline">347-596-5835</a> |{" "}
+          <a href="mailto:ly52@rice.edu" className="!no-underline">ly52@rice.edu</a>
+        </p>
+      </div>
+
+      <hr className="!mt-4" />
+    </header>
   );
 }

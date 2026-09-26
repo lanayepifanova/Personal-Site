@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import EngineeringSection, { BuildingSection } from "./Engineering";
 import MediaSection from "./Media";
@@ -28,22 +28,8 @@ export default function Home() {
     <div className="space-y-6">
       <p>
         I am a senior at Rice University (Will Rice College) studying Electrical Engineering and History. I grew up in
-        Forest Hills, New York. I am ethnically half Japanese and half Russian. I am a proud First Generation Low Income
-        (FGLI) student. I have a younger brother whom I love very much. I also have the best mom in the world. She is a
-        ballet dancer. I am currently based in Houston, Texas.
+        Forest Hills, New York. I am currently based in Houston, Texas.
       </p>
-
-      <ul className="list-disc space-y-1 pl-6">
-        <li>
-          <Link href="/engineering">Engineering</Link>: my work history, summer internships, and engineering projects.
-        </li>
-        <li>
-          <Link href="/media">Media</Link>: content creation, social media marketing, short form video, podcast, and piano.
-        </li>
-        <li>
-          <Link href="/communities">Communities</Link>: hacker houses, sports teams, music groups, dance, volunteering, and travel.
-        </li>
-      </ul>
 
       <section id="building" className="space-y-6 pt-4">
         <h2 className="text-[22px] font-bold">Building</h2>

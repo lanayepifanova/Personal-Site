@@ -167,7 +167,7 @@ export default function EngineeringSection() {
       company: "JLL",
       role: "Capital Markets Intern",
       period: "Summer 2025",
-      description: "Supported commercial real estate investment sales and financing transactions with market research.",
+      description: "Built underwriting models and market comps for commercial real estate investment sales.",
       image: "/images/jll-capital-markets.jpeg",
       link: "https://www.jll.com"
     },

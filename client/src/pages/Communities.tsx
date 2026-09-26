@@ -245,7 +245,11 @@ export default function CommunitiesSection() {
       <a href="https://www.instagram.com/basyk.rice/?hl=en" target="_blank" rel="noopener noreferrer">
         BASYK Dance Team
       </a>{" "}
-      and joined Wiess Tabletop Theatre as a Cabaret Dancer. When I took my gap semester in Boston, I joined the{" "}
+      and joined{" "}
+      <a href="https://www.instagram.com/wiesstabletoptheatre/" target="_blank" rel="noopener noreferrer">
+        Wiess Tabletop Theatre
+      </a>{" "}
+      as a Cabaret Dancer. When I took my gap semester in Boston, I joined the{" "}
       <a href="https://www.harvardaadt.org" target="_blank" rel="noopener noreferrer">
         Harvard AADT Dance Team
       </a>{" "}

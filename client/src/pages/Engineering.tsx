@@ -142,7 +142,7 @@ export default function EngineeringSection() {
       role: "GTM Associate",
       period: "Spring 2026",
       description:
-        "Developed marketing, media and content strategy for the launch of a new consumer product.",
+        "Developed AI generated video marketing strategy for the launch of a new consumer product.",
       image: "/images/xylem-robotics.webp",
       link: "https://xylemtech.com/"
     },
@@ -151,11 +151,7 @@ export default function EngineeringSection() {
       company: "JLL",
       role: "Capital Markets Intern",
       period: "Summer 2025",
-      description: (
-        <>
-          Developed data ingestion pipelines to aggregate leasing analytics. Proptech research for <a href="https://spark.jllt.com/portfolio/" target="_blank" rel="noopener noreferrer">JLL Spark</a> venture fund.
-        </>
-      ),
+      description: "Supported commercial real estate investment sales and financing transactions with market research.",
       image: "/images/jll-capital-markets.jpeg",
       link: "https://www.jll.com"
     },
@@ -192,7 +188,7 @@ export default function EngineeringSection() {
       period: "Summer 2024",
       description: (
         <>
-          Construction projects across $5B+ real estate portfolio. IoT sensors and machine learning at <a href="https://www.nantum.ai" target="_blank" rel="noopener noreferrer">Nantum AI</a> capstone project.
+          Worked on <a href="https://www.nantum.ai" target="_blank" rel="noopener noreferrer">Nantum AI</a> project to help commercial buildings use less energy and operate more efficiently.
         </>
       ),
       image: "/images/rudin-cad-massive.png",
@@ -200,14 +196,11 @@ export default function EngineeringSection() {
     },
     {
       id: "sl-green",
-      company: "SL Green Realty Corp.",
+      company: "SL Green",
       role: "Civil Engineering Intern",
       period: "Summer 2023",
-      description: (
-        <>
-          Real estate development projects across $4B+ Manhattan office portfolio. Auto CAD and Bluebeam.
-        </>
-      ),
+      description:
+        "Updating floor plans in CAD, marking up drawings in Bluebeam, and doing site walks with project managers.",
       image: "/images/slgreen_cad.png",
       link: "https://www.slgreen.com"
     },
@@ -217,17 +210,17 @@ export default function EngineeringSection() {
       role: "Civil Engineering Intern",
       period: "Summer 2022",
       description:
-        "Hydraulic modeling and infrastructure mapping of stormwater systems using InfoWorks, maintaining databases.",
+        "Reviewing proposed developments to the city’s water, sewer, and stormwater systems.",
       image: "/images/nyc-dep-cad-final.png",
       link: "https://www.nyc.gov/site/dep/water/drinking-water.page"
     },
     {
       id: "nyclv",
       company: "NYLCV",
-      role: "Civil Engineering Intern",
-      period: "Summer 2022",
+      role: "Policy Research Intern",
+      period: "Spring 2022",
       description:
-        "Built interactive maps using ArcGIS and Google Earth Engine displaying district-level environmental voting records.",
+        "Mapping environmental data, tracking legislation on clean energy, water and parks, and writing briefs.",
       image: "/images/nyclv.png.jpeg",
       link: "https://www.nylcv.org"
     }

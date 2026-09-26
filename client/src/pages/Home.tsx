@@ -27,8 +27,8 @@ export default function Home() {
   return (
     <div className="space-y-6">
       <p>
-        I am a senior at Rice University (Will Rice College) studying Electrical Engineering and History. I grew up in
-        Forest Hills, New York. I am currently based in Houston, Texas.
+        I am a senior at Rice University (Will Rice College) studying Electrical Engineering and History. I am currently
+        based in Houston, Texas.
       </p>
 
       <section id="building" className="space-y-6 pt-4">

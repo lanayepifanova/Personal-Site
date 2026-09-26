@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Entry, LinkList } from "@/components/Plain";
+import { Entry } from "@/components/Plain";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 
 export const reels = [
@@ -225,21 +225,14 @@ export const reels = [
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>
   `https://www.instagram.com/${reel.type ?? "reel"}/${reel.id}/embed/`;
 
+// Spotify episode IDs, from open.spotify.com/episode/<id>.
 export const podcastEpisodes = [
-  {
-    id: "1000783364521",
-    url: "https://podcasts.apple.com/us/podcast/leading-the-first-o-week-at-chao-college/id1775472900?i=1000783364521",
-    title: "Leading the First O-Week at Chao College",
-  },
-  {
-    id: "1000790045195",
-    url: "https://podcasts.apple.com/us/podcast/you-dont-have-to-be-loud-to-be-a-leader-with/id1775472900?i=1000790045195",
-    title: "You Don't Have to Be Loud to Be a Leader",
-  },
+  { id: "55CLVCwAoeL6yx3Bk3SX8E", title: "Leading the First O-Week at Chao College" },
+  { id: "5v4E16Gh9doVUpaLUGAFsI", title: "You Don't Have to Be Loud to Be a Leader" },
 ];
 
-export const episodeEmbedUrl = (episode: { url: string }) =>
-  episode.url.replace("https://podcasts.apple.com", "https://embed.podcasts.apple.com");
+export const episodeEmbedUrl = (episode: { id: string }) => `https://open.spotify.com/embed/episode/${episode.id}`;
+export const episodeUrl = (episode: { id: string }) => `https://open.spotify.com/episode/${episode.id}`;
 
 // TikTok's official creator embed: a blockquote that their embed.js script turns into a profile card.
 function TikTokProfile({ username }: { username: string }) {
@@ -277,19 +270,12 @@ export default function MediaSection() {
     <div className="space-y-10">
       <Entry title="Lana Yepifanova (@lana_yaps)" role="Personal Branding">
         <p>
-          I make short-form videos about tech, recent news, and startups. I like to make tutorials on how to use AI tools to build cool things like automating video editing with Claude, agent orchestration, MCP servers, and web scraping. I am also starting a series to explain technical ideas in math, physics, and machine learning to nontechnical viewers.
+          I make short-form videos about tech, recent news, and startups. I'm working on two new series: one where I learn technical concepts and explain them to a nontechnical audience, and one where I document building hardware projects. Before this, I ran a small social media marketing agency and made videos for UGC campaigns. Email{" "}
+          <a href="mailto:yepifanova.lana@gmail.com">yepifanova.lana@gmail.com</a> if you are interested.
         </p>
-        <LinkList
-          links={[
-            { label: "Instagram", href: "https://www.instagram.com/lana_yaps/" },
-            { label: "TikTok", href: "https://www.tiktok.com/@lana_yaps" },
-            { label: "YouTube", href: "https://www.youtube.com/@lana_yaps" },
-            { label: "X", href: "https://x.com/lana_yaps" },
-          ]}
-        />
         {/* Instagram and TikTok always side by side; on phones the row scrolls sideways. TikTok's
             creator card is a fixed 288x388, so Instagram is cut to the same size. */}
-        <div className="plain-row items-start gap-4">
+        <div className="plain-row mt-2 items-start gap-4">
           <iframe
             src="https://www.instagram.com/lana_yaps/embed/"
             title="Lana Yepifanova on Instagram"
@@ -309,19 +295,7 @@ export default function MediaSection() {
         <p>
           Ultimate Ivy League Guide is one of the fastest-growing college admissions mentorship companies, featured in Forbes, Business Insider, Yahoo, and other leading publications for its innovative approach to college admissions. Through personalized coaching, strategic planning, and its signature Narrative Method, the company empowers students to build standout applications that showcase their unique strengths and long-term potential.
         </p>
-        <LinkList
-          links={[
-            { label: "UltimateIvyLeagueGuide.com", href: "https://www.ultimateivyleagueguide.com" },
-            { label: "Instagram", href: "https://www.instagram.com/ultimateivyleagueguide/" },
-            { label: "TikTok", href: "https://www.tiktok.com/@ultimateivyleagueguide" },
-            { label: "YouTube", href: "https://www.youtube.com/@ultimateivyleagueguide/shorts" },
-            {
-              label: "Featured in Forbes",
-              href: "https://www.forbes.com/sites/meimeifox/2023/10/18/top-10-pro-tips-for-getting-into-your-dream-college/",
-            },
-          ]}
-        />
-        <div className="plain-row">
+        <div className="plain-row mt-2">
           {reels.map((reel) => (
             <iframe
               key={reel.id}
@@ -343,33 +317,18 @@ export default function MediaSection() {
         <p>
           The Leading Owls Podcast is the official leadership podcast of the Doerr Institute for New Leaders at Rice University, showcasing the students, faculty, alumni, and professionals who are shaping the future through leadership. Episodes are available on Spotify, Apple Podcasts, YouTube, Amazon Music, and other major podcast platforms.
         </p>
-        <LinkList
-          links={[
-            { label: "Leading Owls Podcast", href: "https://doerr.rice.edu/podcast" },
-            { label: "Apple Podcasts", href: "https://podcasts.apple.com/us/podcast/leading-owls-podcast/id1775472900" },
-            { label: "Spotify", href: "https://open.spotify.com/show/4pq6hc0C02oQZYtS3HVjId" },
-            { label: "iHeart", href: "https://www.iheart.com/podcast/1333-leading-owls-podcast-191934518/" },
-            { label: "Buzzsprout", href: "https://www.buzzsprout.com/2382212" },
-            { label: "Amazon Music", href: "https://www.amazon.in/Leading-Owls-Podcast/dp/B0D8QS1CTV" },
-            {
-              label: "YouTube Music",
-              href: "https://music.youtube.com/playlist?list=PLfuAYIKsj9tCv8zMzCAjALedFgNPQA-Ra",
-            },
-          ]}
-        />
         {/* Episodes side by side in one sideways-scrolling row. */}
-        <div className="plain-row">
+        <div className="plain-row mt-2">
           {podcastEpisodes.map((episode) => (
             <iframe
               key={episode.id}
               src={episodeEmbedUrl(episode)}
               title={episode.title}
-              className="h-[175px] w-[min(85vw,480px)] border border-gray-400 bg-white"
+              className="h-[152px] w-[min(85vw,480px)] rounded-xl"
               loading="lazy"
-              allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             >
-              <a href={episode.url} target="_blank" rel="noopener noreferrer">
+              <a href={episodeUrl(episode)} target="_blank" rel="noopener noreferrer">
                 Listen to {episode.title}
               </a>
             </iframe>

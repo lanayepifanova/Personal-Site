@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import { useState } from "react";
-import { Entry, LinkList } from "@/components/Plain";
+import { Entry } from "@/components/Plain";
 
 const pianoShorts = [
   "https://youtube.com/shorts/CQx9n07sxpc?feature=share",
@@ -47,6 +47,9 @@ const pianoShorts = [
 ];
 
 const pianoLongFormVideos = [
+  "https://www.youtube.com/embed/jxJ8cFxw4qI",
+  "https://www.youtube.com/embed/_DiAbZRqQZg",
+  "https://www.youtube.com/embed/9fDRZKqb4Uo",
   "https://www.youtube.com/embed/-QUi0LcYvXo",
   "https://www.youtube.com/embed/UU44y5_G6ds",
   "https://www.youtube.com/embed/2FuQFFNT8CY",
@@ -68,9 +71,6 @@ const pianoLongFormVideos = [
   "https://www.youtube.com/embed/0j8_bvgiJjA",
   "https://www.youtube.com/embed/evRwTdbUobI",
   "https://www.youtube.com/embed/ghJWdeuf3YE",
-  "https://www.youtube.com/embed/9fDRZKqb4Uo",
-  "https://www.youtube.com/embed/_DiAbZRqQZg",
-  "https://www.youtube.com/embed/jxJ8cFxw4qI",
   "https://www.youtube.com/embed/ACmF4cCZjkY",
 ];
 
@@ -118,9 +118,7 @@ export default function PianoYoutubeSection() {
       <p>
         I started my piano YouTube channel to document my growth as a pianist, share performances beyond formal recitals, and make classical music feel more accessible online. It has grown to 500+ subscribers, 130k+ views, and 66 videos.
       </p>
-      <LinkList links={[{ label: "Piano YouTube Channel", href: "https://www.youtube.com/@LanaYepifanova" }]} />
-
-      <div className="plain-row">
+      <div className="plain-row mt-2">
         {pianoLongFormVideos.map((url, index) => (
           <Thumbnail
             key={url}

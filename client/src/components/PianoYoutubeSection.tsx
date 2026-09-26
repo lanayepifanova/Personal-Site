@@ -118,7 +118,7 @@ export default function PianoYoutubeSection() {
       <p>
         I started my piano YouTube channel to document my growth as a pianist, share performances beyond formal recitals, and make classical music feel more accessible online. It has grown to 500+ subscribers, 130k+ views, and 66 videos.
       </p>
-      <div className="plain-row mt-2">
+      <div className="plain-row mt-4">
         {pianoLongFormVideos.map((url, index) => (
           <Thumbnail
             key={url}

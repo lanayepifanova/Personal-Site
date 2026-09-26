@@ -275,7 +275,7 @@ export default function MediaSection() {
         </p>
         {/* Instagram and TikTok always side by side; on phones the row scrolls sideways. TikTok's
             creator card is a fixed 288x388, so Instagram is cut to the same size. */}
-        <div className="plain-row mt-2 items-start gap-4">
+        <div className="plain-row mt-4 items-start gap-4">
           <iframe
             src="https://www.instagram.com/lana_yaps/embed/"
             title="Lana Yepifanova on Instagram"
@@ -295,7 +295,7 @@ export default function MediaSection() {
         <p>
           Ultimate Ivy League Guide is one of the fastest-growing college admissions mentorship companies, featured in Forbes, Business Insider, Yahoo, and other leading publications for its innovative approach to college admissions. Through personalized coaching, strategic planning, and its signature Narrative Method, the company empowers students to build standout applications that showcase their unique strengths and long-term potential.
         </p>
-        <div className="plain-row mt-2">
+        <div className="plain-row mt-4">
           {reels.map((reel) => (
             <iframe
               key={reel.id}
@@ -318,7 +318,7 @@ export default function MediaSection() {
           The Leading Owls Podcast is the official leadership podcast of the Doerr Institute for New Leaders at Rice University, showcasing the students, faculty, alumni, and professionals who are shaping the future through leadership. Episodes are available on Spotify, Apple Podcasts, YouTube, Amazon Music, and other major podcast platforms.
         </p>
         {/* Episodes side by side in one sideways-scrolling row. */}
-        <div className="plain-row mt-2">
+        <div className="plain-row mt-4">
           {podcastEpisodes.map((episode) => (
             <iframe
               key={episode.id}

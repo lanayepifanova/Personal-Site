@@ -44,11 +44,13 @@ export function LinkList({ links }: { links: PlainLink[] }) {
 
 export function PhotoRow({
   photos,
+  className,
 }: {
   photos: { title: string; image: string; objectPosition?: string }[];
+  className?: string;
 }) {
   return (
-    <div className="plain-row">
+    <div className={className ? `plain-row ${className}` : "plain-row"}>
       {photos.map((photo) => (
         <img
           key={photo.image}

@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from "react";
-import { Entry, LinkList, PhotoRow } from "@/components/Plain";
+import { Entry, PhotoRow } from "@/components/Plain";
 import { useLocation } from "wouter";
 import { atlasLocations, slugifyTravelCity } from "@/data/travelLocations";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -16,29 +16,58 @@ type LinkedInPost = {
   title: string;
 };
 
+const linkedInPostWidth = 504;
+
+// LinkedIn embeds don't reflow when made smaller, so `scale` shrinks each post as a whole
+// (rendered at full size, then scaled down inside a box of the smaller size).
 function LinkedInPostRow({
   posts,
   height,
+  scale = 1,
+  className,
   children,
 }: {
   posts: LinkedInPost[];
   height: number;
+  scale?: number;
+  className?: string;
   children?: ReactNode;
 }) {
   return (
-    <div className="plain-row">
+    <div className={className ? `plain-row ${className}` : "plain-row"}>
       {children}
-      {posts.map((post) => (
-        <iframe
-          key={post.url}
-          src={post.url}
-          title={post.title}
-          style={{ height }}
-          className="w-[min(90vw,504px)] border border-gray-400 bg-white"
-          loading="lazy"
-          allowFullScreen
-        ></iframe>
-      ))}
+      {posts.map((post) =>
+        scale === 1 ? (
+          <iframe
+            key={post.url}
+            src={post.url}
+            title={post.title}
+            style={{ height }}
+            className="w-[min(90vw,504px)] border border-gray-400 bg-white"
+            loading="lazy"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <div
+            key={post.url}
+            className="overflow-hidden border border-gray-400 bg-white"
+            style={{ width: linkedInPostWidth * scale, height: height * scale }}
+          >
+            <iframe
+              src={post.url}
+              title={post.title}
+              style={{
+                width: linkedInPostWidth,
+                height,
+                transform: `scale(${scale})`,
+                transformOrigin: "top left",
+              }}
+              loading="lazy"
+              allowFullScreen
+            ></iframe>
+          </div>
+        ),
+      )}
     </div>
   );
 }
@@ -168,26 +197,124 @@ export default function CommunitiesSection() {
 
   // Filled in once the copy is ready; each block hides itself while empty.
   const sportsRole = "";
-  const sportsDescription =
-    "I placed #1 at the Mayor's Cup Championship for Girls Wrestling in Jan 2023. In high school, I was a part of Girls JV Track & Field, Girls Varsity Tennis, Girls Varsity Swimming, Girls Varsity Flag Football, and CoEd Varsity Wrestling. At Rice University, I am part of the Rice Competitive Powerlifting Team, Rice Competitive Boxing Team, Rice Women's Club Lacrosse, and the Rice Club Sailing Team. I am also involved in Intramural Girls Basketball and the Will Rice Beer Bike Team.";
+  const sportsDescription = (
+    <>
+      I placed #1 at the{" "}
+      <a
+        href="https://www.btsny.org/post/beat-the-streets-academy-win-titles-2023-nyc-mayors-cup-wrestling-results"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Mayor's Cup Championship for Girls Wrestling
+      </a>{" "}
+      in Jan 2023. In high school, I was a part of{" "}
+      <a
+        href="https://thhsclassic.com/12147/sport/girls-jv-cross-country-holds-title-of-queens-borough-champions-for-27th-year/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Girls JV Track &amp; Field
+      </a>
+      , Girls Varsity Tennis, Girls Varsity Swimming, Girls Varsity Flag Football, and{" "}
+      <a
+        href="https://thhsclassic.com/18762/sport/psal-winter-season-five-thhs-athletes-with-outstanding-stats/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        CoEd Varsity Wrestling
+      </a>
+      . At Rice University, I am part of the{" "}
+      <a href="https://www.instagram.com/ricepowerlifting/" target="_blank" rel="noopener noreferrer">
+        Rice Competitive Powerlifting Team
+      </a>
+      , Rice Competitive Boxing Team, Rice Women's Club Lacrosse, and the Rice Club Sailing Team. I am also involved in Intramural Girls Basketball and the Will Rice Beer Bike Team.
+    </>
+  );
   const danceRole = "";
-  const danceDescription =
-    "When I was little, I was part of the American Ballet Theatre from age 7-12 and then Rose Academy of Ballet from age 12-18. " +
-    "At Rice University, I am part of the BASYK Dance Team and joined Wiess Tabletop Theatre as a Cabaret Dancer. When I took my gap semester in Boston, I joined the Harvard AADT Dance Team for the semester and performed in their fall showcase.";
+  const danceDescription = (
+    <>
+      When I was little, I was part of the{" "}
+      <a href="https://www.abt.org/" target="_blank" rel="noopener noreferrer">
+        American Ballet Theatre
+      </a>{" "}
+      from age 7-12 and then{" "}
+      <a href="https://www.roseacademyofballet.com/" target="_blank" rel="noopener noreferrer">
+        Rose Academy of Ballet
+      </a>{" "}
+      from age 12-18. At Rice University, I am part of the{" "}
+      <a href="https://www.instagram.com/basyk.rice/?hl=en" target="_blank" rel="noopener noreferrer">
+        BASYK Dance Team
+      </a>{" "}
+      and joined Wiess Tabletop Theatre as a Cabaret Dancer. When I took my gap semester in Boston, I joined the{" "}
+      <a href="https://www.harvardaadt.org" target="_blank" rel="noopener noreferrer">
+        Harvard AADT Dance Team
+      </a>{" "}
+      for the semester and performed in their fall showcase.
+    </>
+  );
   const volunteerRole = "";
   const musicRole = "";
-  const musicDescription =
-    "I was part of the Chamber Music Society at Lincoln Center's Young Musicians Concert and made it to the final stage " +
-    "to perform at Alice Tully Hall two years in a row. We played Sarasate Navarra for Two Violins and Piano Op. 33 the " +
-    "first year, and Nino Rota Trio for Flute, Violin and Piano the second year. I was also a part of the Chamber Strings " +
-    "Group, Pit Orchestra, and S!NG Instrumental Group in high school, and was selected for the NYC Honors Festival.";
-  const volunteerDescription =
-    "I participated in Rice University's Center for Civic Leadership Alternative Spring Break program twice. " +
-    "First, it was for a project called \u201cBringing Health Home: Addressing the Absence of Primary Care in Homeless Communities,\u201d " +
-    "partnered with Precinct 2, ReVision, and Lord of the Streets in Houston, and Grace at the Green Light, Unity, Catholic Churches, " +
-    "Bridge House, and Ozanam Inn in New Orleans. Second, it was for a project called \u201cRepairing the Leak: Exploring the Link " +
-    "Between Waterway Pollution and Environmental Health,\u201d partnered with Texas Environmental Justice Advocacy Services, " +
-    "Sunrise Movement Houston, and Texas Health & Environmental Alliance.";
+  const musicDescription = (
+    <>
+      I was part of the Chamber Music Society at{" "}
+      <a
+        href="https://www.chambermusicsociety.org/education-and-community-engagement/for-emerging-artists/ymc"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Lincoln Center's Young Musicians Concert
+      </a>{" "}
+      and made it to the{" "}
+      <a href="https://playbill.com/article/young-musicians-on-the-tully-stage" target="_blank" rel="noopener noreferrer">
+        final stage
+      </a>{" "}
+      to perform at Alice Tully Hall two years in a row. We played{" "}
+      <a href="https://youtu.be/9fDRZKqb4Uo" target="_blank" rel="noopener noreferrer">
+        Sarasate Navarra for Two Violins and Piano Op. 33
+      </a>{" "}
+      the first year, and{" "}
+      <a href="https://youtu.be/_DiAbZRqQZg" target="_blank" rel="noopener noreferrer">
+        Nino Rota Trio for Flute, Violin and Piano
+      </a>{" "}
+      the second year. I was
+      also a part of the{" "}
+      <a
+        href="https://thhsclassic.com/16500/arts-entertainment/thhs-music-program-performs-in-an-eventful-month-of-concerts-and-festivals/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Chamber Strings Group
+      </a>
+      , Pit Orchestra, and S!NG Instrumental Group in high school, and was
+      selected for the{" "}
+      <a
+        href="https://thhsclassic.com/16181/arts-entertainment/harrisites-earn-multiples-seats-in-nyc-honors-music-festival/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        NYC Honors Festival
+      </a>
+      .
+    </>
+  );
+  const volunteerDescription = (
+    <>
+      I participated in Rice University's Center for Civic Leadership Alternative Spring Break program twice. First, it
+      was for a project called{" \u201c"}
+      <a href="https://sites.google.com/rice.edu/asbdigitalshowcase/home" target="_blank" rel="noopener noreferrer">
+        Bringing Health Home: Addressing the Absence of Primary Care in Homeless Communities
+      </a>
+      {",\u201d "}
+      partnered with Precinct 2, ReVision, and Lord of the Streets in Houston, and Grace at the Green Light, Unity,
+      Catholic Churches, Bridge House, and Ozanam Inn in New Orleans. Second, it was for a project called{" \u201c"}
+      <a href="https://sites.google.com/rice.edu/repairing-the-leak/home" target="_blank" rel="noopener noreferrer">
+        Repairing the Leak: Exploring the Link Between Waterway Pollution and Environmental Health
+      </a>
+      {",\u201d "}
+      partnered with Texas Environmental Justice Advocacy Services, Sunrise Movement Houston, and Texas Health &amp;
+      Environmental Alliance.
+    </>
+  );
   const danceVideos = [
     "https://www.youtube.com/embed/Qs3Z8Mcl5hM",
     "https://www.youtube.com/embed/BZAXumqsj1k",
@@ -233,42 +360,54 @@ export default function CommunitiesSection() {
   ];
   return (
     <div className="space-y-10">
-      <Entry title="Rice Residency" role="Co-Founder and Co-Lead">
+      <Entry
+        title={
+          <a href="https://riceresidency.com" target="_blank" rel="noopener noreferrer">
+            Rice Residency
+          </a>
+        }
+        role="Co-Founder and Co-Lead"
+      >
         <p>
-          Rice Residency is a selective, founder-led hacker house near Rice University in Houston for students and early-stage founders building software, hardware, and deep-tech startups. We've raised 2.5M+ in funding, had 3 residents get into a16z speedrun, 1 resident get into the YC S26 batch, and 7 residents in the Rice Summer Venture Studio.
+          Rice Residency is a selective, founder-led hacker house near Rice University in Houston for students and early-stage founders building software, hardware, and deep-tech startups. We have been{" "}
+          <a
+            href="https://www.ricethresher.org/article/rice-residency-hacker-house-opens-application-for-first-cohort-20251119"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            featured
+          </a>{" "}
+          in The Thresher{" "}
+          <a
+            href="https://ricethresher.org/article/delusion-prevails-inside-houston-hacker-house-20260902"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            twice
+          </a>
+          . We've raised 2.5M+ in funding, had 3 residents get into a16z speedrun, 1 resident get into the YC S26 batch,
+          and 7 residents in the Rice Summer Venture Studio.
         </p>
-        <LinkList
-          links={[
-            { label: "RiceResidency.com", href: "https://riceresidency.com" },
-            {
-              label: "Featured in The Thresher",
-              href: "https://www.ricethresher.org/article/rice-residency-hacker-house-opens-application-for-first-cohort-20251119",
-            },
-            {
-              label: "Profiled in The Thresher",
-              href: "https://ricethresher.org/article/delusion-prevails-inside-houston-hacker-house-20260902",
-            },
-          ]}
-        />
-        <LinkedInPostRow posts={riceResidencyPosts} height={668} />
+        <LinkedInPostRow posts={riceResidencyPosts} height={668} scale={0.7} className="mt-4" />
       </Entry>
 
-      <Entry title="Harvard St Commons" role="Resident">
+      <Entry
+        title={
+          <a href="https://harvardst.co" target="_blank" rel="noopener noreferrer">
+            Harvard St Commons
+          </a>
+        }
+        role="Resident"
+      >
         <p>
           I took a gap semester from Rice University to live at the hacker house for Harvard and MIT. This experience changed my life. Alumni and affiliated founders have gone on to raise from top firms including Greylock Partners, Sequoia Capital, General Catalyst, Pear VC, Felicis Ventures, and Z Fellows.
         </p>
-        <LinkList
-          links={[
-            { label: "HarvardSt.co", href: "https://harvardst.co" },
-            { label: "Cohort Pictures", href: "https://www.instagram.com/harvardstcommons/" },
-          ]}
-        />
         {/* Group photo and LinkedIn posts share one sideways-scrolling row. */}
-        <LinkedInPostRow posts={harvardStPosts} height={627}>
+        <LinkedInPostRow posts={harvardStPosts} height={627} scale={0.7} className="mt-4">
           <img
             src="/images/harvard-st-commons.jpeg"
             alt="Harvard St Commons Community"
-            className="h-[627px] w-auto max-w-none border border-gray-400 object-cover"
+            className="h-[439px] w-auto max-w-none border border-gray-400 object-cover"
             loading="lazy"
           />
         </LinkedInPostRow>
@@ -276,64 +415,17 @@ export default function CommunitiesSection() {
 
       <Entry title="Sports" role={sportsRole || undefined}>
         {sportsDescription && <p>{sportsDescription}</p>}
-        <LinkList
-          links={[
-            {
-              label: "NYC Mayor's Cup Results",
-              href: "https://www.btsny.org/post/beat-the-streets-academy-win-titles-2023-nyc-mayors-cup-wrestling-results",
-            },
-            {
-              label: "Queens Borough Champions",
-              href: "https://thhsclassic.com/12147/sport/girls-jv-cross-country-holds-title-of-queens-borough-champions-for-27th-year/",
-            },
-            {
-              label: "PSAL Season Standouts",
-              href: "https://thhsclassic.com/18762/sport/psal-winter-season-five-thhs-athletes-with-outstanding-stats/",
-            },
-          ]}
-        />
-        <PhotoRow photos={sportsPhotos} />
+        <PhotoRow photos={sportsPhotos} className="mt-4" />
       </Entry>
 
       <Entry title="Music" role={musicRole || undefined}>
         {musicDescription && <p>{musicDescription}</p>}
-        <LinkList
-          links={[
-            {
-              label: "Young Musicians Concert",
-              href: "https://www.chambermusicsociety.org/education-and-community-engagement/for-emerging-artists/ymc",
-            },
-            { label: "Featured in Playbill", href: "https://playbill.com/article/young-musicians-on-the-tully-stage" },
-            { label: "Nino Rota", href: "https://youtu.be/_DiAbZRqQZg" },
-            { label: "Sarasate", href: "https://youtu.be/9fDRZKqb4Uo" },
-            {
-              label: "NYSSMA Festival",
-              href: "https://thhsclassic.com/16500/arts-entertainment/thhs-music-program-performs-in-an-eventful-month-of-concerts-and-festivals/",
-            },
-            {
-              label: "NYC Honors Music Festival",
-              href: "https://thhsclassic.com/16181/arts-entertainment/harrisites-earn-multiples-seats-in-nyc-honors-music-festival/",
-            },
-            {
-              label: "Chamber Strings",
-              href: "https://thhsclassic.com/15654/news/winter-concert-canceled-as-covid-19-cases-surge-in-nyc/",
-            },
-          ]}
-        />
-        <PhotoRow photos={musicPhotos} />
+        <PhotoRow photos={musicPhotos} className="mt-4" />
       </Entry>
 
       <Entry title="Dance" role={danceRole || undefined}>
         {danceDescription && <p>{danceDescription}</p>}
-        <LinkList
-          links={[
-            { label: "BASYK Dance Team", href: "https://www.instagram.com/basyk.rice/?hl=en" },
-            { label: "Harvard AADT Dance Team", href: "https://www.harvardaadt.org" },
-            { label: "American Ballet Theatre", href: "https://www.abt.org/" },
-            { label: "Baby Lana Ballet Photo", href: "https://www.roseacademyofballet.com/" },
-          ]}
-        />
-        <div className="plain-row">
+        <div className="plain-row mt-4">
           {danceVideos.map((url, index) => (
             <iframe
               key={url}
@@ -352,20 +444,14 @@ export default function CommunitiesSection() {
 
       <Entry title="Volunteering" role={volunteerRole || undefined}>
         {volunteerDescription && <p>{volunteerDescription}</p>}
-        <LinkList
-          links={[
-            { label: "Repairing the Leak Project", href: "https://sites.google.com/rice.edu/repairing-the-leak/home" },
-            { label: "Bringing Health Home", href: "https://sites.google.com/rice.edu/asbdigitalshowcase/home" },
-          ]}
-        />
-        <PhotoRow photos={volunteerPhotos} />
+        <PhotoRow photos={volunteerPhotos} className="mt-4" />
       </Entry>
 
       <Entry title="Travel Documentation">
         <p>Click on a pin to see photos from that place.</p>
         <div
           ref={mapContainerRef}
-          className="relative aspect-[16/10] min-h-[300px] w-full max-w-[960px] overflow-hidden border border-gray-400 bg-gray-50"
+          className="relative mt-4 aspect-[16/10] min-h-[300px] w-full max-w-[960px] overflow-hidden border border-gray-400 bg-gray-50"
         />
       </Entry>
     </div>

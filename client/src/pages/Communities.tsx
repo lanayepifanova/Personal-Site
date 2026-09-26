@@ -397,7 +397,7 @@ export default function CommunitiesSection() {
             Harvard St Commons
           </a>
         }
-        role="Resident"
+        role="Cohort Resident"
       >
         <p>
           I took a gap semester from Rice University to live at the hacker house for Harvard and MIT. This experience changed my life. Alumni and affiliated founders have gone on to raise from top firms including Greylock Partners, Sequoia Capital, General Catalyst, Pear VC, Felicis Ventures, and Z Fellows.
@@ -438,8 +438,16 @@ export default function CommunitiesSection() {
               className="aspect-video w-72 border border-gray-400"
             ></iframe>
           ))}
+          {dancePhotos.map((photo) => (
+            <img
+              key={photo.image}
+              src={photo.image}
+              alt={photo.title}
+              loading="lazy"
+              className="h-36 w-52 border border-gray-400 object-cover"
+            />
+          ))}
         </div>
-        <PhotoRow photos={dancePhotos} />
       </Entry>
 
       <Entry title="Volunteering" role={volunteerRole || undefined}>

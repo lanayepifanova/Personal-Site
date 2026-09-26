@@ -220,6 +220,10 @@ export const reels = [
     id: "DdgpIabBQ1v",
     url: "https://www.instagram.com/reel/DdgpIabBQ1v/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
+  {
+    id: "DdoXh2Vh0nN",
+    url: "https://www.instagram.com/reel/DdoXh2Vh0nN/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>

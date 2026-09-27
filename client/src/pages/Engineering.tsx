@@ -83,40 +83,24 @@ const favoriteWords = {
   title: "Words I Love",
   quotes: [
     {
-      text: "I have so much to say to you that I am afraid I shall tell you nothing.",
-      author: "Fyodor Dostoyevsky, The Brothers Karamazov",
-    },
-    {
-      text: "Pain and suffering are inevitable for persons of broad awareness and depth of heart. The truly great are, in my view, always bound to feel a great sense of sadness during their time upon earth.",
-      author: "Fyodor Dostoyevsky, Crime and Punishment",
-    },
-    {
-      text: "If I am worth anything later, I am worth something now. For wheat is wheat, even if people think it is grass in the beginning.",
-      author: "Vincent van Gogh, letter to Theo van Gogh",
-    },
-    {
-      text: "We should not spoil what we have by desiring what we do not have, but remember that what we have too was the gift of fortune.",
-      author: "Epicurus, Vatican Sayings, no. 35",
+      text: "To live in this world you must be able to do three things: to love what is mortal; to hold it against your bones knowing your own life depends on it; and, when the time comes to let it go, to let it go.",
+      author: "Mary Oliver, In Blackwater Woods",
     },
     {
       text: "This heart within me I can feel, and I judge that it exists. This world I can touch, and I likewise judge that it exists. There ends all my knowledge, and the rest is construction. (...) Forever I shall be a stranger to myself",
       author: "Albert Camus, The Myth of Sisyphus",
     },
     {
-      text: "I imagine that one of the reasons people cling to their hates so stubbornly is because they sense, once hate is gone, that they will be forced to deal with pain.",
-      author: "James Baldwin, Notes of a Native Son",
+      text: "If I am worth anything later, I am worth something now. For wheat is wheat, even if people think it is grass in the beginning.",
+      author: "Vincent van Gogh, letter to Theo van Gogh",
     },
     {
-      text: "The fault-finder will find faults even in paradise. Love your life, difficult as it is. You must live in the present, launch yourself on every wave, find your eternity in each moment. Fools stand on their island of opportunities and look toward other land. There is no other land; there is no other life but this.",
-      author: "Henry David Thoreau, Walden and Journal",
+      text: "Pain and suffering are inevitable for persons of broad awareness and depth of heart. The truly great are, in my view, always bound to feel a great sense of sadness during their time upon earth.",
+      author: "Fyodor Dostoyevsky, Crime and Punishment",
     },
     {
       text: "And it's inside myself that I must create someone who will understand.",
       author: "Clarice Lispector, Near to the Wild Heart",
-    },
-    {
-      text: "To live in this world you must be able to do three things: to love what is mortal; to hold it against your bones knowing your own life depends on it; and, when the time comes to let it go, to let it go.",
-      author: "Mary Oliver, In Blackwater Woods",
     },
   ],
 };

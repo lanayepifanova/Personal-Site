@@ -120,7 +120,7 @@ const favoriteWords = {
     },
     {
       text: "Having perfected our disguise, we spend our lives searching for someone we don't fool.",
-      author: "Robert Brault",
+      author: "Robert Brault, Unknown",
     },
   ],
 };

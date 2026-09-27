@@ -102,6 +102,26 @@ const favoriteWords = {
       text: "And it's inside myself that I must create someone who will understand.",
       author: "Clarice Lispector, Near to the Wild Heart",
     },
+    {
+      text: "I learned that it is the weak who are cruel, and gentleness is to be expected only from the strong.",
+      author: "Leo Rosten, Captain Newman, M.D.",
+    },
+    {
+      text: "The world is held together, really it is held together, by the love and the passion of a very few people. Otherwise, of course, you can despair. Walk down the street of any city, any afternoon, and look around you. What you've got to remember is what you're looking at is also you.",
+      author: "James Baldwin, The Artist's Struggle for Integrity",
+    },
+    {
+      text: "I weep because you cannot save people. You can only love them.",
+      author: "Hanya Yanagihara, A Little Life",
+    },
+    {
+      text: "So many people walk around with a meaningless life. They seem half-asleep, even when they're busy doing things they think are important. This is because they're chasing the wrong things. The way you get meaning into your life is to devote yourself to loving others, devote yourself to your community around you, and devote yourself to creating something that gives you purpose and meaning.",
+      author: "Mitch Albom, Tuesdays with Morrie",
+    },
+    {
+      text: "Having perfected our disguise, we spend our lives searching for someone we don't fool.",
+      author: "Robert Brault",
+    },
   ],
 };
 

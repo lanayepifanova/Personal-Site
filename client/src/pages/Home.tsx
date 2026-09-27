@@ -31,11 +31,7 @@ export default function Home() {
         <a href="https://www.rice.edu/" target="_blank" rel="noopener noreferrer">
           Rice University
         </a>{" "}
-        (
-        <a href="https://willrice.rice.edu/pages/home.html" target="_blank" rel="noopener noreferrer">
-          Will Rice College
-        </a>
-        ). I am currently based in Houston, Texas.
+        (Will Rice College). I am currently based in Houston, Texas.
       </p>
 
       <section id="building" className="space-y-6 pt-4">

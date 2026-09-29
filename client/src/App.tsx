@@ -6,6 +6,7 @@ import Home, { CommunitiesPage, EngineeringPage, MediaPage } from "./pages/Home"
 import TravelDestination from "./pages/TravelDestination";
 import Layout from "./components/Layout";
 import ExploreItem from "./pages/ExploreItem";
+import UgcPage from "./pages/Ugc";
 
 function Routes() {
   return (
@@ -16,6 +17,7 @@ function Routes() {
       <Route path="/engineering" component={EngineeringPage} />
       <Route path="/media" component={MediaPage} />
       <Route path="/communities" component={CommunitiesPage} />
+      <Route path="/ugc" component={UgcPage} />
       <Route path="/explore/:slug" component={ExploreItem} />
       <Route path="/communities/travel/:city" component={TravelDestination} />
       <Route component={NotFound} />

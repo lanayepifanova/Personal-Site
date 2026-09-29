@@ -274,7 +274,7 @@ export default function MediaSection() {
     <div className="space-y-10">
       <Entry title="Lana Yepifanova (@lana_yaps)" role="Personal Branding">
         <p>
-          I make short-form videos about tech, recent news, and startups. I'm working on two new series: one where I learn technical concepts and explain them to a nontechnical audience, and one where I document building hardware projects. Before this, I ran a small social media marketing agency and made videos for UGC campaigns. Email{" "}
+          I make short-form videos about tech, recent news, and startups. I'm working on two new series: one where I learn technical concepts and explain them to a nontechnical audience, and one where I document building hardware projects. I make <a href="/ugc">UGC videos</a> for tech, finance, and educational companies. I primarily do sponsored brand deals and partnerships. Email{" "}
           <a href="mailto:yepifanova.lana@gmail.com">yepifanova.lana@gmail.com</a> if you are interested.
         </p>
         {/* Instagram and TikTok always side by side; on phones the row scrolls sideways. TikTok's

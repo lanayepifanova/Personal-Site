@@ -32,21 +32,22 @@ export const audience = [
   { label: "Best fit", value: "AI tools, SaaS, EdTech, productivity, fintech, dev tools, and startups" },
 ];
 
-export const brands: { name: string; note?: string }[] = [
-  { name: "Manus AI", note: "3 campaigns" },
-  { name: "Runable", note: "7 videos" },
+export const brands: { name: string }[] = [
+  { name: "Manus AI" },
+  { name: "Runable" },
   { name: "Moonshot AI / Kimi" },
   { name: "Kalshi" },
   { name: "ChatCut" },
   { name: "Genspark" },
   { name: "Readdy AI" },
-  { name: "Lilys AI", note: "2 videos" },
-  { name: "Mitra App" },
+  { name: "Lilys AI" },
   { name: "StudyX" },
-  { name: "PrepAI" },
   { name: "Cluely" },
   { name: "Jobright" },
   { name: "Moment App" },
+  { name: "Gladiator Metals" },
+  { name: "Higgsfield" },
+  { name: "Cursor" },
 ];
 
 export const testimonials = [

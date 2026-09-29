@@ -114,12 +114,11 @@ export default function UgcPage() {
       </Section>
 
       <Section id="brands" title="Brands I've Worked With">
-        {/* Brand names in newspaper-style columns; repeat partners note how many campaigns. */}
+        {/* Brand names in newspaper-style columns. */}
         <ul className="max-w-4xl list-disc columns-2 gap-10 pl-5 sm:columns-3 lg:columns-4">
           {brands.map((brand) => (
             <li key={brand.name} className="break-inside-avoid py-0.5">
               {brand.name}
-              {brand.note ? <span className="text-gray-600"> ({brand.note})</span> : null}
             </li>
           ))}
         </ul>

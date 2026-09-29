@@ -119,8 +119,8 @@ const favoriteWords = {
       author: "Mitch Albom, Tuesdays with Morrie",
     },
     {
-      text: "Having perfected our disguise, we spend our lives searching for someone we don't fool.",
-      author: "Robert Brault, Unknown",
+      text: "I was waiting for something extraordinary to happen but as the years wasted on nothing ever did unless I caused it.",
+      author: "Charles Bukowski, The People Look Like Flowers at Last",
     },
   ],
 };

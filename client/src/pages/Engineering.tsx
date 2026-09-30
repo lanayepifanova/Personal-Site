@@ -162,7 +162,7 @@ export default function EngineeringSection() {
       role: "GTM Associate",
       period: "Spring 2026",
       description:
-        "Developed AI generated video marketing strategy for the launch of a new consumer product.",
+        "Developed AI video marketing strategy for the launch of a new consumer product.",
       image: "/images/xylem-robotics.webp",
       link: "https://xylemtech.com/"
     },

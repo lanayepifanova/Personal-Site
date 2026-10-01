@@ -233,6 +233,7 @@ export const reelEmbedUrl = (reel: { id: string; type?: string }) =>
 export const podcastEpisodes = [
   { id: "55CLVCwAoeL6yx3Bk3SX8E", title: "Leading the First O-Week at Chao College" },
   { id: "5v4E16Gh9doVUpaLUGAFsI", title: "You Don't Have to Be Loud to Be a Leader" },
+  { id: "4mkVmlvFkatenaTB2PV74r", title: "From O-Week to Venture Capital: Lessons in Leadership at Rice University" },
 ];
 
 export const episodeEmbedUrl = (episode: { id: string }) => `https://open.spotify.com/embed/episode/${episode.id}`;

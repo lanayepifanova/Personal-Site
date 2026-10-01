@@ -13,6 +13,11 @@ export const ugcReels = [
     id: "DdsWn6QBSbF",
     url: "https://www.instagram.com/reel/DdsWn6QBSbF/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
+  {
+    brand: "Ultimate Ivy League Guide",
+    id: "Dd30Q13hMaX",
+    url: "https://www.instagram.com/reel/Dd30Q13hMaX/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+  },
 ];
 
 // Signed deals whose videos aren't posted yet; move each into `ugcReels` once it's live.

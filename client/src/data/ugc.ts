@@ -14,14 +14,14 @@ export const ugcReels = [
     url: "https://www.instagram.com/reel/DdsWn6QBSbF/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
   {
-    brand: "Ultimate Ivy League Guide",
-    id: "Dd30Q13hMaX",
-    url: "https://www.instagram.com/reel/Dd30Q13hMaX/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+    brand: "Higgsfield",
+    id: "Dd4yNU0NYbs",
+    url: "https://www.instagram.com/reel/Dd4yNU0NYbs/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
 ];
 
 // Signed deals whose videos aren't posted yet; move each into `ugcReels` once it's live.
-export const upcomingProjects = ["Higgsfield API", "Gladiator Metals"];
+export const upcomingProjects = ["Gladiator Metals"];
 
 export const platforms = [
   { name: "Instagram", audience: "22K followers", note: "Top reels: 447K, 329K, 223K views" },
@@ -50,7 +50,6 @@ export const brands: { name: string }[] = [
   { name: "Cluely" },
   { name: "Jobright" },
   { name: "Moment App" },
-  { name: "Gladiator Metals" },
   { name: "Higgsfield" },
   { name: "Cursor" },
 ];

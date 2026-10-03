@@ -2,8 +2,6 @@ import type { ReactNode } from "react";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import {
   audience,
-  brands,
-  platforms,
   testimonials,
   ugcReels,
   upcomingProjects,
@@ -45,13 +43,14 @@ export default function UgcPage() {
               @lana_yaps
             </a>
             ). I make UGC videos for tech, finance, and educational companies, and I explain technical products so a
-            broad audience gets them. I primarily do sponsored brand deals and partnerships.
+            broad audience gets them.
           </p>
           <p>
-            <b>22K</b> Instagram followers · <b>14+</b> brands
+            <b>22K</b> Instagram followers · <b>{ugcReels.length}</b> brands ·{" "}
+            <b>24-hour</b> turnaround
           </p>
           <p>
-            [ <a href="#work">work</a> | <a href="#audience">audience</a> | <a href="#brands">brands</a> |{" "}
+            [ <a href="#work">work</a> | <a href="#audience">audience</a> | <a href="#testimonials">testimonials</a> |{" "}
             <a href="#contact">contact</a> ]
           </p>
         </div>
@@ -84,26 +83,8 @@ export default function UgcPage() {
         ) : null}
       </Section>
 
-      <Section id="audience" title="Audience">
-        <table className="w-full max-w-3xl border-collapse text-left">
-          <thead>
-            <tr className="border-b border-gray-400">
-              <th className="py-2 pr-4">Platform</th>
-              <th className="py-2 pr-4">Audience</th>
-              <th className="hidden py-2 sm:table-cell">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {platforms.map((platform) => (
-              <tr key={platform.name} className="border-b border-gray-300 align-top">
-                <td className="py-2 pr-4 font-bold">{platform.name}</td>
-                <td className="py-2 pr-4">{platform.audience}</td>
-                <td className="hidden py-2 text-gray-600 sm:table-cell">{platform.note}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <dl className="max-w-3xl space-y-1 pt-2">
+      <Section id="audience" title="Instagram Audience">
+        <dl className="max-w-3xl space-y-1">
           {audience.map((row) => (
             <div key={row.label} className="sm:flex sm:gap-3">
               <dt className="shrink-0 font-bold sm:w-32">{row.label}</dt>
@@ -113,16 +94,8 @@ export default function UgcPage() {
         </dl>
       </Section>
 
-      <Section id="brands" title="Brands I've Worked With">
-        {/* Brand names in newspaper-style columns. */}
-        <ul className="max-w-4xl list-disc columns-2 gap-10 pl-5 sm:columns-3 lg:columns-4">
-          {brands.map((brand) => (
-            <li key={brand.name} className="break-inside-avoid py-0.5">
-              {brand.name}
-            </li>
-          ))}
-        </ul>
-        <div className="grid max-w-5xl gap-6 pt-2 md:grid-cols-2">
+      <Section id="testimonials" title="Testimonials">
+        <div className="grid max-w-5xl gap-6 md:grid-cols-2">
           {testimonials.map((testimonial) => (
             <blockquote key={testimonial.author} className="m-0 border-l-2 border-gray-400 pl-4">
               <p>“{testimonial.quote}”</p>

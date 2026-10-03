@@ -224,6 +224,14 @@ export const reels = [
     id: "DdoXh2Vh0nN",
     url: "https://www.instagram.com/reel/DdoXh2Vh0nN/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
+  {
+    id: "DdwF-9RhfXm",
+    url: "https://www.instagram.com/reel/DdwF-9RhfXm/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "Dd30Q13hMaX",
+    url: "https://www.instagram.com/reel/Dd30Q13hMaX/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>

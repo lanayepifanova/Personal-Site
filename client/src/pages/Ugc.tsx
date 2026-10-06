@@ -46,7 +46,7 @@ export default function UgcPage() {
             broad audience gets them.
           </p>
           <p>
-            <b>22K</b> Instagram followers · <b>{ugcReels.length}</b> brands ·{" "}
+            <b>22K</b> Instagram followers · <b>{new Set(ugcReels.map((reel) => reel.brand)).size}</b> brands ·{" "}
             <b>24-hour</b> turnaround
           </p>
           <p>
@@ -61,7 +61,10 @@ export default function UgcPage() {
         <div className="plain-row items-start">
           {ugcReels.map((reel) => (
             <figure key={reel.id} className="m-0 shrink-0 space-y-1">
-              <figcaption className="font-bold">{reel.brand}</figcaption>
+              <figcaption>
+                <b>{reel.brand}</b>
+                {reel.views ? <span className="text-gray-600"> · {reel.views} views</span> : null}
+              </figcaption>
               <iframe
                 src={reelEmbedUrl(reel)}
                 title={`${reel.brand} reel`}

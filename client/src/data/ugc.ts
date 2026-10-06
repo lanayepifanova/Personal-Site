@@ -1,20 +1,30 @@
 // Content for the /ugc media kit. Numbers and testimonials come from the old media-kit/ deck;
 // update them here when they change.
 
-// UGC brand-deal reels. Same shape as `reels` in Media.tsx, plus the brand each video was made for.
-export const ugcReels = [
+// UGC brand-deal reels. Same shape as `reels` in Media.tsx, plus the brand each video was made for
+// and an optional view count shown in the caption.
+export const ugcReels: { brand: string; views?: string; id: string; url: string }[] = [
   {
     brand: "Kalshi",
+    views: "194K",
     id: "DcCmZeDoh_T",
     url: "https://www.instagram.com/reel/DcCmZeDoh_T/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
   {
+    brand: "Kalshi",
+    views: "21.8K",
+    id: "Dcr-LGDBLTo",
+    url: "https://www.instagram.com/reel/Dcr-LGDBLTo/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+  },
+  {
     brand: "ChatCut",
+    views: "8.5K",
     id: "DdsWn6QBSbF",
     url: "https://www.instagram.com/reel/DdsWn6QBSbF/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
   {
     brand: "Higgsfield",
+    views: "3.5K",
     id: "Dd4yNU0NYbs",
     url: "https://www.instagram.com/reel/Dd4yNU0NYbs/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },

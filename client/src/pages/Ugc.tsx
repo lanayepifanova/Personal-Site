@@ -6,7 +6,7 @@ import {
   ugcReels,
   upcomingProjects,
 } from "@/data/ugc";
-import { reelEmbedUrl } from "./Media";
+import { reels, reelEmbedUrl } from "./Media";
 
 const email = "yepifanova.lana@gmail.com";
 
@@ -29,14 +29,18 @@ export default function UgcPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-        <img
-          src="/images/ugc-headshot.jpg"
-          alt="Lana Yepifanova"
-          className="h-48 w-44 shrink-0 border border-gray-400 object-cover"
-        />
-        <div className="space-y-3">
-          <h2 className="text-[22px] font-bold">UGC & Media Kit</h2>
+      {/* Phones: a small photo beside the heading, with the text full width below. Wider screens: the
+          photo stretches down the left side to the height of the heading and text. */}
+      <div className="grid grid-cols-[6rem_1fr] gap-x-4 gap-y-3 sm:grid-cols-[14rem_1fr] sm:gap-x-6">
+        <div className="relative h-28 sm:row-span-2 sm:h-auto">
+          <img
+            src="/images/ugc-headshot.jpg"
+            alt="Lana Yepifanova"
+            className="absolute inset-0 h-full w-full border border-gray-400 object-cover"
+          />
+        </div>
+        <h2 className="self-center text-[22px] font-bold sm:self-start">UGC & Media Kit</h2>
+        <div className="col-span-2 space-y-3 sm:col-span-1">
           <p>
             I'm Lana (
             <a href="https://www.instagram.com/lana_yaps/" target="_blank" rel="noopener noreferrer">
@@ -45,14 +49,28 @@ export default function UgcPage() {
             ). I make UGC videos for tech, finance, and educational companies, and I explain technical products so a
             broad audience gets them.
           </p>
+          {/* Each stat stays on one line so the row only wraps between stats. */}
           <p>
-            <b>22K</b> Instagram followers · <b>{new Set(ugcReels.map((reel) => reel.brand)).size}</b> brands ·{" "}
-            <b>24-hour</b> turnaround
+            <span className="whitespace-nowrap">
+              <b>22K</b> Instagram followers
+            </span>{" "}
+            ·{" "}
+            <span className="whitespace-nowrap">
+              <b>{new Set(ugcReels.map((reel) => reel.brand)).size}</b> brands
+            </span>{" "}
+            ·{" "}
+            <span className="whitespace-nowrap">
+              <b>24-hour</b> turnaround
+            </span>
           </p>
-          <p>
-            [ <a href="#work">work</a> | <a href="#audience">audience</a> | <a href="#testimonials">testimonials</a> |{" "}
-            <a href="#contact">contact</a> ]
-          </p>
+          <dl className="m-0 space-y-2 sm:space-y-1">
+            {audience.map((row) => (
+              <div key={row.label} className="sm:flex sm:gap-3">
+                <dt className="shrink-0 font-bold sm:w-28">{row.label}</dt>
+                <dd className="m-0">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
 
@@ -86,15 +104,24 @@ export default function UgcPage() {
         ) : null}
       </Section>
 
-      <Section id="audience" title="Instagram Audience">
-        <dl className="max-w-3xl space-y-1">
-          {audience.map((row) => (
-            <div key={row.label} className="sm:flex sm:gap-3">
-              <dt className="shrink-0 font-bold sm:w-32">{row.label}</dt>
-              <dd className="m-0">{row.value}</dd>
-            </div>
+      <Section id="uilg" title="Ultimate Ivy League Guide">
+        {/* Same reels and layout as the Ultimate Ivy League Guide gallery in Media.tsx. */}
+        <div className="plain-row">
+          {reels.map((reel) => (
+            <iframe
+              key={reel.id}
+              src={reelEmbedUrl(reel)}
+              title={`Instagram reel ${reel.id}`}
+              className="h-[600px] w-[300px] border border-gray-400 bg-white"
+              allowFullScreen
+              loading="lazy"
+            >
+              <a href={reel.url} target="_blank" rel="noopener noreferrer">
+                View this reel on Instagram
+              </a>
+            </iframe>
           ))}
-        </dl>
+        </div>
       </Section>
 
       <Section id="testimonials" title="Testimonials">

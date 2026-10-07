@@ -2,8 +2,9 @@
 // update them here when they change.
 
 // UGC brand-deal reels. Same shape as `reels` in Media.tsx, plus the brand each video was made for
-// and an optional view count shown in the caption.
-export const ugcReels: { brand: string; views?: string; id: string; url: string }[] = [
+// and an optional view count shown in the caption. Add them in any order; `ugcReels` below sorts
+// them by views, most first, with reels missing a count at the end.
+const reels: { brand: string; views?: string; id: string; url: string }[] = [
   {
     brand: "Kalshi",
     views: "194K",
@@ -28,10 +29,25 @@ export const ugcReels: { brand: string; views?: string; id: string; url: string 
     id: "Dd4yNU0NYbs",
     url: "https://www.instagram.com/reel/Dd4yNU0NYbs/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },
+  {
+    brand: "Gladiator Metals",
+    views: "1.3K",
+    id: "DeMdaLyv_v6",
+    url: "https://www.instagram.com/reel/DeMdaLyv_v6/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
+  },
 ];
 
-// Signed deals whose videos aren't posted yet; move each into `ugcReels` once it's live.
-export const upcomingProjects = ["Gladiator Metals"];
+// "194K" -> 194000, "1.2M" -> 1200000; a missing count sorts last.
+function viewCount(views?: string) {
+  if (!views) return -1;
+  const scale = { K: 1e3, M: 1e6 }[views.slice(-1).toUpperCase()] ?? 1;
+  return parseFloat(views) * scale;
+}
+
+export const ugcReels = [...reels].sort((a, b) => viewCount(b.views) - viewCount(a.views));
+
+// Signed deals whose videos aren't posted yet; move each into `reels` once it's live.
+export const upcomingProjects: string[] = [];
 
 export const platforms = [
   { name: "Instagram", audience: "22K followers", note: "Top reels: 447K, 329K, 223K views" },
@@ -39,12 +55,11 @@ export const platforms = [
   { name: "YouTube", audience: "—", note: "—" },
 ];
 
+// Shown in the intro of /ugc.
 export const audience = [
-  { label: "Age", value: "53% ages 18–24, 38% ages 25–34, 7% ages 35–44" },
-  { label: "Location", value: "75% United States, 10% Canada, 8% United Kingdom, 7% India" },
-  { label: "Gender", value: "79% male, 21% female" },
-  { label: "Who they are", value: "STEM students, recent grads, founders, and early-career professionals" },
-  { label: "Best fit", value: "AI tools, SaaS, EdTech, productivity, fintech, dev tools, and startups" },
+  { label: "Audience", value: "STEM students, recent grads, founders, and early-career professionals" },
+  { label: "Best fit", value: "AI tools, SaaS, EdTech, productivity, finance, dev tools, and startups" },
+  { label: "Included", value: "Free TikTok crosspost and ad codes with every package" },
 ];
 
 export const brands: { name: string }[] = [

@@ -5,7 +5,7 @@ import EngineeringSection, { BuildingSection } from "./Engineering";
 import MediaSection from "./Media";
 import CommunitiesSection from "./Communities";
 
-const tabIds = ["engineering", "media", "communities"];
+const tabIds = ["resume", "media", "communities"];
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -20,7 +20,8 @@ export default function Home() {
   useEffect(() => {
     // Old one-page links like /#media now live on their own tab (#building stays here).
     const id = window.location.hash.slice(1);
-    if (tabIds.includes(id)) setLocation(`/${id}`, { replace: true });
+    if (id === "engineering") setLocation("/resume", { replace: true });
+    else if (tabIds.includes(id)) setLocation(`/${id}`, { replace: true });
     else if (id === "building") document.getElementById("building")?.scrollIntoView();
   }, [setLocation]);
 
@@ -66,8 +67,8 @@ function TabPage({
 export function EngineeringPage() {
   return (
     <TabPage
-      title="Engineering"
-      path="/engineering"
+      title="Resume"
+      path="/resume"
       description="Lana Yepifanova's internships and engineering work, from commodities trading to civil engineering."
     >
       <EngineeringSection />

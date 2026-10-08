@@ -14,7 +14,8 @@ function Routes() {
       <Route path="/" component={Home} />
       <Route path="/building">{() => <Redirect to="/" replace />}</Route>
       <Route path="/book">{() => <Redirect to="/" replace />}</Route>
-      <Route path="/engineering" component={EngineeringPage} />
+      <Route path="/resume" component={EngineeringPage} />
+      <Route path="/engineering">{() => <Redirect to="/resume" replace />}</Route>
       <Route path="/media" component={MediaPage} />
       <Route path="/communities" component={CommunitiesPage} />
       <Route path="/ugc" component={UgcPage} />

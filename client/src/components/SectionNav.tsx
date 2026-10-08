@@ -4,7 +4,7 @@ import { Github, Instagram, Linkedin } from "lucide-react";
 
 export const sections = [
   { path: "/", label: "home" },
-  { path: "/engineering", label: "engineering" },
+  { path: "/resume", label: "resume" },
   { path: "/media", label: "media" },
   { path: "/communities", label: "communities" },
 ];

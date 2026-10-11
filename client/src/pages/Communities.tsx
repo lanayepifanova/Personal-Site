@@ -199,15 +199,15 @@ export default function CommunitiesSection() {
   const sportsRole = "";
   const sportsDescription = (
     <>
-      I placed #1 at the{" "}
+      I placed{" "}
       <a
         href="https://www.btsny.org/post/beat-the-streets-academy-win-titles-2023-nyc-mayors-cup-wrestling-results"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Mayor's Cup Championship for Girls Wrestling
+        #1 in NYC for Girls Wrestling
       </a>{" "}
-      in Jan 2023. In high school, I was a part of{" "}
+      in 2023. In high school, I was a part of{" "}
       <a
         href="https://thhsclassic.com/12147/sport/girls-jv-cross-country-holds-title-of-queens-borough-champions-for-27th-year/"
         target="_blank"
@@ -225,9 +225,9 @@ export default function CommunitiesSection() {
       </a>
       . At Rice University, I am part of the{" "}
       <a href="https://www.instagram.com/ricepowerlifting/" target="_blank" rel="noopener noreferrer">
-        Rice Competitive Powerlifting Team
+        Rice Powerlifting Team
       </a>
-      , Rice Competitive Boxing Team, Rice Women's Club Lacrosse, and the Rice Club Sailing Team. I am also involved in Intramural Girls Basketball and the Will Rice Beer Bike Team.
+      , Rice Boxing Team, Rice Sailing Team, Intramural Girls Basketball, and the Will Rice Beer Bike Team.
     </>
   );
   const danceRole = "";

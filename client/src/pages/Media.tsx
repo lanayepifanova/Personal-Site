@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Instagram } from "lucide-react";
 import { Entry } from "@/components/Plain";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 
@@ -251,6 +252,77 @@ export const podcastEpisodes = [
 export const episodeEmbedUrl = (episode: { id: string }) => `https://open.spotify.com/embed/episode/${episode.id}`;
 export const episodeUrl = (episode: { id: string }) => `https://open.spotify.com/episode/${episode.id}`;
 
+// Instagram's own profile embed (instagram.com/lana_yaps/embed/) crashes in their script and renders
+// blank, so this is a hand-built card instead. Update the numbers here when they change.
+const instagramProfile = {
+  username: "lana_yaps",
+  name: "Lana Yepifanova",
+  bio: "just a hobby, not an expert",
+  email: "yepifanova.lana@gmail.com",
+  stats: [
+    { value: "21", label: "posts" },
+    { value: "21.9K", label: "followers" },
+    { value: "327", label: "following" },
+  ],
+};
+
+function InstagramProfile() {
+  const { username, name, bio, email, stats } = instagramProfile;
+  const profileUrl = `https://www.instagram.com/${username}/`;
+
+  return (
+    <div className="flex h-[388px] w-[288px] flex-col items-center border border-gray-400 bg-white p-4 text-center font-sans text-black">
+      <a
+        href={profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`@${username} on Instagram`}
+        className="self-end"
+      >
+        {/* Instagram's brand gradient, bottom-left to top-right, used as the icon's stroke. */}
+        <svg width="0" height="0" className="absolute" aria-hidden>
+          <linearGradient id="instagram-gradient" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stopColor="#feda75" />
+            <stop offset="0.25" stopColor="#fa7e1e" />
+            <stop offset="0.5" stopColor="#d62976" />
+            <stop offset="0.75" stopColor="#962fbf" />
+            <stop offset="1" stopColor="#4f5bd5" />
+          </linearGradient>
+        </svg>
+        <Instagram className="h-6 w-6" stroke="url(#instagram-gradient)" aria-hidden />
+      </a>
+      <img
+        src="/images/instagram-avatar.png"
+        alt={`${name} on Instagram`}
+        className="h-[92px] w-[92px] rounded-full object-cover"
+      />
+      <div className="mt-3 text-lg font-bold leading-tight">{username}</div>
+      <div className="text-sm text-gray-600">{name}</div>
+      <div className="mt-4 flex w-full justify-around">
+        {stats.map((stat) => (
+          <div key={stat.label}>
+            <div className="text-base font-bold leading-tight">{stat.value}</div>
+            <div className="text-xs text-gray-600">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-sm">
+        {bio}
+        <br />
+        💌 <a href={`mailto:${email}`}>{email}</a>
+      </p>
+      <a
+        href={profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-auto block w-full rounded-lg bg-[#0095f6] py-2 text-sm font-semibold !text-white !no-underline"
+      >
+        View profile
+      </a>
+    </div>
+  );
+}
+
 // TikTok's official creator embed: a blockquote that their embed.js script turns into a profile card.
 function TikTokProfile({ username }: { username: string }) {
   useEffect(() => {
@@ -291,19 +363,9 @@ export default function MediaSection() {
           <a href="mailto:yepifanova.lana@gmail.com">yepifanova.lana@gmail.com</a> if you are interested.
         </p>
         {/* Instagram and TikTok always side by side; on phones the row scrolls sideways. TikTok's
-            creator card is a fixed 288x388, so Instagram is cut to the same size. */}
+            creator card is a fixed 288x388, so the Instagram card is built to the same size. */}
         <div className="plain-row mt-4 items-start gap-4">
-          <iframe
-            src="https://www.instagram.com/lana_yaps/embed/"
-            title="Lana Yepifanova on Instagram"
-            className="h-[388px] w-[288px] border border-gray-400 bg-white"
-            allowFullScreen
-            loading="lazy"
-          >
-            <a href="https://www.instagram.com/lana_yaps/?hl=en" target="_blank" rel="noopener noreferrer">
-              View @lana_yaps on Instagram
-            </a>
-          </iframe>
+          <InstagramProfile />
           <TikTokProfile username="lana_yaps" />
         </div>
       </Entry>

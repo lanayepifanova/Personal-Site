@@ -31,7 +31,7 @@ const reels: { brand: string; views?: string; id: string; url: string }[] = [
   },
   {
     brand: "Gladiator Metals",
-    views: "1.3K",
+    views: "2.1K",
     id: "DeMdaLyv_v6",
     url: "https://www.instagram.com/reel/DeMdaLyv_v6/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==",
   },

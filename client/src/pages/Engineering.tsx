@@ -83,44 +83,28 @@ const favoriteWords = {
   title: "Words I Love",
   quotes: [
     {
-      text: "To live in this world you must be able to do three things: to love what is mortal; to hold it against your bones knowing your own life depends on it; and, when the time comes to let it go, to let it go.",
-      author: "Mary Oliver, In Blackwater Woods",
+      text: "The world is held together, really it is held together, by the love and the passion of a very few people. Otherwise, of course, you can despair. Walk down the street of any city, any afternoon, and look around you. What you've got to remember is what you're looking at is also you.",
+      author: "James Baldwin, The Artist's Struggle for Integrity",
     },
     {
-      text: "This heart within me I can feel, and I judge that it exists. This world I can touch, and I likewise judge that it exists. There ends all my knowledge, and the rest is construction. (...) Forever I shall be a stranger to myself",
-      author: "Albert Camus, The Myth of Sisyphus",
+      text: "I was waiting for something extraordinary to happen but as the years wasted on nothing ever did unless I caused it.",
+      author: "Charles Bukowski, The People Look Like Flowers at Last",
+    },
+    {
+      text: "The way you get meaning into your life is to devote yourself to loving others, devote yourself to your community around you, and devote yourself to creating something that gives you purpose and meaning.",
+      author: "Mitch Albom, Tuesdays with Morrie",
     },
     {
       text: "If I am worth anything later, I am worth something now. For wheat is wheat, even if people think it is grass in the beginning.",
       author: "Vincent van Gogh, letter to Theo van Gogh",
     },
     {
-      text: "Pain and suffering are inevitable for persons of broad awareness and depth of heart. The truly great are, in my view, always bound to feel a great sense of sadness during their time upon earth.",
-      author: "Fyodor Dostoyevsky, Crime and Punishment",
-    },
-    {
-      text: "And it's inside myself that I must create someone who will understand.",
-      author: "Clarice Lispector, Near to the Wild Heart",
+      text: "This heart within me I can feel, and I judge that it exists. This world I can touch, and I likewise judge that it exists. There ends all my knowledge, and the rest is construction. (...) Forever I shall be a stranger to myself",
+      author: "Albert Camus, The Myth of Sisyphus",
     },
     {
       text: "I learned that it is the weak who are cruel, and gentleness is to be expected only from the strong.",
       author: "Leo Rosten, Captain Newman, M.D.",
-    },
-    {
-      text: "The world is held together, really it is held together, by the love and the passion of a very few people. Otherwise, of course, you can despair. Walk down the street of any city, any afternoon, and look around you. What you've got to remember is what you're looking at is also you.",
-      author: "James Baldwin, The Artist's Struggle for Integrity",
-    },
-    {
-      text: "I weep because you cannot save people. You can only love them.",
-      author: "Hanya Yanagihara, A Little Life",
-    },
-    {
-      text: "So many people walk around with a meaningless life. They seem half-asleep, even when they're busy doing things they think are important. This is because they're chasing the wrong things. The way you get meaning into your life is to devote yourself to loving others, devote yourself to your community around you, and devote yourself to creating something that gives you purpose and meaning.",
-      author: "Mitch Albom, Tuesdays with Morrie",
-    },
-    {
-      text: "I was waiting for something extraordinary to happen but as the years wasted on nothing ever did unless I caused it.",
-      author: "Charles Bukowski, The People Look Like Flowers at Last",
     },
   ],
 };

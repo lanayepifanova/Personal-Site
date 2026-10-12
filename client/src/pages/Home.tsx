@@ -1,11 +1,12 @@
 import { useEffect, type ReactNode } from "react";
 import { useLocation } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import EngineeringSection, { BuildingSection } from "./Engineering";
+import ResumeSection, { BuildingSection } from "./Engineering";
+import EngineeringProjectsSection from "./EngineeringProjects";
 import MediaSection from "./Media";
 import CommunitiesSection from "./Communities";
 
-const tabIds = ["resume", "media", "communities"];
+const tabIds = ["resume", "engineering", "media", "communities"];
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -20,8 +21,7 @@ export default function Home() {
   useEffect(() => {
     // Old one-page links like /#media now live on their own tab (#building stays here).
     const id = window.location.hash.slice(1);
-    if (id === "engineering") setLocation("/resume", { replace: true });
-    else if (tabIds.includes(id)) setLocation(`/${id}`, { replace: true });
+    if (tabIds.includes(id)) setLocation(`/${id}`, { replace: true });
     else if (id === "building") document.getElementById("building")?.scrollIntoView();
   }, [setLocation]);
 
@@ -32,7 +32,19 @@ export default function Home() {
         <a href="https://www.rice.edu/" target="_blank" rel="noopener noreferrer">
           Rice University
         </a>{" "}
-        (Will Rice College). I am currently based in Houston, Texas.
+        (Will Rice College) based in Houston, Texas. I am currently training for{" "}
+        <a href="https://a1amarathon.com/a1a-marathon/" target="_blank" rel="noopener noreferrer">
+          The Publix Fort Lauderdale A1A Marathon
+        </a>{" "}
+        in Feb 2027 and the{" "}
+        <a href="https://liftingcast.com/meets/mvpimj9k0kpt/registration" target="_blank" rel="noopener noreferrer">
+          TSS Southern Collegiate Powerlifting Cup
+        </a>{" "}
+        in Dec 2026. I am also performing as the dancer "Rosie" in Wiess Tabletop Theatre's{" "}
+        <a href="https://en.wikipedia.org/wiki/Cabaret_(musical)" target="_blank" rel="noopener noreferrer">
+          Cabaret
+        </a>
+        , with shows in Nov 2026. I am fluent in English and Japanese!
       </p>
 
       <section id="building" className="space-y-6 pt-4">
@@ -64,14 +76,26 @@ function TabPage({
   );
 }
 
-export function EngineeringPage() {
+export function ResumePage() {
   return (
     <TabPage
       title="Resume"
       path="/resume"
       description="Lana Yepifanova's internships and engineering work, from commodities trading to civil engineering."
     >
-      <EngineeringSection />
+      <ResumeSection />
+    </TabPage>
+  );
+}
+
+export function EngineeringPage() {
+  return (
+    <TabPage
+      title="Engineering"
+      path="/engineering"
+      description="Lana Yepifanova's engineering projects."
+    >
+      <EngineeringProjectsSection />
     </TabPage>
   );
 }

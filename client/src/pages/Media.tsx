@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Instagram } from "lucide-react";
+import { Instagram, Youtube } from "lucide-react";
 import { Entry } from "@/components/Plain";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
 
@@ -271,13 +271,14 @@ function InstagramProfile() {
   const profileUrl = `https://www.instagram.com/${username}/`;
 
   return (
-    <div className="flex h-[388px] w-[288px] flex-col items-center border border-gray-400 bg-white p-4 text-center font-sans text-black">
+    <div className="relative flex h-[388px] w-[288px] flex-col items-center border border-gray-400 bg-white text-center font-sans text-black">
+      <img src="/images/profile-banner.jpg" alt="" className="h-[96px] w-full object-cover" />
       <a
         href={profileUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`@${username} on Instagram`}
-        className="self-end"
+        className="absolute right-3 top-3 rounded-md bg-white p-1"
       >
         {/* Instagram's brand gradient, bottom-left to top-right, used as the icon's stroke. */}
         <svg width="0" height="0" className="absolute" aria-hidden>
@@ -294,31 +295,95 @@ function InstagramProfile() {
       <img
         src="/images/instagram-avatar.png"
         alt={`${name} on Instagram`}
-        className="h-[92px] w-[92px] rounded-full object-cover"
+        className="-mt-[46px] h-[92px] w-[92px] rounded-full border-4 border-white object-cover"
       />
-      <div className="mt-3 text-lg font-bold leading-tight">{username}</div>
-      <div className="text-sm text-gray-600">{name}</div>
-      <div className="mt-4 flex w-full justify-around">
-        {stats.map((stat) => (
-          <div key={stat.label}>
-            <div className="text-base font-bold leading-tight">{stat.value}</div>
-            <div className="text-xs text-gray-600">{stat.label}</div>
-          </div>
-        ))}
+      <div className="flex w-full flex-1 flex-col items-center px-4 pb-4">
+        <div className="mt-3 text-lg font-bold leading-tight">{username}</div>
+        <div className="text-sm text-gray-600">{name}</div>
+        <div className="mt-4 flex w-full justify-around">
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <div className="text-base font-bold leading-tight">{stat.value}</div>
+              <div className="text-xs text-gray-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-sm">
+          {bio}
+          <br />
+          💌 <a href={`mailto:${email}`}>{email}</a>
+        </p>
+        <a
+          href={profileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-auto block w-full rounded-lg bg-[#0095f6] py-2 text-sm font-semibold !text-white !no-underline"
+        >
+          View profile
+        </a>
       </div>
-      <p className="mt-4 text-sm">
-        {bio}
-        <br />
-        💌 <a href={`mailto:${email}`}>{email}</a>
-      </p>
+    </div>
+  );
+}
+
+// Hand-built to the same 288x388 as the Instagram card. Update the numbers here when they change.
+const youtubeProfile = {
+  handle: "lana_yaps",
+  name: "Lana Yepifanova",
+  bio: "just a hobby, not an expert",
+  email: "yepifanova.lana@gmail.com",
+  stats: [
+    { value: "1.32K", label: "subscribers" },
+    { value: "Aug 2025", label: "joined" },
+  ],
+};
+
+function YoutubeProfile() {
+  const { handle, name, bio, email, stats } = youtubeProfile;
+  const channelUrl = `https://www.youtube.com/@${handle}`;
+
+  return (
+    <div className="relative flex h-[388px] w-[288px] flex-col items-center border border-gray-400 bg-white text-center font-sans text-black">
+      <img src="/images/profile-banner.jpg" alt="" className="h-[96px] w-full object-cover" />
       <a
-        href={profileUrl}
+        href={channelUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-auto block w-full rounded-lg bg-[#0095f6] py-2 text-sm font-semibold !text-white !no-underline"
+        aria-label={`@${handle} on YouTube`}
+        className="absolute right-3 top-3 rounded-md bg-white p-1"
       >
-        View profile
+        <Youtube className="h-6 w-6 text-[#ff0000]" aria-hidden />
       </a>
+      <img
+        src="/images/youtube-avatar.jpg"
+        alt={`${name} on YouTube`}
+        className="-mt-[46px] h-[92px] w-[92px] rounded-full border-4 border-white object-cover"
+      />
+      <div className="flex w-full flex-1 flex-col items-center px-4 pb-4">
+        <div className="mt-3 text-lg font-bold leading-tight">{name}</div>
+        <div className="text-sm text-gray-600">@{handle}</div>
+        <div className="mt-4 flex w-full justify-around">
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <div className="text-base font-bold leading-tight">{stat.value}</div>
+              <div className="text-xs text-gray-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-sm">
+          {bio}
+          <br />
+          💌 <a href={`mailto:${email}`}>{email}</a>
+        </p>
+        <a
+          href={channelUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-auto block w-full rounded-lg bg-[#ff0000] py-2 text-sm font-semibold !text-white !no-underline"
+        >
+          View channel
+        </a>
+      </div>
     </div>
   );
 }
@@ -362,11 +427,12 @@ export default function MediaSection() {
           I make short-form videos about tech, recent news, and startups. I'm working on two new series: one where I learn technical concepts and explain them to a nontechnical audience, and one where I document building hardware projects. I make <a href="/ugc">UGC videos</a> for tech, finance, and educational companies. I primarily do sponsored brand deals and partnerships. Email{" "}
           <a href="mailto:yepifanova.lana@gmail.com">yepifanova.lana@gmail.com</a> if you are interested.
         </p>
-        {/* Instagram and TikTok always side by side; on phones the row scrolls sideways. TikTok's
-            creator card is a fixed 288x388, so the Instagram card is built to the same size. */}
+        {/* The profile cards always sit side by side; on phones the row scrolls sideways. TikTok's
+            creator card is a fixed 288x388, so the Instagram and YouTube cards are built to the same size. */}
         <div className="plain-row mt-4 items-start gap-4">
           <InstagramProfile />
           <TikTokProfile username="lana_yaps" />
+          <YoutubeProfile />
         </div>
       </Entry>
 

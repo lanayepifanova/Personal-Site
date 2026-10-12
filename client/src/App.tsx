@@ -2,7 +2,7 @@ import NotFound from "@/pages/NotFound";
 import { Redirect, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home, { CommunitiesPage, EngineeringPage, MediaPage } from "./pages/Home";
+import Home, { CommunitiesPage, EngineeringPage, MediaPage, ResumePage } from "./pages/Home";
 import TravelDestination from "./pages/TravelDestination";
 import Layout from "./components/Layout";
 import ExploreItem from "./pages/ExploreItem";
@@ -14,8 +14,8 @@ function Routes() {
       <Route path="/" component={Home} />
       <Route path="/building">{() => <Redirect to="/" replace />}</Route>
       <Route path="/book">{() => <Redirect to="/" replace />}</Route>
-      <Route path="/resume" component={EngineeringPage} />
-      <Route path="/engineering">{() => <Redirect to="/resume" replace />}</Route>
+      <Route path="/resume" component={ResumePage} />
+      <Route path="/engineering" component={EngineeringPage} />
       <Route path="/media" component={MediaPage} />
       <Route path="/communities" component={CommunitiesPage} />
       <Route path="/ugc" component={UgcPage} />

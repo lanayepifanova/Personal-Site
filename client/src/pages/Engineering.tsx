@@ -131,6 +131,16 @@ export function BuildingSection() {
 export default function EngineeringSection() {
   const jobs: Job[] = [
     {
+      id: "silicon-data",
+      company: "Silicon Data",
+      role: "Marketing Intern",
+      period: "Fall 2026 & Spring 2027",
+      description:
+        "The independent benchmark and verification layer for the compute economy.",
+      image: "/images/silicon-data-cme.png",
+      link: "https://www.silicondata.com"
+    },
+    {
       id: "macquarie",
       company: "Macquarie Group",
       role: "Commodities Trading Intern",

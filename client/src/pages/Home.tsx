@@ -44,7 +44,7 @@ export default function Home() {
         <a href="https://en.wikipedia.org/wiki/Cabaret_(musical)" target="_blank" rel="noopener noreferrer">
           Cabaret
         </a>
-        , with shows in Nov 2026. I am fluent in English and Japanese!
+        , with shows in Nov 2026.
       </p>
 
       <section id="building" className="space-y-6 pt-4">

@@ -245,6 +245,18 @@ export const reels = [
     id: "Def10GyAtYE",
     url: "https://www.instagram.com/reel/Def10GyAtYE/?utm_source=ig_web_copy_link&mdxt=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
   },
+  {
+    id: "DenqzG-gmQa",
+    url: "https://www.instagram.com/reel/DenqzG-gmQa/?utm_source=ig_web_copy_link&obrf=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "Deovbs_BMdW",
+    url: "https://www.instagram.com/reel/Deovbs_BMdW/?utm_source=ig_web_copy_link&srtk=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "DeqKErhAWpR",
+    url: "https://www.instagram.com/reel/DeqKErhAWpR/?utm_source=ig_web_copy_link&exln=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>

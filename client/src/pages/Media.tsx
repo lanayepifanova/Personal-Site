@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Instagram, Youtube } from "lucide-react";
 import { Entry } from "@/components/Plain";
 import PianoYoutubeSection from "@/components/PianoYoutubeSection";
@@ -440,6 +440,50 @@ function TikTokProfile({ username }: { username: string }) {
   );
 }
 
+// Profile cards for the Personal Branding entry; also shown on the UGC page, which adds a contact
+// card at the start of the row.
+export function ProfileCards({ firstCard }: { firstCard?: ReactNode }) {
+  // The profile cards always sit side by side; on phones the row scrolls sideways. TikTok's creator
+  // card is a fixed 288x388, so the Instagram and YouTube cards are built to the same size.
+  return (
+    <div className="plain-row items-start gap-4">
+      {firstCard}
+      <InstagramProfile />
+      <TikTokProfile username="lana_yaps" />
+      <YoutubeProfile />
+    </div>
+  );
+}
+
+// Episode players for the Leading Owls Podcast entry; also shown on the UGC page.
+export function PodcastEpisodes() {
+  // Episodes side by side in one sideways-scrolling row.
+  return (
+    <div className="plain-row">
+      {podcastEpisodes.map((episode) => (
+        <iframe
+          key={episode.id}
+          src={episodeEmbedUrl(episode)}
+          title={episode.title}
+          className="h-[152px] w-[min(85vw,480px)] rounded-xl"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        >
+          <a href={episodeUrl(episode)} target="_blank" rel="noopener noreferrer">
+            Listen to {episode.title}
+          </a>
+        </iframe>
+      ))}
+    </div>
+  );
+}
+
+// Entry descriptions shared with the UGC page.
+export const uilgDescription =
+  "Ultimate Ivy League Guide is one of the fastest-growing college admissions mentorship companies, featured in Forbes, Business Insider, Yahoo, and other leading publications for its innovative approach to college admissions. Through personalized coaching, strategic planning, and its signature Narrative Method, the company empowers students to build standout applications that showcase their unique strengths and long-term potential.";
+export const leadingOwlsDescription =
+  "The Leading Owls Podcast is the official leadership podcast of the Doerr Institute for New Leaders at Rice University, showcasing the students, faculty, alumni, and professionals who are shaping the future through leadership. Episodes are available on Spotify, Apple Podcasts, YouTube, Amazon Music, and other major podcast platforms.";
+
 export default function MediaSection() {
   return (
     <div className="space-y-10">
@@ -448,19 +492,13 @@ export default function MediaSection() {
           I make short-form videos about tech, recent news, and startups. I'm working on two new series: one where I learn technical concepts and explain them to a nontechnical audience, and one where I document building hardware projects. I make <a href="/ugc">UGC videos</a> for tech, finance, and educational companies. I primarily do sponsored brand deals and partnerships. Email{" "}
           <a href="mailto:yepifanova.lana@gmail.com">yepifanova.lana@gmail.com</a> if you are interested.
         </p>
-        {/* The profile cards always sit side by side; on phones the row scrolls sideways. TikTok's
-            creator card is a fixed 288x388, so the Instagram and YouTube cards are built to the same size. */}
-        <div className="plain-row mt-4 items-start gap-4">
-          <InstagramProfile />
-          <TikTokProfile username="lana_yaps" />
-          <YoutubeProfile />
+        <div className="mt-4">
+          <ProfileCards />
         </div>
       </Entry>
 
       <Entry title="Ultimate Ivy League Guide" role="Content Creator">
-        <p>
-          Ultimate Ivy League Guide is one of the fastest-growing college admissions mentorship companies, featured in Forbes, Business Insider, Yahoo, and other leading publications for its innovative approach to college admissions. Through personalized coaching, strategic planning, and its signature Narrative Method, the company empowers students to build standout applications that showcase their unique strengths and long-term potential.
-        </p>
+        <p>{uilgDescription}</p>
         <div className="plain-row mt-4">
           {reels.map((reel) => (
             <iframe
@@ -480,25 +518,9 @@ export default function MediaSection() {
       </Entry>
 
       <Entry title="Leading Owls Podcast" role="Podcast Host">
-        <p>
-          The Leading Owls Podcast is the official leadership podcast of the Doerr Institute for New Leaders at Rice University, showcasing the students, faculty, alumni, and professionals who are shaping the future through leadership. Episodes are available on Spotify, Apple Podcasts, YouTube, Amazon Music, and other major podcast platforms.
-        </p>
-        {/* Episodes side by side in one sideways-scrolling row. */}
-        <div className="plain-row mt-4">
-          {podcastEpisodes.map((episode) => (
-            <iframe
-              key={episode.id}
-              src={episodeEmbedUrl(episode)}
-              title={episode.title}
-              className="h-[152px] w-[min(85vw,480px)] rounded-xl"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            >
-              <a href={episodeUrl(episode)} target="_blank" rel="noopener noreferrer">
-                Listen to {episode.title}
-              </a>
-            </iframe>
-          ))}
+        <p>{leadingOwlsDescription}</p>
+        <div className="mt-4">
+          <PodcastEpisodes />
         </div>
       </Entry>
 

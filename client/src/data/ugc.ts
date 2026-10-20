@@ -55,13 +55,6 @@ export const platforms = [
   { name: "YouTube", audience: "—", note: "—" },
 ];
 
-// Shown in the intro of /ugc.
-export const audience = [
-  { label: "Audience", value: "STEM students, recent grads, founders, and early-career professionals" },
-  { label: "Best fit", value: "AI tools, SaaS, EdTech, productivity, finance, dev tools, and startups" },
-  { label: "Included", value: "Free TikTok crosspost and ad codes with every package" },
-];
-
 export const brands: { name: string }[] = [
   { name: "Manus AI" },
   { name: "Runable" },

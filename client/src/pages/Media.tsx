@@ -259,12 +259,12 @@ export const reels = [
     url: "https://www.instagram.com/reel/DeqKErhAWpR/?utm_source=ig_web_copy_link&exln=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
   },
   {
-    id: "Dewdw_EB2Lf",
-    url: "https://www.instagram.com/reel/Dewdw_EB2Lf/?utm_source=ig_web_copy_link&xtok=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
-  },
-  {
     id: "De0Zck1xtqO",
     url: "https://www.instagram.com/reel/De0Zck1xtqO/?utm_source=ig_web_copy_link&srtk=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "Dewdw_EB2Lf",
+    url: "https://www.instagram.com/reel/Dewdw_EB2Lf/?utm_source=ig_web_copy_link&xtok=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
   },
   {
     id: "De2-hCexGTd",

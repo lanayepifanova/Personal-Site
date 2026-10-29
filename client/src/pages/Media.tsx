@@ -274,6 +274,14 @@ export const reels = [
     id: "De5pFuMxgEH",
     url: "https://www.instagram.com/reel/De5pFuMxgEH/?utm_source=ig_web_copy_link&vrfl=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
   },
+  {
+    id: "De9VyXyhq8f",
+    url: "https://www.instagram.com/reel/De9VyXyhq8f/?utm_source=ig_web_copy_link&dlrf=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "De-oKrrhH8o",
+    url: "https://www.instagram.com/reel/De-oKrrhH8o/?utm_source=ig_web_copy_link&rpxt=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>
@@ -285,6 +293,7 @@ export const podcastEpisodes = [
   { id: "5v4E16Gh9doVUpaLUGAFsI", title: "You Don't Have to Be Loud to Be a Leader" },
   { id: "4mkVmlvFkatenaTB2PV74r", title: "From O-Week to Venture Capital: Lessons in Leadership at Rice University" },
   { id: "19ShQZhidfR6x2PD86HRRE", title: "Leading with Purpose: Building Community and Taking Chances at Rice University with Aliq" },
+  { id: "3Zns9GKg0YWFeIgmm0L0hW", title: "Leadership, Lessons, and Learning to Avoid Burnout at Rice" },
 ];
 
 export const episodeEmbedUrl = (episode: { id: string }) => `https://open.spotify.com/embed/episode/${episode.id}`;

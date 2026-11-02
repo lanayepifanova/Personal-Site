@@ -282,6 +282,10 @@ export const reels = [
     id: "De-oKrrhH8o",
     url: "https://www.instagram.com/reel/De-oKrrhH8o/?utm_source=ig_web_copy_link&rpxt=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
   },
+  {
+    id: "DfHpAQkBDRg",
+    url: "https://www.instagram.com/reel/DfHpAQkBDRg/?utm_source=ig_web_copy_link&psln=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>
@@ -308,7 +312,7 @@ const instagramProfile = {
   email: "yepifanova.lana@gmail.com",
   stats: [
     { value: "21", label: "posts" },
-    { value: "21.9K", label: "followers" },
+    { value: "21.7K", label: "followers" },
     { value: "327", label: "following" },
   ],
 };

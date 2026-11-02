@@ -170,19 +170,6 @@ export default function EngineeringSection() {
       link: "https://www.jll.com"
     },
     {
-      id: "mixo-ads",
-      company: "Mixo Ads AI",
-      role: "Founder's Associate",
-      period: "Summer 2024",
-      description: (
-        <>
-          Worked 1-1 with founder in <a href="https://www.antler.co/residency" target="_blank" rel="noopener noreferrer">Antler Residency</a> on full stack dev and sales.
-        </>
-      ),
-      image: "/images/mixoads2.webp",
-      link: "https://mixoads.com"
-    },
-    {
       id: "oedk",
       company: "OEDK",
       role: "PTeam Engineering Design",
@@ -194,6 +181,19 @@ export default function EngineeringSection() {
       ),
       image: "/images/oedk-assembly.png",
       link: "https://oedk.rice.edu"
+    },
+    {
+      id: "mixo-ads",
+      company: "Mixo Ads AI",
+      role: "Founder's Associate",
+      period: "Summer 2024",
+      description: (
+        <>
+          Worked 1-1 with founder in <a href="https://www.antler.co/residency" target="_blank" rel="noopener noreferrer">Antler Residency</a> on full stack dev and sales.
+        </>
+      ),
+      image: "/images/mixoads2.webp",
+      link: "https://mixoads.com"
     },
     {
       id: "rudin",

@@ -58,6 +58,22 @@ export const atlasLocations: TravelLocation[] = [
     offsetY: "-3px",
   },
   {
+    city: "Nacogdoches",
+    country: "Texas",
+    lat: 31.6035,
+    lon: -94.6555,
+    offsetX: "5px",
+    offsetY: "-4px",
+  },
+  {
+    city: "San Diego",
+    country: "California",
+    lat: 32.7157,
+    lon: -117.1611,
+    offsetX: "-4px",
+    offsetY: "6px",
+  },
+  {
     city: "Miami",
     country: "Florida",
     lat: 25.7617,

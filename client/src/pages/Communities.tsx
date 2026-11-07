@@ -392,7 +392,7 @@ export default function CommunitiesSection() {
           . We've raised 2.5M+ in funding, had 3 residents get into a16z speedrun, 1 resident get into the YC S26 batch,
           and 7 residents in the Rice Summer Venture Studio.
         </p>
-        <LinkedInPostRow posts={riceResidencyPosts} height={668} scale={0.7} className="mt-4" />
+        <LinkedInPostRow posts={riceResidencyPosts} height={668} className="mt-4" />
       </Entry>
 
       <Entry
@@ -407,7 +407,7 @@ export default function CommunitiesSection() {
           I took a gap semester from Rice University to live at the hacker house for Harvard and MIT. This experience changed my life. Alumni and affiliated founders have gone on to raise from top firms including Greylock Partners, Sequoia Capital, General Catalyst, Pear VC, Felicis Ventures, and Z Fellows.
         </p>
         {/* Group photo and LinkedIn posts share one sideways-scrolling row. */}
-        <LinkedInPostRow posts={harvardStPosts} height={627} scale={0.7} className="mt-4">
+        <LinkedInPostRow posts={harvardStPosts} height={627} className="mt-4">
           <img
             src="/images/harvard-st-commons.jpeg"
             alt="Harvard St Commons Community"

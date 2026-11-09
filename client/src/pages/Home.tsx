@@ -40,11 +40,7 @@ export default function Home() {
         <a href="https://liftingcast.com/meets/mvpimj9k0kpt/registration" target="_blank" rel="noopener noreferrer">
           TSS Southern Collegiate Powerlifting Cup
         </a>{" "}
-        in Dec 2026. I am also performing as the dancer "Rosie" in Wiess Tabletop Theatre's{" "}
-        <a href="https://en.wikipedia.org/wiki/Cabaret_(musical)" target="_blank" rel="noopener noreferrer">
-          Cabaret
-        </a>
-        , with shows in Nov 2026.
+        in Dec 2026.
       </p>
 
       <section id="building" className="space-y-6 pt-4">

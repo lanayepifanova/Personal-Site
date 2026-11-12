@@ -37,7 +37,7 @@ export default function Home() {
           The Publix Fort Lauderdale A1A Marathon
         </a>{" "}
         in Feb 2027 and the{" "}
-        <a href="https://liftingcast.com/meets/mvpimj9k0kpt/registration" target="_blank" rel="noopener noreferrer">
+        <a href="https://liftingcast.com/meets/mvpimj9k0kpt/roster" target="_blank" rel="noopener noreferrer">
           TSS Southern Collegiate Powerlifting Cup
         </a>{" "}
         in Dec 2026.

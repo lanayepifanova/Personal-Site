@@ -290,6 +290,14 @@ export const reels = [
     id: "DfR8GaShGDs",
     url: "https://www.instagram.com/reel/DfR8GaShGDs/?utm_source=ig_web_copy_link&obrf=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
   },
+  {
+    id: "DfcPSv_heGD",
+    url: "https://www.instagram.com/reel/DfcPSv_heGD/?utm_source=ig_web_copy_link&cplk=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+  },
+  {
+    id: "Dfn7zmrBicn",
+    url: "https://www.instagram.com/reel/Dfn7zmrBicn/?utm_source=ig_web_copy_link&mdxt=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+  },
 ];
 
 export const reelEmbedUrl = (reel: { id: string; type?: string }) =>
@@ -302,6 +310,7 @@ export const podcastEpisodes = [
   { id: "4mkVmlvFkatenaTB2PV74r", title: "From O-Week to Venture Capital: Lessons in Leadership at Rice University" },
   { id: "19ShQZhidfR6x2PD86HRRE", title: "Leading with Purpose: Building Community and Taking Chances at Rice University with Aliq" },
   { id: "3Zns9GKg0YWFeIgmm0L0hW", title: "Leadership, Lessons, and Learning to Avoid Burnout at Rice" },
+  { id: "5wcRk3yNw1OJ5sy0jJlOY9", title: "Leadership Starts with Putting People First with Rice University O-Week Coordinator Prasanna" },
 ];
 
 export const episodeEmbedUrl = (episode: { id: string }) => `https://open.spotify.com/embed/episode/${episode.id}`;
